@@ -1,14 +1,26 @@
+#Arc for Kubernetes Conformance tests 
+Introduction and details arund this - Kavitha
 
-# Contributing
+#Prerequisites for running tests
+--Akash link to our docs for Arc. 
+for Tests- the sonobuoy installation
 
-This project welcomes contributions and suggestions.  Most contributions require you to agree to a
-Contributor License Agreement (CLA) declaring that you have the right to, and actually do, grant us
-the rights to use your contribution. For details, visit https://cla.opensource.microsoft.com.
+#Running Conformance tests
+instructions - Akash
+Add conformance.yaml in the repo here (under code)
 
-When you submit a pull request, a CLA bot will automatically determine whether you need to provide
-a CLA and decorate the PR appropriately (e.g., status check, comment). Simply follow the instructions
-provided by the bot. You will only need to do this once across all repos using our CLA.
+#Output from Sonobuoy conformance test run
+instructions- Akash
+What files to look for 
+How can they debug
+Which is the test result file 
+#Uploading results from conformance tests
+-Kavitha : How to parse - upload, debug, raise issue. 
 
-This project has adopted the [Microsoft Open Source Code of Conduct](https://opensource.microsoft.com/codeofconduct/).
-For more information see the [Code of Conduct FAQ](https://opensource.microsoft.com/codeofconduct/faq/) or
-contact [opencode@microsoft.com](mailto:opencode@microsoft.com) with any additional questions or comments.
+#Conformance test Guidelines
+--Kavitha
+#Violation of Arc certification with conformance tests 
+--Kavitha
+#List of tests run
+-- mentionthe list of tests that we are running - Akash
+
