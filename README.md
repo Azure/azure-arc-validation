@@ -31,7 +31,7 @@ Microsoft builds conformance tests and test automation tool, sonobuoy plugin, to
 
 You can find list of conformance test [here]https://github.com 
 
-Conformance tests run the 
+Follow below to run conformance tests
 
 ## Prerequisites 
 
