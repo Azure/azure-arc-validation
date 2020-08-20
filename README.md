@@ -45,99 +45,46 @@ Make sure <a href="https://docs.microsoft.com/en-us/azure/azure-arc/kubernetes/c
 
 Run Arc for Kubernetes conformance test by single command. 
 
-sonobuoy run --plugin {Path to conformance.yaml} --plugin-env azure-arc-conformance.TENANT_ID=$TENANT_ID --plugin-env azure-arc-conformance.SUBSCRIPTION_ID=$SUBSCRIPTION_ID --plugin-env azure-arc-conformance.RESOURCE_GROUP=$RESOURCE_GROUP --plugin-env azure-arc-conformance.CLUSTER_NAME=$CLUSTER_NAME --plugin-env azure-arc-conformance.LOCATION=$LOCATION --plugin-env azure-arc-conformance.CLIENT_ID=$CLIENT_ID --plugin-env azure-arc-conformance.CLIENT_SECRET=$CLIENT_SECRET
+sonobuoy run --plugin {Path to conformance.yaml} --plugin-env azure-arc-conformance.TENANT_ID=$TENANT_ID --plugin-env azure-arc-conformance.SUBSCRIPTION_ID=$SUBSCRIPTION_ID --plugin-env azure-arc-conformance.RESOURCE_GROUP=$RESOURCE_GROUP --plugin-env azure-arc-conformance.CLUSTER_NAME=$CLUSTER_NAME --plugin-env azure-arc-conformance.LOCATION=$LOCATION --plugin-env azure-arc-conformance.CLIENT_ID=$CLIENT_ID --plugin-env azure-arc-conformance.CLIENT_SECRET=$CLIENT_SECRET --plugin-env azure-arc-conformance.KUBERNETES_DISTRIBUTION=$KUBERNETES_DISTRIBUTION --plugin-env azure-arc-conformance.dns-namespace=$DNS_NAMESPACE -plugin-env azure-arc-conformance.dns-pod-labels=$DNS_POD_LABELS 
 
 Download the conformance.yaml from this github <a href="">in this repository</a>  
 
-These two are required for conformance tests to connect kubernetes cluster to Arc on Azure. As stated before, conformance tests connects the cluster to Arc before running the tests.  
-TENANT_ID - is tenantID of Azure subscription 
-Subscription_ID - Azure Subscription ID
+### Paramater
 
-Cluster_Name : Name to give your cluster on Arc connection.
-LOCATION : Region of Azure to connect the cluster to. Make sure you provide the regions supported by Azure Arc for Kubernetes. See [here]https://docs.microsoft.com/en-us/azure/azure-arc/kubernetes/connect-cluster for supported regions.  
+TENANT_ID (Required) : is tenantID of Azure subscription 
+Subscription_ID (Required) : Azure Subscription ID
+Resource_group (Required) : Azure resource group
+Cluster_Name (Required): Name to give your cluster on Arc connection.
+LOCATION (Required) : Region of Azure to connect the cluster to. Make sure you provide the regions supported by Azure Arc for Kubernetes. See <a href="https://docs.microsoft.com/en-us/azure/azure-arc/kubernetes/connect-cluster">here</a> for supported regions.  
+Client_ID (Optional) : User Id who has permission to create azure resources
+Client_secret (Optional) : Password for user Id. 
+Kubernetes_distribution (optional) - ? 
+dns-namespace (optional) :  If a certain kubernetes distribution has different location for the dns pods, the user should provide that information in the above command through the flags '--dns-namespace' and '--dns-pod-labels'
+dns-pod-labels (optional) : If a certain kubernetes distribution has different location for the dns pods, the user should provide that information in the above command through the flags '--dns-namespace' and '--dns-pod-labels'
 
 
-The user should also specify --plugin-env azure-arc-conformance.KUBERNETES_DISTRIBUTION=$KUBERNETES_DISTRIBUTION for the arc conformance test to work properly. Also, sonobuoy assumes that the dns pods are present in the kube-system namespace. If a certain kubernetes distribution has different location for the dns pods, the user should provide that information in the above command through the flags '--dns-namespace' and '--dns-pod-labels'
+## Clean Up
 
-By default, the arc conformance test does the cleanup after the test run. If the user wishes to skip the cleanup step, he should set --plugin-env azure-arc-conformance.SKIP_CLEANUP=true in the above command.
+By default, the arc conformance test does the cleanup arc components after the test run. If the user wishes to skip the cleanup step,  set --plugin-env azure-arc-conformance.SKIP_CLEANUP=true in the above command.
 
-If you wish to run particular tests or skip particular tests, you need to set --plugin-env azure-arc-conformance.TEST_NAME_LIST=$TEST_NAME_LIST. The variable TEST_NAME_LIST should be set similar to -k flag of pytest. See https://docs.pytest.org/en/latest/example/markers.html#using-k-expr-to-select-tests-based-on-their-name
+## Status Check
 
-Similarly, you wish to run particular group of tests or skip particular group tests you need to set --plugin-env azure-arc-conformance.TEST_MARKER_LIST=$TEST_MARKER_LIST. The variable TEST_MARKER_LIST should be set similar to -m flag of pytest. See https://docs.pytest.org/en/2.9.2/example/markers.html#marking-test-functions-and-selecting-them-for-a-run
+The status of the conformance test can be checked using the command **'sonobuoy status'**.
 
-The status of the conformance test can be checked using the command 'sonobuoy status'.
+Once the status is complete, run the command **'sonobuoy retrieve'** to download the results zip file. 
 
-Once the status is complete, run the command 'sonobuoy retrieve' to download the results tarball
-
-These conformance tests , every partner needs to include Arc testing in their E2E testing for every prerelease of their distribution and Arc releases. This is a tall ask for partners without an automated Arc for Kubernetes testing suite provided by us for continued testing.
-
- ## Arc conformance tests
-
- Need of Arc conformance tests and process
+### Result file
+The zip file contains the results file at location **plugins/azure-arc-conformance/sonobuoy results.yaml**. This file has the summary of individual tests and their test status (pass/fail) that were run as a part of the test. If all the tests have passed, you will upload this file the <a href=/results"> Results</a> folder. 
  
- ## Run Arc conformance tests
+ For failed tests, further look into **podlogs/sonobuoy** and **plugins/azure-arc-conformance/results/global** folder for individual test logs. 
 
- ### PreRequisities 
+# Upload Results 
+
+If **sonobuoy status** returns success,  run the command **'sonobuoy retrieve'** to download the results zip file. Retrieve **results.yaml** from *plugins/azure-arc-conformance/sonobuoy results.yaml* folder and upload to  <a href=/results"> Results</a> folder.
  
+Under Results/<<Partner Name>> folder, create a folder with your distribution version(Major.minor). Upload the results.yaml file under this folder. 
  
- #Arc for Kubernetes Conformance tests 
- Introduction and details arund this - Kavitha
-
-#Prerequisites for running tests
---Akash link to our docs for Arc. 
-for Tests- the sonobuoy installation
-
-#Running Conformance tests
-instructions - Akash
-Add conformance.yaml in the repo here (under code)
-
-#Output from Sonobuoy conformance test run
-instructions- Akash
-What files to look for 
-How can they debug
-Which is the test result file 
-#Uploading results from conformance tests
--Kavitha : How to parse - upload, debug, raise issue. 
-
-#Conformance test Guidelines
---Kavitha
-#Violation of Arc certification with conformance tests 
---Kavitha
-#List of tests run
--- mentionthe list of tests that we are running - Akash
-
-
-
-
-
-
-
-##Arc for Kubernetes Conformance tests
-
-
-#Arc for Kubernetes Conformance tests 
-Introduction and details arund this - Kavitha
-
-#Prerequisites for running tests
---Akash link to our docs for Arc. 
-for Tests- the sonobuoy installation
-
-#Running Conformance tests
-instructions - Akash
-Add conformance.yaml in the repo here (under code)
-
-#Output from Sonobuoy conformance test run
-instructions- Akash
-What files to look for 
-How can they debug
-Which is the test result file 
-#Uploading results from conformance tests
--Kavitha : How to parse - upload, debug, raise issue. 
-
-#Conformance test Guidelines
---Kavitha
-#Violation of Arc certification with conformance tests 
---Kavitha
-#List of tests run
--- mentionthe list of tests that we are running - Akash
-
+ For example: Results/Azure Stack-AKS Engine, you will create a folder called 1.2 ( version of AKS Engine on which the conformance tests were run). 
+ 
+ # List of conformance tests
+ You can find the lists of Conformance test under the folder *ConformanceTests* in the repository. 
