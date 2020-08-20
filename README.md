@@ -37,15 +37,17 @@ Follow below to run conformance tests
 
 Install sonobuoy. See: https://github.com/vmware-tanzu/sonobuoy/releases You need to download a suitable sonobuoy version based on the kubernetes version of your cluster.
 
-Conformance test installs the Arc for Kubernetes on selected cluster. Ensure to use a non-Arc connected cluster to run conformance tests.
+Conformance test installs the Arc for Kubernetes on cluster. Ensure to use a non-Arc connected cluster to run conformance tests. 
 
-Make sure [prereqs]https://docs.microsoft.com/en-us/azure/azure-arc/kubernetes/connect-cluster required for Arc for Kubernetes installation are in place.
+Make sure <a href="https://docs.microsoft.com/en-us/azure/azure-arc/kubernetes/connect-cluster">prereqs</a> required for Arc for Kubernetes installation are in place.
 
 ## Running conformance tests
 
 Run Arc for Kubernetes conformance test by single command. 
 
-sonobuoy run --plugin {PATH/URL_TO_PLUGIN_SPEC} --plugin-env azure-arc-conformance.TENANT_ID=$TENANT_ID --plugin-env azure-arc-conformance.SUBSCRIPTION_ID=$SUBSCRIPTION_ID --plugin-env azure-arc-conformance.RESOURCE_GROUP=$RESOURCE_GROUP --plugin-env azure-arc-conformance.CLUSTER_NAME=$CLUSTER_NAME --plugin-env azure-arc-conformance.LOCATION=$LOCATION --plugin-env azure-arc-conformance.CLIENT_ID=$CLIENT_ID --plugin-env azure-arc-conformance.CLIENT_SECRET=$CLIENT_SECRET where plugin spec corresponds to yaml configuration file of the test plugin. For arc conformance tests, the corresponding plugin file is src/plugins/core/conformance.yaml. The environment variables mentioned in the above command are required and to be provided by the user.
+sonobuoy run --plugin {Path to conformance.yaml} --plugin-env azure-arc-conformance.TENANT_ID=$TENANT_ID --plugin-env azure-arc-conformance.SUBSCRIPTION_ID=$SUBSCRIPTION_ID --plugin-env azure-arc-conformance.RESOURCE_GROUP=$RESOURCE_GROUP --plugin-env azure-arc-conformance.CLUSTER_NAME=$CLUSTER_NAME --plugin-env azure-arc-conformance.LOCATION=$LOCATION --plugin-env azure-arc-conformance.CLIENT_ID=$CLIENT_ID --plugin-env azure-arc-conformance.CLIENT_SECRET=$CLIENT_SECRET
+
+Download the conformance.yaml from this github <a href="">in this repository</a>  
 
 These two are required for conformance tests to connect kubernetes cluster to Arc on Azure. As stated before, conformance tests connects the cluster to Arc before running the tests.  
 TENANT_ID - is tenantID of Azure subscription 
