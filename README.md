@@ -45,22 +45,25 @@ Make sure <a href="https://docs.microsoft.com/en-us/azure/azure-arc/kubernetes/c
 
 Run Arc for Kubernetes conformance test by single command. 
 
-sonobuoy run --plugin {Path to conformance.yaml} --plugin-env azure-arc-conformance.TENANT_ID=$TENANT_ID --plugin-env azure-arc-conformance.SUBSCRIPTION_ID=$SUBSCRIPTION_ID --plugin-env azure-arc-conformance.RESOURCE_GROUP=$RESOURCE_GROUP --plugin-env azure-arc-conformance.CLUSTER_NAME=$CLUSTER_NAME --plugin-env azure-arc-conformance.LOCATION=$LOCATION --plugin-env azure-arc-conformance.CLIENT_ID=$CLIENT_ID --plugin-env azure-arc-conformance.CLIENT_SECRET=$CLIENT_SECRET --plugin-env azure-arc-conformance.KUBERNETES_DISTRIBUTION=$KUBERNETES_DISTRIBUTION --plugin-env azure-arc-conformance.dns-namespace=$DNS_NAMESPACE -plugin-env azure-arc-conformance.dns-pod-labels=$DNS_POD_LABELS 
+sonobuoy run --plugin {Path to <a href="/conformance.yaml">Azure arc conformance yaml</a>} --plugin-env azure-arc-conformance.TENANT_ID=$TENANT_ID --plugin-env azure-arc-conformance.SUBSCRIPTION_ID=$SUBSCRIPTION_ID --plugin-env azure-arc-conformance.RESOURCE_GROUP=$RESOURCE_GROUP --plugin-env azure-arc-conformance.CLUSTER_NAME=$CLUSTER_NAME --plugin-env azure-arc-conformance.LOCATION=$LOCATION --plugin-env azure-arc-conformance.CLIENT_ID=$CLIENT_ID --plugin-env azure-arc-conformance.CLIENT_SECRET=$CLIENT_SECRET --plugin-env azure-arc-conformance.KUBERNETES_DISTRIBUTION=$KUBERNETES_DISTRIBUTION --plugin-env azure-arc-conformance.dns-namespace=$DNS_NAMESPACE -plugin-env azure-arc-conformance.dns-pod-labels=$DNS_POD_LABELS 
 
-Download the conformance.yaml from this github <a href="">in this repository</a>  
+Download the conformance.yaml from <a href="/conformance.yaml">here, in this repo</a>  
+
+In case of failure and to rerun the above command, delete sonobuoy pods and namespace by calling *sonobuoy delete*
 
 ### Paramater
 
-TENANT_ID (Required) : is tenantID of Azure subscription 
-Subscription_ID (Required) : Azure Subscription ID
-Resource_group (Required) : Azure resource group
-Cluster_Name (Required): Name to give your cluster on Arc connection.
-LOCATION (Required) : Region of Azure to connect the cluster to. Make sure you provide the regions supported by Azure Arc for Kubernetes. See <a href="https://docs.microsoft.com/en-us/azure/azure-arc/kubernetes/connect-cluster">here</a> for supported regions.  
-Client_ID (Optional) : User Id who has permission to create azure resources
-Client_secret (Optional) : Password for user Id. 
-Kubernetes_distribution (optional) - ? 
-dns-namespace (optional) :  If a certain kubernetes distribution has different location for the dns pods, the user should provide that information in the above command through the flags '--dns-namespace' and '--dns-pod-labels'
-dns-pod-labels (optional) : If a certain kubernetes distribution has different location for the dns pods, the user should provide that information in the above command through the flags '--dns-namespace' and '--dns-pod-labels'
+**TENANT_ID (Required)** : is tenantID of Azure subscription 
+**Subscription_ID (Required)** : Azure Subscription ID
+**Resource_group (Required)** : Azure resource group
+**Cluster_Name (Required)** : Name to give your cluster on Arc connection.
+**LOCATION (Required)** : Region of Azure to connect the cluster to. Make sure you provide the regions supported by Azure Arc for Kubernetes. See <a href="https://docs.microsoft.com/en-us/azure/azure-arc/kubernetes/connect-cluster">here</a> for supported regions.  
+**Client_ID** : App_ID of a service principal. You can reuse service Principal, make sure to assign the following minimal permission for your service principal 
+                $ az role assignment create --role "Kubernetes Cluster - Azure Arc Onboarding" --assignee <<SP_APP_ID>> --subscription ${SUBSCRIPTION_ID} 
+**Client_secret** : Password of service principal. 
+**Kubernetes_distribution (optional)** - Needed only for Openshift clusters, in case of openshift, value should be "openshift"
+**dns-namespace (optional)** :  If a certain kubernetes distribution has different location for the dns pods, the user should provide that information in the above command through the flags '--dns-namespace' and '--dns-pod-labels'
+**dns-pod-labels (optional)** : If a certain kubernetes distribution has different location for the dns pods, the user should provide that information in the above command through the flags '--dns-namespace' and '--dns-pod-labels'
 
 
 ## Clean Up
@@ -76,11 +79,13 @@ Once the status is complete, run the command **'sonobuoy retrieve'** to download
 ### Result file
 The zip file contains the results file at location **plugins/azure-arc-conformance/sonobuoy results.yaml**. This file has the summary of individual tests and their test status (pass/fail) that were run as a part of the test. If all the tests have passed, you will upload this file the <a href=/results"> Results</a> folder. 
  
- For failed tests, further look into **podlogs/sonobuoy** and **plugins/azure-arc-conformance/results/global** folder for individual test logs. 
+ For failed tests, further look into **podlogs/sonobuoy/sonobuoy-azure-arc-conformance-job-GUID/plugin** file for error description. 
+ 
+ When error cannot be resolved and want to raise issue, please share XXX.tar.gz generated by the sonobuoy. 
 
 # Upload Results 
 
-If **sonobuoy status** returns success,  run the command **'sonobuoy retrieve'** to download the results zip file. Retrieve **results.yaml** from *plugins/azure-arc-conformance/sonobuoy results.yaml* folder and upload to  <a href=/results"> Results</a> folder.
+If **sonobuoy status** returns success,  run the command **'sonobuoy retrieve'** to download the results zip file. Retrieve **sonobuoy_results.yaml** from *plugins/azure-arc-conformance/sonobuoy_results.yaml* folder and upload to  <a href=/results"> Results</a> folder.
  
 Under Results/<<Partner Name>> folder, create a folder with your distribution version(Major.minor). Upload the results.yaml file under this folder. 
  
