@@ -53,17 +53,17 @@ In case of failure and to rerun the above command, delete sonobuoy pods and name
 
 ### Paramater
 
-**TENANT_ID (Required)** : is tenantID of Azure subscription 
-**Subscription_ID (Required)** : Azure Subscription ID
-**Resource_group (Required)** : Azure resource group
-**Cluster_Name (Required)** : Name to give your cluster on Arc connection.
-**LOCATION (Required)** : Region of Azure to connect the cluster to. Make sure you provide the regions supported by Azure Arc for Kubernetes. See <a href="https://docs.microsoft.com/en-us/azure/azure-arc/kubernetes/connect-cluster">here</a> for supported regions.  
-**Client_ID** : App_ID of a service principal. You can reuse service Principal, make sure to assign the following minimal permission for your service principal 
+- **TENANT_ID (Required)** : is tenantID of Azure subscription 
+- **Subscription_ID (Required)** : Azure Subscription ID
+- **Resource_group (Required)** : Azure resource group
+- **Cluster_Name (Required)** : Name to give your cluster on Arc connection.
+- **LOCATION (Required)** : Region of Azure to connect the cluster to. Make sure you provide the regions supported by Azure Arc for Kubernetes. See <a href="https://docs.microsoft.com/en-us/azure/azure-arc/kubernetes/connect-cluster">here</a> for supported regions.  
+- **Client_ID** : App_ID of a service principal. You can reuse service Principal, make sure to assign the following minimal permission for your service principal 
                 $ az role assignment create --role "Kubernetes Cluster - Azure Arc Onboarding" --assignee <<SP_APP_ID>> --subscription ${SUBSCRIPTION_ID} 
-**Client_secret** : Password of service principal. 
-**Kubernetes_distribution (optional)** - Needed only for Openshift clusters, in case of openshift, value should be "openshift"
-**dns-namespace (optional)** :  If a certain kubernetes distribution has different location for the dns pods, the user should provide that information in the above command through the flags '--dns-namespace' and '--dns-pod-labels'
-**dns-pod-labels (optional)** : If a certain kubernetes distribution has different location for the dns pods, the user should provide that information in the above command through the flags '--dns-namespace' and '--dns-pod-labels'
+- **Client_secret** : Password of service principal. 
+- **Kubernetes_distribution (optional)** - Needed only for Openshift clusters, in case of openshift, value should be "openshift"
+- **dns-namespace (optional)** :  If a certain kubernetes distribution has different location for the dns pods, the user should provide that information in the above command through the flags '--dns-namespace' and '--dns-pod-labels'
+- **dns-pod-labels (optional)** : If a certain kubernetes distribution has different location for the dns pods, the user should provide that information in the above command through the flags '--dns-namespace' and '--dns-pod-labels'
 
 
 ## Clean Up
@@ -85,11 +85,11 @@ The zip file contains the results file at location **plugins/azure-arc-conforman
 
 # Upload Results 
 
-If **sonobuoy status** returns success,  run the command **'sonobuoy retrieve'** to download the results zip file. Retrieve **sonobuoy_results.yaml** from *plugins/azure-arc-conformance/sonobuoy_results.yaml* folder and upload to  <a href=/results"> Results</a> folder.
+If **sonobuoy status** returns success,  run the command **'sonobuoy retrieve'** to download the results zip file. Retrieve **sonobuoy_results.yaml** from *plugins/azure-arc-conformance/sonobuoy_results.yaml* folder and upload to  <a href="/Results"> Results</a> folder.
  
 Under Results/<<Partner Name>> folder, create a folder with your distribution version(Major.minor). Upload the results.yaml file under this folder. 
  
  For example: Results/Azure Stack-AKS Engine, you will create a folder called 1.2 ( version of AKS Engine on which the conformance tests were run). 
  
  # List of conformance tests
- You can find the lists of Conformance test under the folder *ConformanceTests* in the repository. 
+ <a href="catalog.md">Here</a> is the catalog of conformance tests. 
