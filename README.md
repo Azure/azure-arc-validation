@@ -51,7 +51,7 @@ Download the conformance.yaml from <a href="/conformance.yaml">here, in this rep
 
 In case of failure and to rerun the above command, delete sonobuoy pods and namespace by calling *sonobuoy delete*
 
-### Paramater
+### Parameters
 
 - **TENANT_ID (Required)** : is tenantID of Azure subscription 
 - **Subscription_ID (Required)** : Azure Subscription ID
