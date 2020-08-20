@@ -11,7 +11,7 @@ To realize the promise of Arc feature consistency and high quality on partner pl
 For managing consistency, we had like our certified partners to integrate the conformance tests in their CI/CD pipeline and publishing conformance tests results for major/minor release of partner distribution. 
 
 ### Partner Responsibility
-- Partner runs the conformance tests for every major/minor version pre-releases of their Kubernetes distribution prior to at least 15 days of its public release. (both beta and production releases). 
+- Partner runs the conformance tests for every major/minor version pre-releases/stable releases of their Kubernetes distribution prior to at least 15 days of its public release. (both beta and production releases). 
 - Partner to include the conformance testing in their CI/CD pipeline.
 - Partner publishes the conformance test results emitted by test automation tool, sonobuoy, into partner results folder on certification GitHub repository. 
     - Partner K8s distro version is conformant when test results are positive. 
