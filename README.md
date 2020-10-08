@@ -1,8 +1,8 @@
- # Arc certification for kubernetes
+ # Arc enabled Kubernetes validation 
 
  Azure Arc aims at bringing management and services to any infrastructure. Deploy and manage applications on Kubernetes clusters everywhere using GitOps.  
 
-While Azure Arc can be deployed on any K8s clusters, certification provides distinct visibility for integrated K8s platforms and promises quality, support and consistency for Azure Arc customers across hybrid clusters. 
+While Azure Arc can be deployed on any K8s clusters, validation provides distinct visibility for integrated K8s platforms and promises quality, support and consistency for Azure Arc customers across hybrid clusters. 
 
 To realize the promise of Arc feature consistency and high quality on partner platforms, we have build conformance test framework and automation to continuously test and validate the Arc functionality on certified platforms. Microsoft will take ownership of providing conformance tests covering Arc for Kubernetes functionality. We will continuously add to conformance test repo as we release functionality to get 100% coverage. 
 
