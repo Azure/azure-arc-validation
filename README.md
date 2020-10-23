@@ -12,25 +12,25 @@ For managing consistency, we had like our certified partners to integrate the co
 
 ### Partner Responsibility
 
-1)	Partner runs the conformance tests for every major/minor version pre-releases of their Kubernetes distribution prior to at least 7 days of its public/stable release. (alpha and production also called as public preview and GA at Microsoft respectively ). 
-    a.	Instruction for running conformance tests are here. 
-    b.	Partners will validate the latest, latest-1 and latest-2 Kubernetes distro      . 
+1)	Partner runs the conformance tests for every major/minor version pre-releases of their Kubernetes distribution prior to at least 7 days of its public/stable release, (alpha and production also called as public preview and GA at Microsoft respectively). 
+    - Instruction for running conformance tests are here. 
+    - Partners will validate the latest, latest-1 and latest-2 Kubernetes distro      . 
 2)	Partner publishes the conformance test results emitted by test automation tool, sonobuoy, into partner results folder on validation  GitHub repository. 
-    a.	Partner K8s distro version is conformant when test results are positive. 
-    b.	If test suite failed, partner can verify failure reason emitted by the test automation tool and optionally raise an issue on validation  GitHub for Microsoft review.   
-    c.	Partners should aim to resolve Arc conformance issue before going production with the version.  
+    - Partner K8s distro version is conformant when test results are positive. 
+    - If test suite failed, partner can verify failure reason emitted by the test automation tool and optionally raise an issue on validation  GitHub for Microsoft review.   
+    - Partners should aim to resolve Arc conformance issue before going production with the version.  
 3)	Partner to help create/maintain test lab with Microsoft for their respective distribution.    Partners will provide access to their Kubernetes environment in Azure subscription hosted by the Arc team
-    a.	In case, partners not able to provide access to their Kubernetes environment in Microsoft Azure subscription (test environment), the partner will be required to re-run the conformance tests when a new (major/minor) Arc version is released. 
+    - In case, partners not able to provide access to their Kubernetes environment in Microsoft Azure subscription (test environment), the partner will be required to re-run the conformance tests when a new (major/minor) Arc version is released. 
 
 ### Microsoft Responsibility 
 Microsoft builds conformance tests and test automation tool, sonobuoy plugin   , to run on partner distribution. 
 1)	Microsoft provides the conformance test suite and sonobuoy plugin to run conformance tests with single command line run. 
-    a.	Microsoft will continuously provide test coverage as feature evolves on Arc.    
+    - Microsoft will continuously provide test coverage as feature evolves on Arc.    
 2)	Microsoft integrates conformance tests in its E2E Arc K8s testing and validates these tests on partner distribution for every major/minor version   releases of Arc K8s.  
 3)	In case of severity1/2 (blockers) errors in conformance testing on partner distribution, Microsoft debugs and fixes the issue before releasing the Arc K8s version in question. 
-    a.	Microsoft will work with partner team in case issue needs additional knowledge from partner distribution team.
+    - Microsoft will work with partner team in case issue needs additional knowledge from partner distribution team.
 4)	Microsoft will provide a test azure subscription for partners to deploy/manage their latest GA’ed (Generally available, production ready) distribution. 
-    a.	Legal to write control boundaries around subscription usage from partners. 
+    - Legal to write control boundaries around subscription usage from partners. 
 5)	Microsoft gives partner access to Arc for Kubernetes latest release (major and minor) version 7 days prior to Arc release to public customers, enabling partners to run conformance tests on their side, if needed. 
 6)	Microsoft will provide issue tracking in case of bugs raised by partner and aim to answer the bugs within 7 days.  
 
