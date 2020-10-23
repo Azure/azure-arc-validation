@@ -14,7 +14,7 @@ For managing consistency, we had like our certified partners to integrate the co
 
 1)	Partner runs the conformance tests for every major/minor version pre-releases of their Kubernetes distribution prior to at least 7 days of its public/stable release, (alpha and production also called as public preview and GA at Microsoft respectively). 
     - Instruction for running conformance tests are here. 
-    - Partners will validate the latest, latest-1 and latest-2 Kubernetes distro      . 
+    - Partners will validate the latest, latest-1 and latest-2 Kubernetes distro. 
 2)	Partner publishes the conformance test results emitted by test automation tool, sonobuoy, into partner results folder on validation  GitHub repository. 
     - Partner K8s distro version is conformant when test results are positive. 
     - If test suite failed, partner can verify failure reason emitted by the test automation tool and optionally raise an issue on validation  GitHub for Microsoft review.   
