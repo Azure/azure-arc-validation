@@ -57,7 +57,19 @@ Make sure <a href="https://docs.microsoft.com/en-us/azure/azure-arc/kubernetes/c
 
 Run Arc for Kubernetes conformance test by single command. 
 
-sonobuoy run --plugin {Path to <a href="/conformance.yaml">Azure arc conformance yaml</a>} --plugin-env azure-arc-conformance.TENANT_ID=$TENANT_ID --plugin-env azure-arc-conformance.SUBSCRIPTION_ID=$SUBSCRIPTION_ID --plugin-env azure-arc-conformance.RESOURCE_GROUP=$RESOURCE_GROUP --plugin-env azure-arc-conformance.CLUSTER_NAME=$CLUSTER_NAME --plugin-env azure-arc-conformance.LOCATION=$LOCATION --plugin-env azure-arc-conformance.CLIENT_ID=$CLIENT_ID --plugin-env azure-arc-conformance.CLIENT_SECRET=$CLIENT_SECRET --plugin-env azure-arc-conformance.KUBERNETES_DISTRIBUTION=$KUBERNETES_DISTRIBUTION --plugin-env azure-arc-conformance.dns-namespace=$DNS_NAMESPACE -plugin-env azure-arc-conformance.dns-pod-labels=$DNS_POD_LABELS 
+```console
+sonobuoy run --plugin {Path to <a href="/conformance.yaml">Azure arc conformance yaml</a>} \
+    --plugin-env azure-arc-conformance.TENANT_ID=$TENANT_ID \
+    --plugin-env azure-arc-conformance.SUBSCRIPTION_ID=$SUBSCRIPTION_ID \
+    --plugin-env azure-arc-conformance.RESOURCE_GROUP=$RESOURCE_GROUP \
+    --plugin-env azure-arc-conformance.CLUSTER_NAME=$CLUSTER_NAME \
+    --plugin-env azure-arc-conformance.LOCATION=$LOCATION \
+    --plugin-env azure-arc-conformance.CLIENT_ID=$CLIENT_ID \
+    --plugin-env azure-arc-conformance.CLIENT_SECRET=$CLIENT_SECRET \
+    --plugin-env azure-arc-conformance.KUBERNETES_DISTRIBUTION=$KUBERNETES_DISTRIBUTION \
+    --dns-namespace=$DNS_NAMESPACE \
+    --dns-pod-labels=$DNS_POD_LABELS
+```
 
 Download the conformance.yaml from <a href="/conformance.yaml">here, in this repo</a>  
 
