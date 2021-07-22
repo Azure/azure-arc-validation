@@ -1,0 +1,15 @@
+sonobuoy-config:
+  driver: Job
+  plugin-name: azure-arc-agent-cleanup
+  result-format: junit
+spec:
+  image: arck8sconformance.azurecr.io/arck8sconformance/agentcleanup:0.1.0
+  imagePullPolicy: IfNotPresent
+  name: plugin
+  resources: {}
+  volumes:
+  - name: results
+    emptyDir: {}
+  volumeMounts:
+  - mountPath: /tmp/results
+    name: results

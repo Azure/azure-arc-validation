@@ -1,0 +1,15 @@
+sonobuoy-config:
+  driver: Job
+  plugin-name: azure-arc-ds-platform
+  result-format: junit
+spec:
+  image: arcdatacertification.azurecr.io/ds-test:v1.132
+  imagePullPolicy: IfNotPresent
+  name: plugin
+  resources: {}
+  volumes:
+  - name: results
+    emptyDir: {}
+  volumeMounts:
+  - mountPath: /tmp/results
+    name: results

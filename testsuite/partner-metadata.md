@@ -1,0 +1,6 @@
+- Upstream Kubernetes Version:
+- K8s Distribution Version:
+- Additional Storage/Network Driver details (if applicable):
+- Private Cloud details (if applicable):
+- Bare-metal Node details (if applicable):
+- OEM/IHV solution details (if applicable):

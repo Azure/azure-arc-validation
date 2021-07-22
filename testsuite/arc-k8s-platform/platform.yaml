@@ -1,0 +1,15 @@
+sonobuoy-config:
+  driver: Job
+  plugin-name: azure-arc-platform
+  result-format: junit
+spec:
+  image: arck8sconformance.azurecr.io/arck8sconformance/platform:0.1.1
+  imagePullPolicy: IfNotPresent
+  name: plugin
+  resources: {}
+  volumes:
+  - name: results
+    emptyDir: {}
+  volumeMounts:
+  - mountPath: /tmp/results
+    name: results
