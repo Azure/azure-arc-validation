@@ -9,6 +9,7 @@ AZ_CLIENT_SECRET= # password field of the service principal
 AZ_STORAGE_ACCOUNT= # name of your storage account
 AZ_STORAGE_ACCOUNT_SAS="" # sas token for your storage account, please add it within the quotes
 RESOURCE_GROUP= # resource group name; set this to the resource group
+OFFERING_NAME= # name of the partner offering; use this variable to distinguish between the results tar for different offerings
 LOCATION=eastus # location of the arc connected cluster
 NAMESPACE=arc-ds-controller # namespace of the data controller
 STORAGE_CLASS=default # choose the storage class
@@ -50,4 +51,4 @@ az login --service-principal --username $AZ_CLIENT_ID --password $AZ_CLIENT_SECR
 az account set -s $AZ_SUBSCRIPTION_ID
 
 az storage container create -n conformance-results --account-name $AZ_STORAGE_ACCOUNT --sas-token $AZ_STORAGE_ACCOUNT_SAS
-az storage blob upload --file conformance-results.tar.gz --name conformance-results.tar.gz --container-name conformance-results --account-name $AZ_STORAGE_ACCOUNT --sas-token $AZ_STORAGE_ACCOUNT_SAS
+az storage blob upload --file conformance-results.tar.gz --name conformance-results-$OFFERING_NAME.tar.gz --container-name conformance-results --account-name $AZ_STORAGE_ACCOUNT --sas-token $AZ_STORAGE_ACCOUNT_SAS
