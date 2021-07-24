@@ -11,7 +11,7 @@ It is recommended that our partners integrate the conformance tests into their C
 The conformance tests need to be run every time there's an update (major or minor) to the partner offering or to the Azure Arc components.
 These components include*:
 - **Arc for K8s Platform**: The core Arc for K8s platform with functionalities such as onboarding a cluster to Arc, GitOps etc.
-- **Arc enabled Data Services**: Provides fully managed Azure PaaS offerings for SQLMI and PostgreSQL on your clusters on-prem or on other clouds.
+- **Arc enabled Data Services**: Provides fully managed Azure PaaS offerings such as SQLMI on your clusters on-prem or on other clouds.
 
 *These components may grow in the future as the Azure Arc portfolio widens.
 
