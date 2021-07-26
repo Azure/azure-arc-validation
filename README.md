@@ -10,20 +10,20 @@ It is recommended that our partners integrate the conformance tests into their C
 
 The conformance tests need to be run every time there's an update (major or minor) to the partner offering or to the Azure Arc components.
 These components include*:
-- **Arc for K8s Platform**: The core Arc for K8s platform with functionalities such as onboarding a cluster to Arc, GitOps etc.
-- **Arc enabled Data Services**: Provides fully managed Azure PaaS offerings for SQLMI and PostgreSQL on your clusters on-prem or on other clouds.
+- **Arc enabled Kubernetes**: The core Arc enabled Kubernetes with functionalities such as onboarding a cluster to Arc, GitOps etc.
+- **Arc enabled Data Services**: Provides Azure data services offerings such as SQLMI on your clusters on-prem or on other clouds.
 
 *These components may grow in the future as the Azure Arc portfolio widens.
 
 ### Testing Strategy
 
 The testing strategy can be broken down into two parts:
-- **Update to partner offering**: The new version of the partner offering is tested against N, N-1 and N-2 minor versions of Arc for K8s and the latest version of Arc enabled Data Services.
+- **Update to partner offering**: The new version of the partner offering is tested against N, N-1 and N-2 minor versions of Arc enabled Kubernetes and the latest version of Arc enabled Data Services.
 - **Update to Azure Arc components**: The new version of the Azure Arc component is tested against N, N-1 and N-2 minor versions of the partner offering.
 
-By default the test suite will install the latest versions of Arc for K8s and Arc enabled Data Services.
+By default the test suite will install the latest versions of Arc enabled Kubernetes and Arc enabled Data Services.
 
-| Arc for K8s Minor Release | Version |
+| Arc enabled Kubernetes Minor Release | Version |
 | :---: | :----: |
 | N | 1.3.8 |
 | N-1 | 1.2.0 |
@@ -39,7 +39,7 @@ By default the test suite will install the latest versions of Arc for K8s and Ar
 
 Microsoft will provide the testing tools and processes for partners to run the tests on their environments.
 1. Microsoft will update partners on the availability of a new version of an Azure Arc component as outlined in the Validation Agreement.
-2. Partners will be provided with the sonobuoy based test suite comprising of plugins for the Arc for K8s as well as Arc enabled Data Services. This test suite will be updated as the Azure Arc components evolve.
+2. Partners will be provided with the sonobuoy based test suite comprising of plugins for the Arc enabled Kubernetes as well as Arc enabled Data Services. This test suite will be updated as the Azure Arc components evolve.
 3. Storage accounts for each partner will also be provided. Partners will be given credentials (service principals, storage account SAS token) to publish the test results into these accounts.
 
 ### Failure to Address Issues in Conformance Testing
