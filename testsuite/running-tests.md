@@ -20,7 +20,7 @@ This document will enumerate everything you need to do run the sonobuoy based co
 1. Clone this repository.
 2. Edit the [`partner-metadata.md`](partner-metadata.md) file and fill in the required details.
 
-### Arc for K8s
+### Arc enabled Kubernetes
 1. Edit the [`k8s-conformance-test-suite.sh`](k8s-conformance-test-suite.sh) file and set the values for the required environment variables.
 2. If your cluster is behind an outbound proxy, please edit the above file according to the instruction provided as comments for proxy configuration.
 3. Make the test suite file executable by running `chmod +x k8s-conformance-test-suite.sh`.
