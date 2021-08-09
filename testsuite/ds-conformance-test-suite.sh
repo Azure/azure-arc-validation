@@ -20,7 +20,7 @@ SQL_INSTANCE_NAME=arc-sql # sql instance name
 
 echo "Running the test suite.."
 
-sonobuoy run --wait 
+sonobuoy run --wait \
 --plugin arc-dataservices/dataservices.yaml \
 --plugin-env azure-arc-ds-platform.NAMESPACE=$NAMESPACE \
 --plugin-env azure-arc-ds-platform.STORAGE_CLASS=$STORAGE_CLASS \
