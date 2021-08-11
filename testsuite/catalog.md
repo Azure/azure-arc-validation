@@ -33,8 +33,6 @@ Following tests are a part of this test suite:
 
 - `test_data_controller_ready`: This test will look for the presence of data controller and its status.
 
-- `test_azdata_login`: This test will check for log in to the cluster's controller endpoint and set its namespace as your active context.
-
 - `test_create_sql_mi`: This test will look for the presence of SQL managed instance and its status.
 
 - `test_check_pod_existence`: This test will watch the pods created under the given namespace and its status(RUNNING).
