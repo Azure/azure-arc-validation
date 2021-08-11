@@ -17,6 +17,7 @@ CONFIG_PROFILE=azure-arc-aks-default-storage # choose the config profile
 AZDATA_USERNAME=azureuser # database username
 AZDATA_PASSWORD=Welcome1234% # database password
 SQL_INSTANCE_NAME=arc-sql # sql instance name
+INFRASTRUCTURE=azure # Allowed values are alibaba, aws, azure, gpc, onpremises, other.
 
 echo "Running the test suite.."
 
@@ -33,7 +34,8 @@ sonobuoy run --wait \
 --plugin-env azure-arc-ds-platform.RESOURCE_GROUP=$RESOURCE_GROUP \
 --plugin-env azure-arc-ds-platform.LOCATION=$LOCATION \
 --plugin-env azure-arc-ds-platform.CLIENT_ID=$AZ_CLIENT_ID \
---plugin-env azure-arc-ds-platform.CLIENT_SECRET=$AZ_CLIENT_SECRET
+--plugin-env azure-arc-ds-platform.CLIENT_SECRET=$AZ_CLIENT_SECRET \
+--plugin-env azure-arc-ds-platform.INFRASTRUCTURE=$INFRASTRUCTURE
 
 echo "Test execution completed..Retrieving results"
 
