@@ -43,5 +43,8 @@ Following tests are a part of this test suite:
 
 - `test_ds_cleanup`: This test will cleanup all the data service resources under the given namespace.
 
+## Data services Cleanup
 
+By deleting the repective namespace we can clean up the Data services.
 
+kubectl delete namespace
