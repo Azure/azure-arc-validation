@@ -14,6 +14,7 @@ This document will enumerate everything you need to do run the sonobuoy based co
 ### Additional Prerequisites for Arc enabled Data Services
 
 1. Install [Azure Data CLI](https://docs.microsoft.com/en-us/sql/azdata/install/deploy-install-azdata?view=sql-server-ver15).
+2. Install [arcdata extension](https://docs.microsoft.com/en-us/azure/azure-arc/data/release-notes).
 
 ## Running the script and publishing the results
 
