@@ -30,15 +30,16 @@ This document will enumerate everything you need to do run the sonobuoy based co
 
 ### Arc enabled Data Services
 1. Edit the [`ds-conformance-test-suite.sh`](ds-conformance-test-suite.sh) file and set the values for the required environment variables.
-2. If you wish to bring your own custom control deployment profile with your own configuration, please follow the below process to provide the control.json to sonobuoy plugin:
+2. If your cluster is behind an outbound proxy, please edit the above file according to the instruction provided as comments for proxy configuration.
+3. If you wish to bring your own custom control deployment profile with your own configuration, please follow the below process to provide the control.json to sonobuoy plugin:
 ```
 kubectl create ns arc-ds-config ; kubectl -n arc-ds-config create configmap arc-ds-config --from-file=/opt/azdata/lib/python3.6/site-packages/azdata/cli/commands/arc/deployment-configs/azure-arc-aks-default-storage/control.json
 ```
 Please update the `CONFIG_PROFILE` variable in the above script accordingly.
 
-3. Make the test suite file executable by running `chmod +x ds-conformance-test-suite.sh`.
-4. Execute the script by running `./ds-conformance-test-suite.sh`.
-5. The test suite will take the storage account details as environment variables and will handle publishing the results in the right format.
+4. Make the test suite file executable by running `chmod +x ds-conformance-test-suite.sh`.
+5. Execute the script by running `./ds-conformance-test-suite.sh`.
+6. The test suite will take the storage account details as environment variables and will handle publishing the results in the right format.
 
 ## Retrieving the results
 
