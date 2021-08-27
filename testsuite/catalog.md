@@ -26,13 +26,12 @@ This test plugin runs a single test which is responsible for cleaning up the arc
 
 ## Arc Data Services
 
-This test plugin will determine if the Kubernetes cluster is Azure Arc data services conformant. Following tests are a part of this test suite:
+This test plugin automates the provisioning and testing of Azure Arc enabled data services "Data controller , SQL MI" on a Kubernetes cluster.
+Following tests are a part of this test suite:
 
 - `test_check_namespace_existence`: This test will be responsible for monitoring the given namespace created or not. It will fail if the given namespace already found.
 
 - `test_data_controller_ready`: This test will look for the presence of data controller and its status.
-
-- `test_azdata_login`: This test will check for log in to the cluster's controller endpoint and set its namespace as your active context.
 
 - `test_create_sql_mi`: This test will look for the presence of SQL managed instance and its status.
 
@@ -41,6 +40,3 @@ This test plugin will determine if the Kubernetes cluster is Azure Arc data serv
 - `test_check_pv_existence`: This test will watch the persistent volumes status and volume is bound to a claim.
 
 - `test_ds_cleanup`: This test will cleanup all the data service resources under the given namespace.
-
-
-

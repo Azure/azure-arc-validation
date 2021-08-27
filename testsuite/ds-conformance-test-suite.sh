@@ -17,10 +17,22 @@ CONFIG_PROFILE=azure-arc-aks-default-storage # choose the config profile
 AZDATA_USERNAME=azureuser # database username
 AZDATA_PASSWORD=Welcome1234% # database password
 SQL_INSTANCE_NAME=arc-sql # sql instance name
+INFRASTRUCTURE=azure # Allowed values are alibaba, aws, azure, gpc, onpremises, other.
+
+# In case your cluster is behind an outbound proxy, please add the following environment variables in the below command
+# --plugin-env azure-arc-ds-platform.HTTPS_PROXY="http://<proxy ip>:<proxy port>"
+# --plugin-env azure-arc-ds-platform.HTTP_PROXY="http://<proxy ip>:<proxy port>"
+# --plugin-env azure-arc-ds-platform.NO_PROXY="kubernetes.default.svc,<ip CIDR etc>"
+
+# In case your outbound proxy is setup with certificate authentication, follow the below steps:
+# Create a Kubernetes generic secret with the name sonobuoy-proxy-cert with key proxycert in any namespace:
+# kubectl create secret generic sonobuoy-proxy-cert --from-file=proxycert=<path-to-cert-file>
+# By default we check for the secret in the default namespace. In case you have created the secret in some other namespace, please add the following variables in the sonobuoy run command: 
+# --plugin-env azure-arc-ds-platform.PROXY_CERT_NAMESPACE="<namespace of sonobuoy secret>"
 
 echo "Running the test suite.."
 
-sonobuoy run --wait 
+sonobuoy run --wait \
 --plugin arc-dataservices/dataservices.yaml \
 --plugin-env azure-arc-ds-platform.NAMESPACE=$NAMESPACE \
 --plugin-env azure-arc-ds-platform.STORAGE_CLASS=$STORAGE_CLASS \
@@ -33,7 +45,8 @@ sonobuoy run --wait
 --plugin-env azure-arc-ds-platform.RESOURCE_GROUP=$RESOURCE_GROUP \
 --plugin-env azure-arc-ds-platform.LOCATION=$LOCATION \
 --plugin-env azure-arc-ds-platform.CLIENT_ID=$AZ_CLIENT_ID \
---plugin-env azure-arc-ds-platform.CLIENT_SECRET=$AZ_CLIENT_SECRET
+--plugin-env azure-arc-ds-platform.CLIENT_SECRET=$AZ_CLIENT_SECRET \
+--plugin-env azure-arc-ds-platform.INFRASTRUCTURE=$INFRASTRUCTURE
 
 echo "Test execution completed..Retrieving results"
 
