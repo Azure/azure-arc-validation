@@ -21,8 +21,6 @@ The testing strategy can be broken down into two parts:
 - **Update to partner offering**: The new version of the partner offering is tested against N, N-1 and N-2 minor versions of Arc enabled Kubernetes and the latest version of Arc enabled Data Services.
 - **Update to Azure Arc components**: The new version of the Azure Arc component is tested against N, N-1 and N-2 minor versions of the partner offering.
 
-By default the test suite will install the latest versions of Arc enabled Kubernetes and Arc enabled Data Services.
-
 | Arc enabled Kubernetes Minor Release | Version |
 | :---: | :----: |
 | N | 1.3.8 |

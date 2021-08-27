@@ -63,5 +63,5 @@ echo "Publishing results.."
 az login --service-principal --username $AZ_CLIENT_ID --password $AZ_CLIENT_SECRET --tenant $AZ_TENANT_ID
 az account set -s $AZ_SUBSCRIPTION_ID
 
-az storage container create -n conformance-results --account-name $AZ_STORAGE_ACCOUNT --sas-token $AZ_STORAGE_ACCOUNT_SAS
-az storage blob upload --file conformance-results.tar.gz --name conformance-results-$OFFERING_NAME.tar.gz --container-name conformance-results --account-name $AZ_STORAGE_ACCOUNT --sas-token $AZ_STORAGE_ACCOUNT_SAS
+az storage container create -n conformance-results-ds --account-name $AZ_STORAGE_ACCOUNT --sas-token $AZ_STORAGE_ACCOUNT_SAS
+az storage blob upload --file conformance-results.tar.gz --name conformance-results-$OFFERING_NAME.tar.gz --container-name conformance-results-ds --account-name $AZ_STORAGE_ACCOUNT --sas-token $AZ_STORAGE_ACCOUNT_SAS

@@ -43,7 +43,7 @@ Please update the `CONFIG_PROFILE` variable in the above script accordingly.
 
 ## Retrieving the results
 
-1. Once the above script executes successfully, you can run `sonobuoy retrieve` to get the tar file with the test results and logs.
+1. Once the above script executes successfully, you will find the sonobuoy results tar file in the present working directory.
 2. Run `sonobuoy results <path_to_tar>` to display the results. The results are displayed per sonobuoy plugin.
 3. To take a deeper look at the test logs:
     1. Extract the tar file by running `tar -xvzf <path_to_tar>`
