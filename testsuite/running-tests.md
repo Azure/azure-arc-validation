@@ -33,7 +33,8 @@ This document will enumerate everything you need to do run the sonobuoy based co
 2. If your cluster is behind an outbound proxy, please edit the above file according to the instruction provided as comments for proxy configuration.
 3. If you wish to bring your own custom control deployment profile with your own configuration, please follow the below process to provide the control.json to sonobuoy plugin:
 ```
-kubectl create ns arc-ds-config ; kubectl -n arc-ds-config create configmap arc-ds-config --from-file=/opt/azdata/lib/python3.6/site-packages/azdata/cli/commands/arc/deployment-configs/azure-arc-aks-default-storage/control.json
+az arcdata dc config init --source azure-arc-aks-default-storage --path /tmp/dcconfig
+kubectl create ns arc-ds-config ; kubectl -n arc-ds-config create configmap arc-ds-config --from-file=/tmp/dcconfig/control.json
 ```
 Please update the `CONFIG_PROFILE` variable in the above script accordingly.
 
