@@ -82,7 +82,7 @@ foreach($version in $arc_platform_version)
     az storage container create --n $containerString --account-name $AZ_STORAGE_ACCOUNT --sas-token $AZ_STORAGE_ACCOUNT_SAS
     az storage blob upload  --file conformance-results-$version.tar.gz --name conformance-results-$OFFERING_NAME.tar.gz --container-name $containerString --account-name $AZ_STORAGE_ACCOUNT --sas-token $AZ_STORAGE_ACCOUNT_SAS
     
-    echo "Cleaning the cluster.."
+    Write-Host "Cleaning the cluster.."
     sonobuoy delete --wait
  	
 }
