@@ -64,20 +64,20 @@ foreach($version in $arc_platform_version)
 
     sonobuoy results $sonobuoyResults
 
-	New-Item -Path . -Name "results" -ItemType "directory"
+    New-Item -Path . -Name "results" -ItemType "directory"
     Move-Item -Path $sonobuoyResults -Destination results\$sonobuoyResults
 	
-	Copy-Item .\partner-metadata.md  -Destination results\partner-metadata.md
+    Copy-Item .\partner-metadata.md  -Destination results\partner-metadata.md
 	
     tar -czvf conformance-results-$version.tar.gz results     
 
-	Remove-Item .\results -Recurse	
+    Remove-Item .\results -Recurse	
 	
     Write-Host "Publishing results.."
 
-	$versionArry=$version.Split(".")
+    $versionArry=$version.Split(".")
 
-	$containerString="conformance-results-major-"+$versionArry[0]+"-minor-"+$versionArry[1]+"-patch-"+$versionArry[2]	
+    $containerString="conformance-results-major-"+$versionArry[0]+"-minor-"+$versionArry[1]+"-patch-"+$versionArry[2]	
 
     az storage container create --n $containerString --account-name $AZ_STORAGE_ACCOUNT --sas-token $AZ_STORAGE_ACCOUNT_SAS
     az storage blob upload  --file conformance-results-$version.tar.gz --name conformance-results-$OFFERING_NAME.tar.gz --container-name $containerString --account-name $AZ_STORAGE_ACCOUNT --sas-token $AZ_STORAGE_ACCOUNT_SAS
