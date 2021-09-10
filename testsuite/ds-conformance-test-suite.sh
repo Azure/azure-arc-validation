@@ -12,7 +12,8 @@ RESOURCE_GROUP= # resource group name; set this to the resource group
 OFFERING_NAME= # name of the partner offering; use this variable to distinguish between the results tar for different offerings
 LOCATION=eastus # location of the arc connected cluster
 NAMESPACE=arc-ds-controller # namespace of the data controller
-STORAGE_CLASS=default # choose the storage class
+DATA_CONTROLLER_STORAGE_CLASS=default # choose the storage class for data controller
+SQL_MI_STORAGE_CLASS=default # choose the storage class for sql mi
 CONFIG_PROFILE=azure-arc-aks-default-storage # choose the config profile
 AZDATA_USERNAME=azureuser # database username
 AZDATA_PASSWORD=Welcome1234% # database password
@@ -35,7 +36,8 @@ echo "Running the test suite.."
 sonobuoy run --wait \
 --plugin arc-dataservices/dataservices.yaml \
 --plugin-env azure-arc-ds-platform.NAMESPACE=$NAMESPACE \
---plugin-env azure-arc-ds-platform.STORAGE_CLASS=$STORAGE_CLASS \
+--plugin-env azure-arc-ds-platform.DATA_CONTROLLER_STORAGE_CLASS=$DATA_CONTROLLER_STORAGE_CLASS \
+--plugin-env azure-arc-ds-platform.SQL_MI_STORAGE_CLASS=$SQL_MI_STORAGE_CLASS \
 --plugin-env azure-arc-ds-platform.CONFIG_PROFILE=$CONFIG_PROFILE \
 --plugin-env azure-arc-ds-platform.AZDATA_USERNAME=$AZDATA_USERNAME \
 --plugin-env azure-arc-ds-platform.AZDATA_PASSWORD=$AZDATA_PASSWORD \
@@ -63,5 +65,5 @@ echo "Publishing results.."
 az login --service-principal --username $AZ_CLIENT_ID --password $AZ_CLIENT_SECRET --tenant $AZ_TENANT_ID
 az account set -s $AZ_SUBSCRIPTION_ID
 
-az storage container create -n conformance-results --account-name $AZ_STORAGE_ACCOUNT --sas-token $AZ_STORAGE_ACCOUNT_SAS
-az storage blob upload --file conformance-results.tar.gz --name conformance-results-$OFFERING_NAME.tar.gz --container-name conformance-results --account-name $AZ_STORAGE_ACCOUNT --sas-token $AZ_STORAGE_ACCOUNT_SAS
+az storage container create -n conformance-results-ds --account-name $AZ_STORAGE_ACCOUNT --sas-token $AZ_STORAGE_ACCOUNT_SAS
+az storage blob upload --file conformance-results.tar.gz --name conformance-results-$OFFERING_NAME.tar.gz --container-name conformance-results-ds --account-name $AZ_STORAGE_ACCOUNT --sas-token $AZ_STORAGE_ACCOUNT_SAS
