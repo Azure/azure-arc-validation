@@ -14,7 +14,6 @@ LOCATION=eastus # location of the arc connected cluster
 NAMESPACE=arc-ds-controller # namespace of the data controller
 DATA_CONTROLLER_STORAGE_CLASS=default # choose the storage class for data controller
 SQL_MI_STORAGE_CLASS=default # choose the storage class for sql mi
-CONFIG_PROFILE=azure-arc-aks-default-storage # choose the config profile
 AZDATA_USERNAME=azureuser # database username
 AZDATA_PASSWORD=Welcome1234% # database password
 SQL_INSTANCE_NAME=arc-sql # sql instance name
@@ -38,7 +37,6 @@ sonobuoy run --wait \
 --plugin-env azure-arc-ds-platform.NAMESPACE=$NAMESPACE \
 --plugin-env azure-arc-ds-platform.DATA_CONTROLLER_STORAGE_CLASS=$DATA_CONTROLLER_STORAGE_CLASS \
 --plugin-env azure-arc-ds-platform.SQL_MI_STORAGE_CLASS=$SQL_MI_STORAGE_CLASS \
---plugin-env azure-arc-ds-platform.CONFIG_PROFILE=$CONFIG_PROFILE \
 --plugin-env azure-arc-ds-platform.AZDATA_USERNAME=$AZDATA_USERNAME \
 --plugin-env azure-arc-ds-platform.AZDATA_PASSWORD=$AZDATA_PASSWORD \
 --plugin-env azure-arc-ds-platform.SQL_INSTANCE_NAME=$SQL_INSTANCE_NAME \
