@@ -7,9 +7,9 @@ $AZ_TENANT_ID="" # tenant field of the service principal, please add it within t
 $AZ_SUBSCRIPTION_ID="" # subscription id of the azure subscription (will be provided), please add it within the quotes
 $AZ_CLIENT_ID="" # appid field of the service principal, please add it within the quotes
 $AZ_CLIENT_SECRET="" # password field of the service principal, please add it within the quotes
-$AZ_STORAGE_ACCOUNT="" # name of your storage account, please add it within the quotes
-$AZ_STORAGE_ACCOUNT_SAS="`"<your-sas-token-here>`"" # sas token for your storage account, please replace <your-sas-token-here> with the actual value
-$RESOURCE_GROUP="" # resource group name; set this to the resource group provided to you; please add it within the quotes
+$AZ_STORAGE_ACCOUNT="" # name of your storage account, please add it within the quotes (will be provided)
+$AZ_STORAGE_ACCOUNT_SAS="`"<your-sas-token-here>`"" # sas token for your storage account, please replace <your-sas-token-here> with the actual value (will be provided)
+$RESOURCE_GROUP="" # resource group name; set this to the resource group provided to you; please add it within the quotes (will be provided)
 $OFFERING_NAME="" # name of the partner offering; use this variable to distinguish between the results tar for different offerings
 $CLUSTERNAME="arc-partner-test"+$connectedClustedId # name of the arc connected cluster
 $LOCATION="eastus" # location of the arc connected cluster
@@ -85,4 +85,6 @@ foreach($version in $arc_platform_version)
     Write-Host "Cleaning the cluster.."
     sonobuoy delete --wait
  	
+    Write-Host "Buffer wait 5 minutes.."
+    Start-Sleep -s 300
 }

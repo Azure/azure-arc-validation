@@ -19,7 +19,7 @@ This document will enumerate everything you need to do run the sonobuoy based co
 ## Running the script and publishing the results
 
 1. Clone this repository.
-2. Edit the [`partner-metadata.md`](partner-metadata.md) file and fill in the required details.
+2. Edit the [`partner-metadata.md`](partner-metadata.md) file and fill in the required details. For reference, please see the [`partner-metadata-sample.md`](partner-metadata-sample.md) file.
 
 ### Arc enabled Kubernetes
 1. Edit the [`k8s-conformance-test-suite.sh`](k8s-conformance-test-suite.sh) file and set the values for the required environment variables.
