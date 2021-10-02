@@ -1,3 +1,7 @@
+# Set the following environment variables to run the test suite
+
+# Common Variables
+# Some of the variables need to be populated from the service principal and storage account details provided to you by Microsoft
 $connectedClustedId=-join (((48..57)+(65..90)+(97..122)) * 80 |Get-Random -Count 7 |%{[char]$_})
 $AZ_TENANT_ID= # tenant field of the service principal
 $AZ_SUBSCRIPTION_ID= # subscription id of the azure subscription (will be provided)
@@ -45,7 +49,7 @@ foreach($version in $arc_platform_version)
     --plugin-env azure-arc-platform.CLIENT_ID=$AZ_CLIENT_ID `
     --plugin-env azure-arc-platform.CLIENT_SECRET=$AZ_CLIENT_SECRET `
     --plugin arc-k8s-platform/cleanup.yaml `
-    --plugin-env azure-arc-platform.HELMREGISTRY=mcr.microsoft.com/azurearck8s/batch1/stable/azure-arc-k8sagents:$arc_platform_version `
+    --plugin-env azure-arc-platform.HELMREGISTRY=mcr.microsoft.com/azurearck8s/batch1/stable/azure-arc-k8sagents:$version `
     --plugin-env azure-arc-agent-cleanup.TENANT_ID=$AZ_TENANT_ID `
     --plugin-env azure-arc-agent-cleanup.SUBSCRIPTION_ID=$AZ_SUBSCRIPTION_ID `
     --plugin-env azure-arc-agent-cleanup.RESOURCE_GROUP=$RESOURCE_GROUP `
