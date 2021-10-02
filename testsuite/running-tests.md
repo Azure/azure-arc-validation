@@ -28,6 +28,8 @@ This document will enumerate everything you need to do run the sonobuoy based co
 4. Execute the script by running `./k8s-conformance-test-suite.sh`.
 5. The test suite will take the storage account details as environment variables and will handle publishing the results in the right format.
 
+*The above script is **bash only**. Please use the [`k8s-conformance-test-suite.ps1`](k8s-conformance-test-suite.ps1) script for windows hosts.
+
 ### Arc enabled Data Services
 1. Edit the [`ds-conformance-test-suite.sh`](ds-conformance-test-suite.sh) file and set the values for the required environment variables.
 2. If your cluster is behind an outbound proxy, please edit the above file according to the instruction provided as comments for proxy configuration.

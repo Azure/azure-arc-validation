@@ -3,16 +3,16 @@
 # Common Variables
 # Some of the variables need to be populated from the service principal and storage account details provided to you by Microsoft
 $connectedClustedId=-join (((48..57)+(65..90)+(97..122)) * 80 |Get-Random -Count 7 |%{[char]$_})
-$AZ_TENANT_ID= # tenant field of the service principal
-$AZ_SUBSCRIPTION_ID= # subscription id of the azure subscription (will be provided)
-$AZ_CLIENT_ID= # appid field of the service principal
-$AZ_CLIENT_SECRET= # password field of the service principal
-$AZ_STORAGE_ACCOUNT= # name of your storage account
-$AZ_STORAGE_ACCOUNT_SAS="" # sas token for your storage account, please add it within the quotes
-$RESOURCE_GROUP= # resource group name; set this to the resource group
-$OFFERING_NAME= # name of the partner offering; use this variable to distinguish between the results tar for different offerings
+$AZ_TENANT_ID="" # tenant field of the service principal, please add it within the quotes
+$AZ_SUBSCRIPTION_ID="" # subscription id of the azure subscription (will be provided), please add it within the quotes
+$AZ_CLIENT_ID="" # appid field of the service principal, please add it within the quotes
+$AZ_CLIENT_SECRET="" # password field of the service principal, please add it within the quotes
+$AZ_STORAGE_ACCOUNT="" # name of your storage account, please add it within the quotes
+$AZ_STORAGE_ACCOUNT_SAS="`"<your-sas-token-here>`"" # sas token for your storage account, please replace <your-sas-token-here> with the actual value
+$RESOURCE_GROUP="" # resource group name; set this to the resource group provided to you; please add it within the quotes
+$OFFERING_NAME="" # name of the partner offering; use this variable to distinguish between the results tar for different offerings
 $CLUSTERNAME="arc-partner-test"+$connectedClustedId # name of the arc connected cluster
-$LOCATION= # location of the arc connected cluster
+$LOCATION="eastus" # location of the arc connected cluster
 
 # Platform Cleanup Plugin
 $CLEANUP_TIMEOUT=1500 # time in seconds after which the platform cleanup plugin times out
@@ -64,25 +64,25 @@ foreach($version in $arc_platform_version)
 
     sonobuoy results $sonobuoyResults
 
-	New-Item -Path . -Name "results" -ItemType "directory"
+    New-Item -Path . -Name "results" -ItemType "directory"
     Move-Item -Path $sonobuoyResults -Destination results\$sonobuoyResults
 	
-	Copy-Item .\partner-metadata.md  -Destination results\partner-metadata.md
+    Copy-Item .\partner-metadata.md  -Destination results\partner-metadata.md
 	
     tar -czvf conformance-results-$version.tar.gz results     
 
-	Remove-Item .\results -Recurse	
+    Remove-Item .\results -Recurse	
 	
     Write-Host "Publishing results.."
 
-	$versionArry=$version.Split(".")
+    $versionArry=$version.Split(".")
 
-	$containerString="conformance-results-major-"+$versionArry[0]+"-minor-"+$versionArry[1]+"-patch-"+$versionArry[2]	
+    $containerString="conformance-results-major-"+$versionArry[0]+"-minor-"+$versionArry[1]+"-patch-"+$versionArry[2]	
 
-    az storage container create --n $containerString --account-name $AZ_STORAGE_ACCOUNT --sas-token $AZ_STORAGE_ACCOUNT_SAS
+    az storage container create -n $containerString --account-name $AZ_STORAGE_ACCOUNT --sas-token $AZ_STORAGE_ACCOUNT_SAS
     az storage blob upload  --file conformance-results-$version.tar.gz --name conformance-results-$OFFERING_NAME.tar.gz --container-name $containerString --account-name $AZ_STORAGE_ACCOUNT --sas-token $AZ_STORAGE_ACCOUNT_SAS
     
-    echo "Cleaning the cluster.."
+    Write-Host "Cleaning the cluster.."
     sonobuoy delete --wait
  	
 }
