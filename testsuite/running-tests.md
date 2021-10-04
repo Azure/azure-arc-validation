@@ -18,7 +18,7 @@ This document will enumerate everything you need to do run the sonobuoy based co
 ## Running the script and publishing the results
 
 1. Clone this repository.
-2. Edit the [`partner-metadata.md`](partner-metadata.md) file and fill in the required details.
+2. Edit the [`partner-metadata.md`](partner-metadata.md) file and fill in the required details. For reference, please see the [`partner-metadata-sample.md`](partner-metadata-sample.md) file.
 
 ### Arc enabled Kubernetes
 1. Edit the [`k8s-conformance-test-suite.sh`](k8s-conformance-test-suite.sh) file and set the values for the required environment variables.
@@ -26,6 +26,8 @@ This document will enumerate everything you need to do run the sonobuoy based co
 3. Make the test suite file executable by running `chmod +x k8s-conformance-test-suite.sh`.
 4. Execute the script by running `./k8s-conformance-test-suite.sh`.
 5. The test suite will take the storage account details as environment variables and will handle publishing the results in the right format.
+
+*The above script is **bash only**. Please use the [`k8s-conformance-test-suite.ps1`](k8s-conformance-test-suite.ps1) script for windows hosts.
 
 ### Arc enabled Data Services
 1. Edit the [`ds-conformance-test-suite.sh`](ds-conformance-test-suite.sh) file and set the values for the required environment variables.
