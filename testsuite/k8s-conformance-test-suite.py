@@ -16,16 +16,16 @@ from azure.storage.blob import ContainerClient
 
 connectedClustedId = ''.join(random.choices(string.ascii_uppercase + string.digits, k = 7))
 
-AZ_TENANT_ID="8548a469-8c0e-4aa4-b534-ac75ca1e02f7" # tenant field of the service principal, please add it within the quotes
-AZ_SUBSCRIPTION_ID="3959ec86-5353-4b0c-b5d7-3877122861a0" # subscription id of the azure subscription (will be provided), please add it within the quotes
-AZ_CLIENT_ID="27eb2e73-6520-4676-9f36-8dcc4b07efe3" # appid field of the service principal, please add it within the quotes
-AZ_CLIENT_SECRET="GnxI5n2AZltrqIfW2.tV4_THYLKGPgqHzB" # password field of the service principal, please add it within the quotes
-AZ_STORAGE_ACCOUNT="arcvalidationsa" # name of your storage account, please add it within the quotes
-AZ_STORAGE_ACCOUNT_SAS="?sv=2020-08-04&ss=bfqt&srt=sco&sp=rwdlacuptfx&se=2021-10-09T14:59:39Z&st=2021-10-05T06:59:39Z&spr=https&sig=YxYm%2FKdmEfpQJybs4DC0%2FQTB%2B%2BersVC0nK3XuNaK5k0%3D" # sas token for your storage account, please replace <your-sas-token-here> with the actual value
-RESOURCE_GROUP="external-test" # resource group name; set this to the resource group provided to you; please add it within the quotes
-OFFERING_NAME="suvankartest123" # name of the partner offering; use this variable to distinguish between the results tar for different offerings
-CLUSTERNAME="arc-partner-test"+connectedClustedId # name of the arc connected cluster
-LOCATION="eastus" # location of the arc connected cluster
+AZ_TENANT_ID="" # tenant field of the service principal, please add it within the quotes
+AZ_SUBSCRIPTION_ID="" # subscription id of the azure subscription (will be provided), please add it within the quotes
+AZ_CLIENT_ID="" # appid field of the service principal, please add it within the quotes
+AZ_CLIENT_SECRET="" # password field of the service principal, please add it within the quotes
+AZ_STORAGE_ACCOUNT="" # name of your storage account, please add it within the quotes
+AZ_STORAGE_ACCOUNT_SAS="" # sas token for your storage account, please replace <your-sas-token-here> with the actual value
+RESOURCE_GROUP="" # resource group name; set this to the resource group provided to you; please add it within the quotes
+OFFERING_NAME="" # name of the partner offering; use this variable to distinguish between the results tar for different offerings
+CLUSTERNAME=""+connectedClustedId # name of the arc connected cluster
+LOCATION="" # location of the arc connected cluster
 
 # Platform Cleanup Plugin
 CLEANUP_TIMEOUT=1500 # time in seconds after which the platform cleanup plugin times out
