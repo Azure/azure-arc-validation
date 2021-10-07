@@ -24,8 +24,8 @@ AZ_STORAGE_ACCOUNT="" # name of your storage account, please add it within the q
 AZ_STORAGE_ACCOUNT_SAS="" # sas token for your storage account, please replace <your-sas-token-here> with the actual value
 RESOURCE_GROUP="" # resource group name; set this to the resource group provided to you; please add it within the quotes
 OFFERING_NAME="" # name of the partner offering; use this variable to distinguish between the results tar for different offerings
-CLUSTERNAME=""+connectedClustedId # name of the arc connected cluster
-LOCATION="" # location of the arc connected cluster
+CLUSTERNAME="arc-partner-test"+connectedClustedId # name of the arc connected cluster
+LOCATION="eastus" # location of the arc connected cluster
 
 # Platform Cleanup Plugin
 CLEANUP_TIMEOUT=1500 # time in seconds after which the platform cleanup plugin times out
@@ -83,13 +83,13 @@ for version in arc_platform_version:
 
     print("Test execution completed..Retrieving results")    
 
-    sonobuoyRunCommandResult = subprocess.run(sonobuoyRunCommand)    
+    sonobuoyRunCommandResult = subprocess.run(sonobuoyRunCommand,shell=True)    
 
     sonobuoyretrieveCommand = "sonobuoy retrieve" 
-    sonobuoyresultFile = subprocess.run(sonobuoyretrieveCommand,capture_output=True, text=True).stdout.strip("\n")     
+    sonobuoyresultFile = subprocess.run(sonobuoyretrieveCommand,shell=True, capture_output=True, text=True).stdout.strip("\n")     
 
     sonobuoyResultsCommand = f"sonobuoy results {sonobuoyresultFile}"
-    sonobuoyResultsCommandResult = subprocess.run(sonobuoyResultsCommand)    
+    sonobuoyResultsCommandResult = subprocess.run(sonobuoyResultsCommand,shell=True)    
 
     os.makedirs(optputFolderName)
     shutil.move(sonobuoyresultFile, optputFolderName) 
@@ -116,6 +116,11 @@ for version in arc_platform_version:
     with open(tarFileName, "rb") as data:
         blob_client.upload_blob(data,blob_type="BlockBlob")
 
-    print("Cleaning the cluster..")    
+    print("Cleaning the cluster..")
 
-    subprocess.run("sonobuoy delete --wait")
+    subprocess.run("sonobuoy delete --wait",shell=True)
+
+
+   
+
+    
