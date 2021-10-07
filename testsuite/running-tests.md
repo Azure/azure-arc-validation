@@ -10,6 +10,7 @@ This document will enumerate everything you need to do run the sonobuoy based co
 3. Address the [network requirements](https://docs.microsoft.com/en-us/azure/azure-arc/kubernetes/quickstart-connect-cluster#meet-network-requirements) on your cluster for the Arc agents to communicate with Azure.
 4. Download and install [git](https://git-scm.com/downloads).
 5. Download and install [az cli](https://docs.microsoft.com/en-us/cli/azure/install-azure-cli).
+6. Download and install [python](https://www.python.org/downloads/) and [pip](https://packaging.python.org/tutorials/     installing-packages/#use-pip-for-installing). 
 
 ### Additional Prerequisites for Arc enabled Data Services
 
@@ -29,6 +30,7 @@ This document will enumerate everything you need to do run the sonobuoy based co
 5. The test suite will take the storage account details as environment variables and will handle publishing the results in the right format.
 
 *The above script is **bash only**. Please use the [`k8s-conformance-test-suite.ps1`](k8s-conformance-test-suite.ps1) script for windows hosts.
+**Please use the [`k8s-conformance-test-suite.py`](k8s-conformance-test-suite.py) script for both windows and linux hosts.To execute the script create a virtual environment under project root directory and install the following packages using pip [azure-identity](https://pypi.org/project/azure-identity/),[azure-mgmt-resource](https://pypi.org/project/azure-mgmt-resource/) and azure-storage-blob(https://pypi.org/project/azure-storage-blob/).    
 
 ### Arc enabled Data Services
 1. Edit the [`ds-conformance-test-suite.sh`](ds-conformance-test-suite.sh) file and set the values for the required environment variables.
