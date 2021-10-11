@@ -7,9 +7,9 @@ AZ_TENANT_ID= # tenant field of the service principal
 AZ_SUBSCRIPTION_ID= # subscription id of the azure subscription (will be provided)
 AZ_CLIENT_ID= # appid field of the service principal
 AZ_CLIENT_SECRET= # password field of the service principal
-AZ_STORAGE_ACCOUNT= # name of your storage account
-AZ_STORAGE_ACCOUNT_SAS="" # sas token for your storage account, please add it within the quotes
-RESOURCE_GROUP= # resource group name; set this to the resource group
+AZ_STORAGE_ACCOUNT= # name of your storage account (will be provided)
+AZ_STORAGE_ACCOUNT_SAS="" # sas token for your storage account, please add it within the quotes (will be provided)
+RESOURCE_GROUP= # resource group name (will be provided)
 OFFERING_NAME= # name of the partner offering; use this variable to distinguish between the results tar for different offerings
 CLUSTERNAME=arc-partner-test-$connectedClustedId # name of the arc connected cluster
 LOCATION=eastus # location of the arc connected cluster
@@ -77,5 +77,8 @@ while IFS= read -r arc_platform_version || [ -n "$arc_platform_version" ]; do
 
     echo "Cleaning the cluster.."
     sonobuoy delete --wait
+
+    echo "Buffer wait 5 minutes..."
+    sleep 5m
 
 done < aak8sSupportPolicy.txt

@@ -1,0 +1,6 @@
+- Upstream Kubernetes Version: TKGm 1.3.1
+- K8s Distribution Version: v1.20.5_vmware.2
+- Additional Storage/Network Driver details (if applicable): Antrea v1.2.1
+- Private Cloud details (if applicable): vSphere 7.0
+- Bare-metal Node details (if applicable):
+- OEM/IHV solution details (if applicable):
