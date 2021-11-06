@@ -38,6 +38,7 @@ az arcdata dc config init --source azure-arc-aks-default-storage --path /tmp/dcc
 kubectl create ns arc-ds-config ; kubectl -n arc-ds-config create configmap arc-ds-config --from-file=/tmp/dcconfig/control.json
 ```
 Please update the `CONFIG_PROFILE` variable in the above script accordingly.
+
 4. Make the test suite file executable by running `chmod +x ds-conformance-test-suite.sh`.
 5. Execute the script by running `./ds-conformance-test-suite.sh`.
 6. The test suite will take the storage account details as environment variables and will handle publishing the results in the right format.
