@@ -54,6 +54,7 @@ while IFS= read -r arc_platform_version || [ -n "$arc_platform_version" ]; do
     --plugin-env azure-arc-agent-cleanup.CLEANUP_TIMEOUT=$CLEANUP_TIMEOUT \
     --plugin-env azure-arc-agent-cleanup.CLIENT_ID=$AZ_CLIENT_ID \
     --plugin-env azure-arc-agent-cleanup.CLIENT_SECRET=$AZ_CLIENT_SECRET \
+    --config config.json \
 
     echo "Test execution completed..Retrieving results"
 

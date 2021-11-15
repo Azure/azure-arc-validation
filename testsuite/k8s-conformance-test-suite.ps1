@@ -56,7 +56,8 @@ foreach($version in $arc_platform_version)
     --plugin-env azure-arc-agent-cleanup.CLUSTER_NAME=$CLUSTERNAME `
     --plugin-env azure-arc-agent-cleanup.CLEANUP_TIMEOUT=$CLEANUP_TIMEOUT `
     --plugin-env azure-arc-agent-cleanup.CLIENT_ID=$AZ_CLIENT_ID `
-    --plugin-env azure-arc-agent-cleanup.CLIENT_SECRET=$AZ_CLIENT_SECRET 
+    --plugin-env azure-arc-agent-cleanup.CLIENT_SECRET=$AZ_CLIENT_SECRET `
+    --config config.json
 
     Write-Host "Test execution completed..Retrieving results"
    

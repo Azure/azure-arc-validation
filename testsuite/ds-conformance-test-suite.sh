@@ -52,7 +52,8 @@ sonobuoy run --wait \
 --plugin-env azure-arc-ds-platform.LOCATION=$LOCATION \
 --plugin-env azure-arc-ds-platform.CLIENT_ID=$AZ_CLIENT_ID \
 --plugin-env azure-arc-ds-platform.CLIENT_SECRET=$AZ_CLIENT_SECRET \
---plugin-env azure-arc-ds-platform.INFRASTRUCTURE=$INFRASTRUCTURE
+--plugin-env azure-arc-ds-platform.INFRASTRUCTURE=$INFRASTRUCTURE \
+--config config.json
 
 echo "Test execution completed..Retrieving results"
 
