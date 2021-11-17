@@ -44,7 +44,7 @@ sonobuoy run --wait \
 --plugin-env azure-arc-ds-platform.PSQL_STORAGE_CLASS=$PSQL_STORAGE_CLASS \
 --plugin-env azure-arc-ds-platform.AZDATA_USERNAME=$AZDATA_USERNAME \
 --plugin-env azure-arc-ds-platform.AZDATA_PASSWORD=$AZDATA_PASSWORD \
---plugin-env azure-arc-ds-platform.SQL_INSTANCE_NAME=$SQL_INSTANCE_NAME \ 
+--plugin-env azure-arc-ds-platform.SQL_INSTANCE_NAME=$SQL_INSTANCE_NAME \
 --plugin-env azure-arc-ds-platform.PSQL_SERVERGROUP_NAME=$PSQL_SERVERGROUP_NAME \
 --plugin-env azure-arc-ds-platform.TENANT_ID=$AZ_TENANT_ID \
 --plugin-env azure-arc-ds-platform.SUBSCRIPTION_ID=$AZ_SUBSCRIPTION_ID \
