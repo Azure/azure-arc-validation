@@ -6,6 +6,7 @@ $connectedClustedId=-join (((48..57)+(65..90)+(97..122)) * 80 |Get-Random -Count
 $AZ_TENANT_ID="" # tenant field of the service principal, please add it within the quotes
 $AZ_SUBSCRIPTION_ID="" # subscription id of the azure subscription (will be provided), please add it within the quotes
 $AZ_CLIENT_ID="" # appid field of the service principal, please add it within the quotes
+$AZ_OBJECT_ID= # objectid of the service principal, please add it within the quotes
 $AZ_CLIENT_SECRET="" # password field of the service principal, please add it within the quotes
 $AZ_STORAGE_ACCOUNT="" # name of your storage account, please add it within the quotes (will be provided)
 $AZ_STORAGE_ACCOUNT_SAS="`"<your-sas-token-here>`"" # sas token for your storage account, please replace <your-sas-token-here> with the actual value (will be provided)
@@ -57,6 +58,7 @@ foreach($version in $arc_platform_version)
     --plugin-env azure-arc-agent-cleanup.CLEANUP_TIMEOUT=$CLEANUP_TIMEOUT `
     --plugin-env azure-arc-agent-cleanup.CLIENT_ID=$AZ_CLIENT_ID `
     --plugin-env azure-arc-agent-cleanup.CLIENT_SECRET=$AZ_CLIENT_SECRET `
+    --plugin-env azure-arc-platform.OBJECT_ID=$AZ_OBJECT_ID `
     --config config.json
 
     Write-Host "Test execution completed..Retrieving results"

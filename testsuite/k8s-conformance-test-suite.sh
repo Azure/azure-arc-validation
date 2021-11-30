@@ -6,6 +6,7 @@ connectedClustedId=$(tr -dc A-Za-z0-9 </dev/urandom | head -c 7 ; echo '')
 AZ_TENANT_ID= # tenant field of the service principal
 AZ_SUBSCRIPTION_ID= # subscription id of the azure subscription (will be provided)
 AZ_CLIENT_ID= # appid field of the service principal
+AZ_OBJECT_ID= # objectid of the service principal, please add it within the quotes
 AZ_CLIENT_SECRET= # password field of the service principal
 AZ_STORAGE_ACCOUNT= # name of your storage account (will be provided)
 AZ_STORAGE_ACCOUNT_SAS="" # sas token for your storage account, please add it within the quotes (will be provided)
@@ -54,6 +55,7 @@ while IFS= read -r arc_platform_version || [ -n "$arc_platform_version" ]; do
     --plugin-env azure-arc-agent-cleanup.CLEANUP_TIMEOUT=$CLEANUP_TIMEOUT \
     --plugin-env azure-arc-agent-cleanup.CLIENT_ID=$AZ_CLIENT_ID \
     --plugin-env azure-arc-agent-cleanup.CLIENT_SECRET=$AZ_CLIENT_SECRET \
+    --plugin-env azure-arc-platform.OBJECT_ID=$AZ_OBJECT_ID \
     --config config.json \
 
     echo "Test execution completed..Retrieving results"

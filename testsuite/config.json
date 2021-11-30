@@ -1,7 +1,7 @@
 {
     "Description": "Azure Arc Kubernetes Conformance",
     "UUID": "",
-    "Version": "v0.55.0",
+    "Version": "v0.55.1",
     "ResultsDir": "/tmp/results",
     "Resources": null,
     "Filters": {
@@ -37,7 +37,7 @@
         "~/sonobuoy/plugins.d"
     ],
     "Namespace": "sonobuoy",
-    "WorkerImage": "sonobuoy/sonobuoy:v0.55.0",
+    "WorkerImage": "sonobuoy/sonobuoy:v0.55.1",
     "ImagePullPolicy": "IfNotPresent",
     "ImagePullSecrets": "",
     "ProgressUpdatesPort": "8099",
