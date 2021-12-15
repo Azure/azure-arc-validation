@@ -33,7 +33,7 @@ def fix_definition_json(data):
     index = 0
     for i in data["Definition"]["spec"]["env"]:
         key = i["name"].lower()
-        if key is not None and "secret" in key:
+        if key is not None and "client_secret" in key:
             data["Definition"]["spec"]["env"][index]["value"] = ""
         index+=1
     
@@ -85,7 +85,7 @@ def fix_core_v1_configmaps(data):
 
 
 def fix_string(str):
-    secret_index = str.index("SECRET")
+    secret_index = str.index("CLIENT_SECRET")
     value_index = str.index("value", secret_index + 6)
     secret_value_index = str.index(" ", value_index + 7)
 
@@ -99,7 +99,7 @@ def fix_core_v1_pods(data):
         for container in item["spec"]["containers"]:
             index = 0
             for env in container["env"]:
-                if "secret" in env["name"].lower():
+                if "client_secret" in env["name"].lower():
                     data[outer_index]["spec"]["containers"][container_index]["env"][index]["value"] = ""
                 index+=1
             container_index+=1
