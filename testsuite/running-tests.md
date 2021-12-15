@@ -10,6 +10,7 @@ This document will enumerate everything you need to do run the sonobuoy based co
 3. Address the [network requirements](https://docs.microsoft.com/en-us/azure/azure-arc/kubernetes/quickstart-connect-cluster#meet-network-requirements) on your cluster for the Arc agents to communicate with Azure.
 4. Download and install [git](https://git-scm.com/downloads).
 5. Download and install [az cli](https://docs.microsoft.com/en-us/cli/azure/install-azure-cli).
+6. Download and install [python](https://www.python.org/downloads)
 
 ### Additional Prerequisites for Arc enabled Data Services
 
