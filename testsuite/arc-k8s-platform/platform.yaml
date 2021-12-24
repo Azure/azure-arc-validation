@@ -1,7 +1,9 @@
+podSpec:
   containers:
     - name: clusterconnecttest
       image: arck8sconformance.azurecr.io/arck8sconformance/clusterconnect:0.1.5
-  restartPolicy: Never
+      imagePullPolicy: IfNotPresent
+  restartPolicy: Always
   serviceAccountName: sonobuoy-serviceaccount
 sonobuoy-config:
   driver: Job
