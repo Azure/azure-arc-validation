@@ -9,9 +9,9 @@ AZ_CLIENT_ID= # appid field of the service principal
 AZ_OBJECT_ID= # objectid of the service principal, please add it within the quotes
 AZ_CLIENT_SECRET= # password field of the service principal
 AZ_STORAGE_ACCOUNT= # name of your storage account (will be provided)
-AZ_STORAGE_ACCOUNT_SAS="" # sas token for your storage account, please add it within the quotes (will be provided)
-RESOURCE_GROUP=rapatchi # resource group name (will be provided)
-OFFERING_NAME=test # name of the partner offering; use this variable to distinguish between the results tar for different offerings
+AZ_STORAGE_ACCOUNT_SAS="<your-sas-token-here>" # sas token for your storage account, please add it within the quotes (will be provided)
+RESOURCE_GROUP= # resource group name (will be provided)
+OFFERING_NAME= # name of the partner offering; use this variable to distinguish between the results tar for different offerings
 CLUSTERNAME=arc-partner-test-$connectedClustedId # name of the arc connected cluster
 LOCATION=eastus # location of the arc connected cluster
 
