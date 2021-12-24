@@ -3,17 +3,17 @@
 # Common Variables
 # Some of the variables need to be populated from the service principal and storage account details provided to you by Microsoft
 $connectedClustedId=-join (((48..57)+(65..90)+(97..122)) * 80 |Get-Random -Count 7 |%{[char]$_})
-$AZ_TENANT_ID="72f988bf-86f1-41af-91ab-2d7cd011db47" # tenant field of the service principal, please add it within the quotes
-$AZ_SUBSCRIPTION_ID="1bfbb5d0-917e-4346-9026-1d3b344417f5" # subscription id of the azure subscription (will be provided), please add it within the quotes
-$AZ_CLIENT_ID="d0d26cba-4790-4c30-b7d2-6caa7a4a3d0d" # appid field of the service principal, please add it within the quotes
-$AZ_OBJECT_ID="03c64f52-b2ad-436a-921f-73f9ff64fd4b" # objectid of the service principal, please add it within the quotes
-$AZ_CLIENT_SECRET="F6cZ-HpR994NwLibS2hU~wZQh.scA1~_27" # password field of the service principal, please add it within the quotes
-$AZ_STORAGE_ACCOUNT="rapatchisastest" # name of your storage account, please add it within the quotes (will be provided)
-$AZ_STORAGE_ACCOUNT_SAS="`"?sv=2020-08-04&ss=bfqt&srt=sco&sp=rwdlacupitfx&se=2021-12-24T19:17:59Z&st=2021-12-24T11:17:59Z&spr=https&sig=Fe3DY0PYpu9NB5C%2FLyXY%2FQdscaak4WxkGgxojLWQp7A%3D`"" # sas token for your storage account, please replace <your-sas-token-here> with the actual value (will be provided)
-$RESOURCE_GROUP="rapatchi" # resource group name; set this to the resource group provided to you; please add it within the quotes (will be provided)
-$OFFERING_NAME="test" # name of the partner offering; use this variable to distinguish between the results tar for different offerings
-$CLUSTERNAME="arc-partner-test"+$connectedClustedId # name of the arc connected cluster
-$LOCATION="eastus" # location of the arc connected cluster
+$AZ_TENANT_ID="" # tenant field of the service principal, please add it within the quotes
+$AZ_SUBSCRIPTION_ID="" # subscription id of the azure subscription (will be provided), please add it within the quotes
+$AZ_CLIENT_ID="" # appid field of the service principal, please add it within the quotes
+$AZ_OBJECT_ID="" # objectid of the service principal, please add it within the quotes
+$AZ_CLIENT_SECRET="" # password field of the service principal, please add it within the quotes
+$AZ_STORAGE_ACCOUNT="" # name of your storage account, please add it within the quotes (will be provided)
+$AZ_STORAGE_ACCOUNT_SAS="`"`"" # sas token for your storage account, please replace <your-sas-token-here> with the actual value (will be provided)
+$RESOURCE_GROUP="" # resource group name; set this to the resource group provided to you; please add it within the quotes (will be provided)
+$OFFERING_NAME="" # name of the partner offering; use this variable to distinguish between the results tar for different offerings
+$CLUSTERNAME=""+$connectedClustedId # name of the arc connected cluster
+$LOCATION="" # location of the arc connected cluster
 
 # Platform Cleanup Plugin
 $CLEANUP_TIMEOUT=1500 # time in seconds after which the platform cleanup plugin times out
