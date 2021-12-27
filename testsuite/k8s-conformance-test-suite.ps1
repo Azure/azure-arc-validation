@@ -64,6 +64,11 @@ foreach($version in $arc_platform_version)
 
     sonobuoy results $sonobuoyResults
 
+    New-Item -Path . -Name "testResult" -ItemType "directory"
+    python arc-k8s-platform/remove-secrets.py $sonobuoyResults testResult
+
+    Remove-Item .\testResult -Recurse
+
     New-Item -Path . -Name "results" -ItemType "directory"
     Move-Item -Path $sonobuoyResults -Destination results\$sonobuoyResults
 	
