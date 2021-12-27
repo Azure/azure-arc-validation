@@ -60,6 +60,11 @@ while IFS= read -r arc_platform_version || [ -n "$arc_platform_version" ]; do
 
     sonobuoyResults=$(sonobuoy retrieve)
     sonobuoy results $sonobuoyResults
+
+    mkdir testResult
+    python arc-k8s-platform/remove-secrets.py $sonobuoyResults testResult
+
+    rm -rf testResult
     mkdir results
     mv $sonobuoyResults results/$sonobuoyResults
     cp partner-metadata.md results/partner-metadata.md
