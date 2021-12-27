@@ -8,7 +8,7 @@ AZ_SUBSCRIPTION_ID= # subscription id of the azure subscription (will be provide
 AZ_CLIENT_ID= # appid field of the service principal
 AZ_CLIENT_SECRET= # password field of the service principal
 AZ_STORAGE_ACCOUNT= # name of your storage account (will be provided)
-AZ_STORAGE_ACCOUNT_SAS="" # sas token for your storage account, please add it within the quotes (will be provided)
+AZ_STORAGE_ACCOUNT_SAS="<your-sas-token-here>" # sas token for your storage account, please add it within the quotes (will be provided)
 RESOURCE_GROUP= # resource group name (will be provided)
 OFFERING_NAME= # name of the partner offering; use this variable to distinguish between the results tar for different offerings
 CLUSTERNAME=arc-partner-test-$connectedClustedId # name of the arc connected cluster
@@ -54,6 +54,7 @@ while IFS= read -r arc_platform_version || [ -n "$arc_platform_version" ]; do
     --plugin-env azure-arc-agent-cleanup.CLEANUP_TIMEOUT=$CLEANUP_TIMEOUT \
     --plugin-env azure-arc-agent-cleanup.CLIENT_ID=$AZ_CLIENT_ID \
     --plugin-env azure-arc-agent-cleanup.CLIENT_SECRET=$AZ_CLIENT_SECRET \
+    --config config.json
 
     echo "Test execution completed..Retrieving results"
 
