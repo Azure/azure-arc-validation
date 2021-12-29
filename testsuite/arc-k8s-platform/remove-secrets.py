@@ -74,7 +74,7 @@ def make_tarfile(output_filename, source_dir):
 
 
 def fix_core_v1_configmaps(data):
-    for item in data:
+    for item in data["items"]:
         if item["metadata"]["name"] == "sonobuoy-plugins-cm":
             data = item["data"]
             for key, value in data.items():
@@ -94,13 +94,13 @@ def fix_string(str):
 
 def fix_core_v1_pods(data):
     outer_index = 0
-    for item in data:
+    for item in data["items"]:
         container_index = 0
         for container in item["spec"]["containers"]:
             index = 0
             for env in container["env"]:
                 if "client_secret" in env["name"].lower():
-                    data[outer_index]["spec"]["containers"][container_index]["env"][index]["value"] = ""
+                    data["items"][outer_index]["spec"]["containers"][container_index]["env"][index]["value"] = ""
                 index+=1
             container_index+=1
         outer_index+=1
