@@ -1,0 +1,9 @@
+configMapGenerator:
+- name: azure-arc-conformance
+  files:
+  - azure-arc-conformance.properties
+  namespace: azure-arc-kubernetes-conformance
+generatorOptions:
+  disableNameSuffixHash: true
+resources:
+  - launch.yaml

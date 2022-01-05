@@ -8,7 +8,7 @@ AZ_SUBSCRIPTION_ID= # subscription id of the azure subscription (will be provide
 AZ_CLIENT_ID= # appid field of the service principal
 AZ_CLIENT_SECRET= # password field of the service principal
 AZ_STORAGE_ACCOUNT= # name of your storage account (will be provided)
-AZ_STORAGE_ACCOUNT_SAS="<your-sas-token-here>" # sas token for your storage account, please add it within the quotes (will be provided)
+AZ_STORAGE_ACCOUNT_SAS= # sas token for your storage account, please add it within the quotes (will be provided)
 RESOURCE_GROUP= # resource group name (will be provided)
 OFFERING_NAME= # name of the partner offering; use this variable to distinguish between the results tar for different offerings
 CLUSTERNAME=arc-partner-test-$connectedClustedId # name of the arc connected cluster
@@ -31,6 +31,51 @@ CLEANUP_TIMEOUT=1500 # time in seconds after which the platform cleanup plugin t
 
 az login --service-principal --username $AZ_CLIENT_ID --password $AZ_CLIENT_SECRET --tenant $AZ_TENANT_ID
 az account set -s $AZ_SUBSCRIPTION_ID
+
+# read config file i.e., azure-arc-conformance.properties
+declare -A properties
+declare -A enabled_plugins
+
+properties_count=0
+plugin_count=0
+while IFS= read -r line; do
+    echo "current line: $line"
+    if [[ $line == *"enable"* ]] 
+    then
+        if [[ $line == *"true"* ]]
+        then
+            enabled_plugins[$plugin_count]=$(echo $line | cut -d. -f1)
+            echo "adding plugins: $plugin_count"
+            echo "added plugins: ${enabled_plugins[$plugin_count]}"
+            ((plugin_count++))
+            
+        fi
+    else
+        properties[$properties_count]=$line
+        echo "adding properties: $properties_count"
+        echo "added properties: ${properties[$properties_count]}"
+        ((properties_count++))
+    fi
+done < /etc/config/azure-arc-conformance.properties
+
+for items in "${properties[@]}"
+do
+    echo "the properties are $items"
+done
+
+for items in "${enabled_plugins[@]}"
+do
+    echo "the plugins found are: $items"
+done
+
+git clone "https://github.com/santosh02iiit/azure-arc-validation.git"
+
+plugins_file=(/azure-arc-validation/testsuite/arc-k8s-platform/*)
+
+for items in "${plugins_file[@]}"
+do
+    echo "the files found are: $items"
+done
 
 while IFS= read -r arc_platform_version || [ -n "$arc_platform_version" ]; do
 
