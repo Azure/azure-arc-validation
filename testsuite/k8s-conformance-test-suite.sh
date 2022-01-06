@@ -38,6 +38,11 @@ declare -A enabled_plugins
 
 properties_count=0
 plugin_count=0
+
+# more santiation required in below code
+# case 1: empty spaces/newlines before and after
+# case 2: ignore comments starting with #
+
 while IFS= read -r line; do
     echo "current line: $line"
     if [[ $line == *"enable"* ]] 
@@ -58,56 +63,72 @@ while IFS= read -r line; do
     fi
 done < /etc/config/azure-arc-conformance.properties
 
-for items in "${properties[@]}"
-do
-    echo "the properties are $items"
-done
-
-for items in "${enabled_plugins[@]}"
-do
-    echo "the plugins found are: $items"
-done
-
+# Url will be changed test code
 git clone "https://github.com/santosh02iiit/azure-arc-validation.git"
+cd /azure-arc-validation
+git checkout -b launcher_VMwareProposal origin/launcher_VMwareProposal
+cd /
+# test code ends
 
-plugins_file=(/azure-arc-validation/testsuite/arc-k8s-platform/*)
+plugins_file=(/azure-arc-validation/testsuite/conformance-test-plugins/*)
 
-for items in "${plugins_file[@]}"
+command="sonobuoy run --wait"
+#check if yaml file is present for the user configuration
+add_helm=0
+found=0
+for enabled_plugin in "${enabled_plugins[@]}"
 do
-    echo "the files found are: $items"
+    for file in "${plugins_file[@]}"
+    do
+        if [[ $file == *$enabled_plugin* ]] 
+        then
+            found=1
+            if [[ $enabled_plugin == "azure-arc-platform" ]]
+            then
+                add_helm=1
+            fi
+            # prepare the command 
+            command="${command} --plugin $file" 
+            # get all the variables
+            for var in "${properties[@]}"
+            do
+                if [[ $var == *$enabled_plugin* ]]
+                then
+                    command="${command} --plugin-env $var"
+                elif [[ $var == *"global"* ]]
+                then
+                    plugin_var="${var/"global"/"$enabled_plugin"}"
+                    echo "new var $plugin_var"
+                    command="${command} --plugin-env $plugin_var"
+                fi
+            done            
+            break
+        fi
+    done
+    if [[ $found -eq 0 ]]
+    then
+        echo "Plugins yaml file is not found on server please check the property"
 done
+
+command="${command} --config config.json" 
 
 while IFS= read -r arc_platform_version || [ -n "$arc_platform_version" ]; do
 
     echo "Running the test suite for Arc for Kubernetes version: ${arc_platform_version}"    
 
-    sonobuoy run --wait \
-    --plugin arc-k8s-platform/platform.yaml \
-    --plugin-env azure-arc-platform.TENANT_ID=$AZ_TENANT_ID \
-    --plugin-env azure-arc-platform.SUBSCRIPTION_ID=$AZ_SUBSCRIPTION_ID \
-    --plugin-env azure-arc-platform.RESOURCE_GROUP=$RESOURCE_GROUP \
-    --plugin-env azure-arc-platform.CLUSTER_NAME=$CLUSTERNAME \
-    --plugin-env azure-arc-platform.LOCATION=$LOCATION \
-    --plugin-env azure-arc-platform.CLIENT_ID=$AZ_CLIENT_ID \
-    --plugin-env azure-arc-platform.CLIENT_SECRET=$AZ_CLIENT_SECRET \
-    --plugin-env azure-arc-platform.HELMREGISTRY=mcr.microsoft.com/azurearck8s/batch1/stable/azure-arc-k8sagents:$arc_platform_version \
-    --plugin arc-k8s-platform/cleanup.yaml \
-    --plugin-env azure-arc-agent-cleanup.TENANT_ID=$AZ_TENANT_ID \
-    --plugin-env azure-arc-agent-cleanup.SUBSCRIPTION_ID=$AZ_SUBSCRIPTION_ID \
-    --plugin-env azure-arc-agent-cleanup.RESOURCE_GROUP=$RESOURCE_GROUP \
-    --plugin-env azure-arc-agent-cleanup.CLUSTER_NAME=$CLUSTERNAME \
-    --plugin-env azure-arc-agent-cleanup.CLEANUP_TIMEOUT=$CLEANUP_TIMEOUT \
-    --plugin-env azure-arc-agent-cleanup.CLIENT_ID=$AZ_CLIENT_ID \
-    --plugin-env azure-arc-agent-cleanup.CLIENT_SECRET=$AZ_CLIENT_SECRET \
-    --config config.json
-
+    if [[ $add_helm -eq 1 ]]
+    then
+        eval "$command --plugin-env azure-arc-platform.HELMREGISTRY=mcr.microsoft.com/azurearck8s/batch1/stable/azure-arc-k8sagents:$arc_platform_version"
+    else
+        eval $command
+    fi
     echo "Test execution completed..Retrieving results"
 
     sonobuoyResults=$(sonobuoy retrieve)
     sonobuoy results $sonobuoyResults
 
     mkdir testResult
-    python arc-k8s-platform/remove-secrets.py $sonobuoyResults testResult
+    python remove-secrets.py $sonobuoyResults testResult
 
     rm -rf testResult
     mkdir results

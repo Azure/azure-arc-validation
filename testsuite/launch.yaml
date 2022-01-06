@@ -36,7 +36,8 @@ spec:
         kubernetes.io/os: linux
       containers:
       - name: azure-arc-kubernetes-conformance
-        image: testsantoshacr.azurecr.io/arck8sconformance/launcher:0.0.18
+        # test image will change to actual once we push to MCR
+        image: testsantoshacr.azurecr.io/arck8sconformance/launcher:0.0.37
         imagePullPolicy: IfNotPresent
         volumeMounts:
         - name: config-volume

@@ -19,10 +19,7 @@ COPY config.json /
 
 COPY partner-metadata.md /
 
-RUN mkdir /arc-k8s-platform
-COPY arc-k8s-platform/remove-secrets.py /arc-k8s-platform/
-COPY arc-k8s-platform/cleanup.yaml /arc-k8s-platform/
-COPY arc-k8s-platform/platform.yaml /arc-k8s-platform/
+COPY remove-secrets.py /
 
 # Install sonobuoy
 ADD https://github.com/vmware-tanzu/sonobuoy/releases/download/v0.55.1/sonobuoy_0.55.1_linux_arm64.tar.gz ./
