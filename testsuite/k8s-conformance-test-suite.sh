@@ -1,70 +1,78 @@
-# Set the following environment variables to run the test suite
-
-# Common Variables
-# Some of the variables need to be populated from the service principal and storage account details provided to you by Microsoft
-connectedClustedId=$(tr -dc A-Za-z0-9 </dev/urandom | head -c 7 ; echo '')
-AZ_TENANT_ID= # tenant field of the service principal
-AZ_SUBSCRIPTION_ID= # subscription id of the azure subscription (will be provided)
-AZ_CLIENT_ID= # appid field of the service principal
-AZ_CLIENT_SECRET= # password field of the service principal
-AZ_STORAGE_ACCOUNT= # name of your storage account (will be provided)
-AZ_STORAGE_ACCOUNT_SAS= # sas token for your storage account, please add it within the quotes (will be provided)
-RESOURCE_GROUP= # resource group name (will be provided)
-OFFERING_NAME= # name of the partner offering; use this variable to distinguish between the results tar for different offerings
-CLUSTERNAME=arc-partner-test-$connectedClustedId # name of the arc connected cluster
-LOCATION=eastus # location of the arc connected cluster
-
-# Platform Cleanup Plugin
-CLEANUP_TIMEOUT=1500 # time in seconds after which the platform cleanup plugin times out
-
-# In case your cluster is behind an outbound proxy, please add the following environment variables in the below command
-# --plugin-env azure-arc-platform.HTTPS_PROXY="http://<proxy ip>:<proxy port>"
-# --plugin-env azure-arc-platform.HTTP_PROXY="http://<proxy ip>:<proxy port>"
-# --plugin-env azure-arc-platform.NO_PROXY="kubernetes.default.svc,<ip CIDR etc>"
-
-# In case your outbound proxy is setup with certificate authentication, follow the below steps:
-# Create a Kubernetes generic secret with the name sonobuoy-proxy-cert with key proxycert in any namespace:
-# kubectl create secret generic sonobuoy-proxy-cert --from-file=proxycert=<path-to-cert-file>
-# By default we check for the secret in the default namespace. In case you have created the secret in some other namespace, please add the following variables in the sonobuoy run command: 
-# --plugin-env azure-arc-platform.PROXY_CERT_NAMESPACE="<namespace of sonobuoy secret>"
-# --plugin-env azure-arc-agent-cleanup.PROXY_CERT_NAMESPACE="namespace of sonobuoy secret"
-
-az login --service-principal --username $AZ_CLIENT_ID --password $AZ_CLIENT_SECRET --tenant $AZ_TENANT_ID
-az account set -s $AZ_SUBSCRIPTION_ID
-
 # read config file i.e., azure-arc-conformance.properties
 declare -A properties
 declare -A enabled_plugins
 
 properties_count=0
 plugin_count=0
-
-# more santiation required in below code
-# case 1: empty spaces/newlines before and after
-# case 2: ignore comments starting with #
+repository="https://github.com/santosh02iiit/azure-arc-validation.git"
 
 while IFS= read -r line; do
-    echo "current line: $line"
+    # remove leading and trailing whitespaces
+    line="$(echo -e "${line}" | sed -e 's/^[[:space:]]*//' -e 's/[[:space:]]*$//')"
+
+    if [[ "${line}" == "#"* ]] #ignore lines starting with comments
+    then
+        continue
+    elif [ -z "${line}" ] #ignore empty lines
+    then
+        continue
+    fi
+
     if [[ $line == *"enable"* ]] 
     then
         if [[ $line == *"true"* ]]
         then
             enabled_plugins[$plugin_count]=$(echo $line | cut -d. -f1)
-            echo "adding plugins: $plugin_count"
-            echo "added plugins: ${enabled_plugins[$plugin_count]}"
             ((plugin_count++))
-            
         fi
+    
+    elif [[ $line == *"dev-repository"* ]]
+    then
+        repository=$(echo $line | cut -d= -f2)
+
+    elif [[ $line == *"offering-name"* ]]
+    then
+        OFFERING_NAME=$(echo $line | cut -d= -f2)
+
+    elif [[ $line == *"az-storage-account-sas"* ]]
+    then
+        AZ_STORAGE_ACCOUNT_SAS="${line#*=}"
+        echo "AZ_STORAGE_ACCOUNT_SAS : $AZ_STORAGE_ACCOUNT_SAS"
+    
+    elif [[ $line == *"az-storage-account"* ]]
+    then
+        AZ_STORAGE_ACCOUNT=$(echo $line | cut -d= -f2)
+
     else
         properties[$properties_count]=$line
-        echo "adding properties: $properties_count"
-        echo "added properties: ${properties[$properties_count]}"
         ((properties_count++))
     fi
+
+    if [[ $line == *"SUBSCRIPTION_ID"* ]]
+    then
+        AZ_SUBSCRIPTION_ID="${line#*=}"
+
+    elif [[ $line == *"CLIENT_ID"* ]]
+    then
+        AZ_CLIENT_ID="${line#*=}"
+
+    elif [[ $line == *"CLIENT_SECRET"* ]]
+    then
+        AZ_CLIENT_SECRET="${line#*=}"
+    
+    elif [[ $line == *"TENANT_ID"* ]]
+    then
+        AZ_TENANT_ID="${line#*=}"
+    fi
+
 done < /etc/config/azure-arc-conformance.properties
 
+az login --service-principal --username $AZ_CLIENT_ID --password $AZ_CLIENT_SECRET --tenant $AZ_TENANT_ID
+az account set -s $AZ_SUBSCRIPTION_ID
+
 # Url will be changed test code
-git clone "https://github.com/santosh02iiit/azure-arc-validation.git"
+echo "arc repository: $repository"
+git clone $repository
 cd /azure-arc-validation
 git checkout -b launcher_VMwareProposal origin/launcher_VMwareProposal
 cd /
@@ -98,7 +106,6 @@ do
                 elif [[ $var == *"global"* ]]
                 then
                     plugin_var="${var/"global"/"$enabled_plugin"}"
-                    echo "new var $plugin_var"
                     command="${command} --plugin-env $plugin_var"
                 fi
             done            
@@ -108,6 +115,7 @@ do
     if [[ $found -eq 0 ]]
     then
         echo "Plugins yaml file is not found on server please check the property"
+    fi
 done
 
 command="${command} --config config.json" 
@@ -144,11 +152,20 @@ while IFS= read -r arc_platform_version || [ -n "$arc_platform_version" ]; do
     containerString="conformance-results-major-${version[0]}-minor-${version[1]}-patch-${version[2]}"
     IFS=$' \t\n'
 
-    az storage container create -n $containerString --account-name $AZ_STORAGE_ACCOUNT --sas-token $AZ_STORAGE_ACCOUNT_SAS
-    az storage blob upload --file conformance-results-$arc_platform_version.tar.gz --name conformance-results-$OFFERING_NAME.tar.gz --container-name $containerString --account-name $AZ_STORAGE_ACCOUNT --sas-token $AZ_STORAGE_ACCOUNT_SAS
+    az_storage_create_result=$(az storage container create -n $containerString --account-name $AZ_STORAGE_ACCOUNT --sas-token $AZ_STORAGE_ACCOUNT_SAS)
+    az_storage_upload_result=$(az storage blob upload --file conformance-results-$arc_platform_version.tar.gz --name conformance-results-$OFFERING_NAME.tar.gz --container-name $containerString --account-name $AZ_STORAGE_ACCOUNT --sas-token $AZ_STORAGE_ACCOUNT_SAS)
+
+    echo "az_storage_create_result : $az_storage_create_result"
+    echo "az_storage_upload_result : $az_storage_upload_result"
 
     echo "Cleaning the cluster.."
     sonobuoy delete --wait
+
+    if [[ $az_storage_create_result==*"ERROR"* || $az_storage_upload_result==*"ERROR"* ]]
+    then
+        echo "Result upload failed keeping the pod for 2 days for result fecthing"
+        sleep 2d
+    fi
 
     echo "Buffer wait 5 minutes..."
     sleep 5m
