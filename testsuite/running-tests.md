@@ -5,11 +5,12 @@ This document will enumerate everything you need to do run the sonobuoy based co
 ## Prerequisites
 
 1. Install [kubectl](https://kubernetes.io/docs/tasks/tools/#kubectl).
-1. Set the `KUBECONFIG` environment variable to the path to your kubeconfig file of your cluster.
-2. Install [sonobuoy](https://github.com/vmware-tanzu/sonobuoy#installation). Run `sonobuoy version` to verify it's installed correctly.
-3. Address the [network requirements](https://docs.microsoft.com/en-us/azure/azure-arc/kubernetes/quickstart-connect-cluster#meet-network-requirements) on your cluster for the Arc agents to communicate with Azure.
-4. Download and install [git](https://git-scm.com/downloads).
-5. Download and install [az cli](https://docs.microsoft.com/en-us/cli/azure/install-azure-cli).
+2. Set the `KUBECONFIG` environment variable to the path to your kubeconfig file of your cluster.
+3. Install [sonobuoy](https://github.com/vmware-tanzu/sonobuoy#installation). Run `sonobuoy version` to verify it's installed correctly.
+4. Address the [network requirements](https://docs.microsoft.com/en-us/azure/azure-arc/kubernetes/quickstart-connect-cluster#meet-network-requirements) on your cluster for the Arc agents to communicate with Azure.
+5. Download and install [git](https://git-scm.com/downloads).
+6. Download and install [az cli](https://docs.microsoft.com/en-us/cli/azure/install-azure-cli).
+7. Download and install [helm cli](https://v3-1-0.helm.sh/docs/intro/install/).
 
 ### Additional Prerequisites for Arc enabled Data Services
 
@@ -30,18 +31,19 @@ This document will enumerate everything you need to do run the sonobuoy based co
 *The above script is **bash only**. Please use the [`k8s-conformance-test-suite.ps1`](k8s-conformance-test-suite.ps1) script for windows hosts.
 
 ### Arc enabled Data Services
-1. Edit the [`ds-conformance-test-suite.sh`](ds-conformance-test-suite.sh) file and set the values for the required environment variables.
-2. If your cluster is behind an outbound proxy, please edit the above file according to the instruction provided as comments for proxy configuration.
-3. If you wish to bring your own custom control deployment profile with your own configuration, please follow the below process to provide the `control.json` to sonobuoy plugin.
+1. For indirect mode edit the [`ds-conformance-test-suite.sh`](ds-conformance-test-suite.sh) file and set the values for the required environment variables.
+2. For direct mode edit the [`ds-connect-conformance-test-suite.sh`](ds-connect-conformance-test-suite.sh) file and set the values for the required environment variables.
+3. If your cluster is behind an outbound proxy, please edit the above file according to the instruction provided as comments for proxy configuration.
+4. If you wish to bring your own custom control deployment profile with your own configuration, please follow the below process to provide the `control.json` to sonobuoy plugin.
 ```
 az arcdata dc config init --source azure-arc-aks-default-storage --path /tmp/dcconfig
 kubectl create ns arc-ds-config ; kubectl -n arc-ds-config create configmap arc-ds-config --from-file=/tmp/dcconfig/control.json
 ```
 Please update the `CONFIG_PROFILE` variable in the above script accordingly.
 
-4. Make the test suite file executable by running `chmod +x ds-conformance-test-suite.sh`.
-5. Execute the script by running `./ds-conformance-test-suite.sh`.
-6. The test suite will take the storage account details as environment variables and will handle publishing the results in the right format.
+5. Make the test suite file executable by running `chmod +x ds-conformance-test-suite.sh ds-conformance-test-suite.sh`.
+6. Execute the script by running `./ds-conformance-test-suite.sh` or `./ds-connect-conformance-test-suite.sh`.
+7. The test suite will take the storage account details as environment variables and will handle publishing the results in the right format.
 
 ## Retrieving the results
 

@@ -11,7 +11,8 @@ It is recommended that our partners integrate the conformance tests into their C
 The conformance tests need to be run every time there's an update (major or minor) to the partner offering or to the Azure Arc components.
 These components include*:
 - **Arc enabled Kubernetes**: The core Arc enabled Kubernetes with functionalities such as onboarding a cluster to Arc, GitOps etc.
-- **Arc enabled Data Services**: Provides Azure data services offerings such as SQLMI and PostgreSQL server on your clusters on-prem or on other clouds.
+- **Arc enabled Data Services with indirect mode**: Provides Azure data indirect services offerings such as SQLMI and PostgreSQL server on your clusters on-prem or on other clouds.
+- **Arc enabled Data Services with direct mode**: Provides Azure data direct services offerings such as SQLMI server at azure portal on your clusters on-prem or on other clouds.
 
 *These components may grow in the future as the Azure Arc portfolio widens.
 
