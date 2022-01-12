@@ -6,11 +6,12 @@ This document will enumerate everything you need to do run the sonobuoy based co
 
 1. Install [kubectl](https://kubernetes.io/docs/tasks/tools/#kubectl).
 2. Set the `KUBECONFIG` environment variable to the path to your kubeconfig file of your cluster.
-3. Install [sonobuoy](https://github.com/vmware-tanzu/sonobuoy#installation). Run `sonobuoy version` to verify it's installed correctly.
+3. Install [sonobuoy](https://github.com/vmware-tanzu/sonobuoy#installation) version 0.55.1 or higher. Run `sonobuoy version` to verify it's installed correctly.
 4. Address the [network requirements](https://docs.microsoft.com/en-us/azure/azure-arc/kubernetes/quickstart-connect-cluster#meet-network-requirements) on your cluster for the Arc agents to communicate with Azure.
 5. Download and install [git](https://git-scm.com/downloads).
 6. Download and install [az cli](https://docs.microsoft.com/en-us/cli/azure/install-azure-cli).
-7. Download and install [helm cli](https://v3-1-0.helm.sh/docs/intro/install/).
+7. Download and install [python 3](https://www.python.org/downloads)
+8. Download and install [helm cli](https://v3-1-0.helm.sh/docs/intro/install/).
 
 ### Additional Prerequisites for Arc enabled Data Services
 
