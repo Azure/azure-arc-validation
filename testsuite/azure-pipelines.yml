@@ -22,4 +22,5 @@ stages:
         Dockerfile: 'testsuite/Dockerfile'
         buildContext: 'testsuite'
         tags: $(launcherImageVersion)
+        arguments: '--build-arg SONOBUOY_VERSION=$(sonobuoyVersion) --build-arg AZURE_CLI_VERSION=$(azureCliVerison)'
         addPipelineData: false
