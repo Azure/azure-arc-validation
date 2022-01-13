@@ -1,0 +1,25 @@
+trigger:
+- none
+  
+resources:
+- repo: self
+  
+stages:
+- stage: Build
+  displayName: Build image
+  jobs:  
+  - job: Build
+    displayName: Build
+    pool:
+      vmImage: 'ubuntu-latest'
+    steps:
+    - task: Docker@2
+      displayName: Build and Push Conformance test launcher image
+      inputs:
+        containerRegistry: 'ConformanceACR'
+        repository: 'arck8sconformance/launcher'
+        command: 'buildAndPush'
+        Dockerfile: 'testsuite/Dockerfile'
+        buildContext: 'testsuite'
+        tags: $(launcherImageVersion)
+        addPipelineData: false

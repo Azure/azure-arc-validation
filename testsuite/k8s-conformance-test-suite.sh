@@ -1,4 +1,5 @@
-# read config file i.e., azure-arc-conformance.properties
+# Azure Arc Conformance test launcher script
+
 declare -A properties
 declare -A enabled_plugins
 
@@ -6,6 +7,7 @@ properties_count=0
 plugin_count=0
 repository="https://github.com/santosh02iiit/azure-arc-validation.git"
 
+# Parsing azure-arc-conformance.properties
 while IFS= read -r line; do
     # remove leading and trailing whitespaces
     line="$(echo -e "${line}" | sed -e 's/^[[:space:]]*//' -e 's/[[:space:]]*$//')"
@@ -18,7 +20,7 @@ while IFS= read -r line; do
         continue
     fi
 
-    if [[ $line == *"enable"* ]] 
+    if [[ $line == *".enable="* ]] 
     then
         if [[ $line == *"true"* ]]
         then
@@ -28,11 +30,11 @@ while IFS= read -r line; do
     
     elif [[ $line == *"dev-repository"* ]]
     then
-        repository=$(echo $line | cut -d= -f2)
+        repository="${line#*=}"
 
     elif [[ $line == *"offering-name"* ]]
     then
-        OFFERING_NAME=$(echo $line | cut -d= -f2)
+        OFFERING_NAME="${line#*=}"
 
     elif [[ $line == *"az-storage-account-sas"* ]]
     then
@@ -41,7 +43,7 @@ while IFS= read -r line; do
     
     elif [[ $line == *"az-storage-account"* ]]
     then
-        AZ_STORAGE_ACCOUNT=$(echo $line | cut -d= -f2)
+        AZ_STORAGE_ACCOUNT="${line#*=}"
 
     else
         properties[$properties_count]=$line
@@ -66,6 +68,49 @@ while IFS= read -r line; do
     fi
 
 done < /etc/config/azure-arc-conformance.properties
+# Parsing ends
+
+# Basic validation of required parameters
+error=0
+if [[ -z "${AZ_STORAGE_ACCOUNT_SAS}" ]]
+then
+    echo "Warning: Please set az-storage-account-sas in property file"
+fi
+
+if [[ -z "${AZ_STORAGE_ACCOUNT}" ]]
+then
+    echo "Warning: Please set az-storage-account in property file"
+fi
+
+if [[ -z "${AZ_SUBSCRIPTION_ID}" ]]
+then
+    echo "Error: Please set global.SUBSCRIPTION_ID in property file"
+    error=1
+fi
+
+if [[ -z "${AZ_CLIENT_ID}" ]]
+then
+    echo "Error: Please set global.CLIENT_ID in property file"
+    error=1
+fi
+
+if [[ -z "${AZ_CLIENT_SECRET}" ]]
+then
+    echo "Error: Please set global.CLIENT_SECRET in property file"
+    error=1
+fi
+
+if [[ -z "${AZ_TENANT_ID}" ]]
+then
+    echo "Error: Please set global.TENANT_ID in property file"
+    error=1
+fi
+
+if [[ error -eq 1 ]]
+then
+    exit
+fi
+# Parameter validation ends
 
 az login --service-principal --username $AZ_CLIENT_ID --password $AZ_CLIENT_SECRET --tenant $AZ_TENANT_ID
 az account set -s $AZ_SUBSCRIPTION_ID
@@ -78,7 +123,7 @@ git checkout -b launcher_VMwareProposal origin/launcher_VMwareProposal
 cd /
 # test code ends
 
-plugins_file=(/azure-arc-validation/testsuite/conformance-test-plugins/*)
+plugins_files=(/azure-arc-validation/testsuite/conformance-test-plugins/*)
 
 command="sonobuoy run --wait"
 #check if yaml file is present for the user configuration
@@ -86,7 +131,7 @@ add_helm=0
 found=0
 for enabled_plugin in "${enabled_plugins[@]}"
 do
-    for file in "${plugins_file[@]}"
+    for file in "${plugins_files[@]}"
     do
         if [[ $file == *$enabled_plugin* ]] 
         then
@@ -100,10 +145,10 @@ do
             # get all the variables
             for var in "${properties[@]}"
             do
-                if [[ $var == *$enabled_plugin* ]]
+                if [[ $var == $enabled_plugin* ]]
                 then
                     command="${command} --plugin-env $var"
-                elif [[ $var == *"global"* ]]
+                elif [[ $var == "global"* ]]
                 then
                     plugin_var="${var/"global"/"$enabled_plugin"}"
                     command="${command} --plugin-env $plugin_var"
@@ -154,9 +199,6 @@ while IFS= read -r arc_platform_version || [ -n "$arc_platform_version" ]; do
 
     az_storage_create_result=$(az storage container create -n $containerString --account-name $AZ_STORAGE_ACCOUNT --sas-token $AZ_STORAGE_ACCOUNT_SAS)
     az_storage_upload_result=$(az storage blob upload --file conformance-results-$arc_platform_version.tar.gz --name conformance-results-$OFFERING_NAME.tar.gz --container-name $containerString --account-name $AZ_STORAGE_ACCOUNT --sas-token $AZ_STORAGE_ACCOUNT_SAS)
-
-    echo "az_storage_create_result : $az_storage_create_result"
-    echo "az_storage_upload_result : $az_storage_upload_result"
 
     echo "Cleaning the cluster.."
     sonobuoy delete --wait
