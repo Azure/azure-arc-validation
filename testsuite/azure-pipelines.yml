@@ -14,13 +14,21 @@ stages:
       vmImage: 'ubuntu-latest'
     steps:
     - task: Docker@2
-      displayName: Build and Push Conformance test launcher image
+      displayName: Build Conformance test launcher image
       inputs:
         containerRegistry: 'ConformanceACR'
         repository: 'arck8sconformance/launcher'
-        command: 'buildAndPush'
+        command: build
         Dockerfile: 'testsuite/Dockerfile'
         buildContext: 'testsuite'
         tags: $(launcherImageVersion)
         arguments: '--build-arg SONOBUOY_VERSION=$(sonobuoyVersion) --build-arg AZURE_CLI_VERSION=$(azureCliVersion)'
+        addPipelineData: false
+    - task: Docker@2
+      displayName: Build and Push Conformance test launcher image
+      inputs:
+        containerRegistry: 'ConformanceACR'
+        repository: 'arck8sconformance/launcher'
+        command: push
+        tags: $(launcherImageVersion)
         addPipelineData: false
