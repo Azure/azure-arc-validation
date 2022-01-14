@@ -36,7 +36,7 @@ INFRASTRUCTURE=azure # Allowed values are alibaba, aws, azure, gpc, onpremises, 
 
 echo "Running the test suite.."
 
-sonobuoy run --wait \
+sonobuoy run --wait --config config.json \
 --plugin arc-dataservices/dataservices.yaml \
 --plugin-env azure-arc-ds-platform.NAMESPACE=$NAMESPACE \
 --plugin-env azure-arc-ds-platform.CONFIG_PROFILE=$CONFIG_PROFILE \
@@ -54,8 +54,7 @@ sonobuoy run --wait \
 --plugin-env azure-arc-ds-platform.LOCATION=$LOCATION \
 --plugin-env azure-arc-ds-platform.CLIENT_ID=$AZ_CLIENT_ID \
 --plugin-env azure-arc-ds-platform.CLIENT_SECRET=$AZ_CLIENT_SECRET \
---plugin-env azure-arc-ds-platform.INFRASTRUCTURE=$INFRASTRUCTURE \
---config config.json
+--plugin-env azure-arc-ds-platform.INFRASTRUCTURE=$INFRASTRUCTURE
 
 echo "Test execution completed..Retrieving results"
 

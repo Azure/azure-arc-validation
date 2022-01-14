@@ -45,12 +45,15 @@ CLEANUP_TIMEOUT=3600 # time in seconds after which the platform cleanup plugin t
 
 echo "Running the test suite.."
 
-sonobuoy run --wait --plugin arc-k8s-platform/platform.yaml --plugin-env azure-arc-platform.TENANT_ID=$AZ_TENANT_ID \
+sonobuoy run --wait --config src/plugins/common/config.json \
+--plugin arc-k8s-platform/platform.yaml \
+--plugin-env azure-arc-platform.TENANT_ID=$AZ_TENANT_ID \
 --plugin-env azure-arc-platform.SUBSCRIPTION_ID=$AZ_SUBSCRIPTION_ID --plugin-env azure-arc-platform.RESOURCE_GROUP=$RESOURCE_GROUP \
 --plugin-env azure-arc-platform.CLUSTER_NAME=$CLUSTERNAME --plugin-env azure-arc-platform.LOCATION=$LOCATION \
 --plugin-env azure-arc-platform.CLIENT_ID=$AZ_CLIENT_ID --plugin-env azure-arc-platform.CLIENT_SECRET=$AZ_CLIENT_SECRET \
 --plugin-env azure-arc-platform.OBJECT_ID=$OBJECT_ID --plugin-env azure-arc-platform.CUSTOM_LOCATION_OID=$CUSTOM_LOCATION_OID \
---plugin arc-dataservices/dataservices-connect.yaml --plugin-env azure-arc-ds-connect-platform.NAMESPACE=$NAMESPACE \
+--plugin arc-dataservices/dataservices-connect.yaml \
+--plugin-env azure-arc-ds-connect-platform.NAMESPACE=$NAMESPACE \
 --plugin-env azure-arc-ds-connect-platform.CLUSTER_NAME=$CLUSTERNAME \
 --plugin-env azure-arc-ds-connect-platform.CONNECTIVITY_MODE=$CONNECTIVITY_MODE \
 --plugin-env azure-arc-ds-connect-platform.CONFIG_PROFILE=$CONFIG_PROFILE \
@@ -66,11 +69,11 @@ sonobuoy run --wait --plugin arc-k8s-platform/platform.yaml --plugin-env azure-a
 --plugin-env azure-arc-ds-connect-platform.CLIENT_ID=$AZ_CLIENT_ID \
 --plugin-env azure-arc-ds-connect-platform.CLIENT_SECRET=$AZ_CLIENT_SECRET \
 --plugin-env azure-arc-ds-connect-platform.INFRASTRUCTURE=$INFRASTRUCTURE \
---plugin arc-k8s-platform/cleanup.yaml \ --plugin-env azure-arc-agent-cleanup.TENANT_ID=$AZ_TENANT_ID \
+--plugin arc-k8s-platform/cleanup.yaml \
+--plugin-env azure-arc-agent-cleanup.TENANT_ID=$AZ_TENANT_ID \
 --plugin-env azure-arc-agent-cleanup.SUBSCRIPTION_ID=$AZ_SUBSCRIPTION_ID --plugin-env azure-arc-agent-cleanup.RESOURCE_GROUP=$RESOURCE_GROUP \
 --plugin-env azure-arc-agent-cleanup.CLUSTER_NAME=$CLUSTERNAME --plugin-env azure-arc-agent-cleanup.CLEANUP_TIMEOUT=$CLEANUP_TIMEOUT \
---plugin-env azure-arc-agent-cleanup.CLIENT_ID=$AZ_CLIENT_ID --plugin-env azure-arc-agent-cleanup.CLIENT_SECRET=$AZ_CLIENT_SECRET \
---config src/plugins/common/config.json
+--plugin-env azure-arc-agent-cleanup.CLIENT_ID=$AZ_CLIENT_ID --plugin-env azure-arc-agent-cleanup.CLIENT_SECRET=$AZ_CLIENT_SECRET
 
 echo "Test execution completed..Retrieving results"
 
