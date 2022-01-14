@@ -2,7 +2,8 @@
 
 # Common Variables
 # Some of the variables need to be populated from the service principal and storage account details provided to you by Microsoft
-OBJECT_ID= # username from kubeconfig of current context
+OBJECT_ID= # object id field of the service principal
+CUSTOM_LOCATION_OID= # object id field of the service principal
 AZ_TENANT_ID= # tenant field of the service principal
 AZ_SUBSCRIPTION_ID= # subscription id of the azure subscription (will be provided)
 AZ_CLIENT_ID= # appid field of the service principal
@@ -48,7 +49,7 @@ sonobuoy run --wait --plugin arc-k8s-platform/platform.yaml --plugin-env azure-a
 --plugin-env azure-arc-platform.SUBSCRIPTION_ID=$AZ_SUBSCRIPTION_ID --plugin-env azure-arc-platform.RESOURCE_GROUP=$RESOURCE_GROUP \
 --plugin-env azure-arc-platform.CLUSTER_NAME=$CLUSTERNAME --plugin-env azure-arc-platform.LOCATION=$LOCATION \
 --plugin-env azure-arc-platform.CLIENT_ID=$AZ_CLIENT_ID --plugin-env azure-arc-platform.CLIENT_SECRET=$AZ_CLIENT_SECRET \
---plugin-env azure-arc-platform.OBJECT_ID=$OBJECT_ID \
+--plugin-env azure-arc-platform.OBJECT_ID=$OBJECT_ID --plugin-env azure-arc-platform.CUSTOM_LOCATION_OID=$CUSTOM_LOCATION_OID \
 --plugin arc-dataservices/dataservices-connect.yaml --plugin-env azure-arc-ds-connect-platform.NAMESPACE=$NAMESPACE \
 --plugin-env azure-arc-ds-connect-platform.CLUSTER_NAME=$CLUSTERNAME \
 --plugin-env azure-arc-ds-connect-platform.CONNECTIVITY_MODE=$CONNECTIVITY_MODE \
