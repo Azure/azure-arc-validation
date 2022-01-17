@@ -32,3 +32,7 @@ stages:
         command: push
         tags: $(launcherImageVersion)
         addPipelineData: false
+
+    - task: ComponentGovernanceComponentDetection@0
+      inputs:
+        sourceScanPath: .
