@@ -39,7 +39,6 @@ while IFS= read -r line; do
     elif [[ $line == *"az-storage-account-sas"* ]]
     then
         AZ_STORAGE_ACCOUNT_SAS="${line#*=}"
-        echo "AZ_STORAGE_ACCOUNT_SAS : $AZ_STORAGE_ACCOUNT_SAS"
     
     elif [[ $line == *"az-storage-account"* ]]
     then
@@ -131,6 +130,7 @@ add_helm=0
 found=0
 for enabled_plugin in "${enabled_plugins[@]}"
 do
+    found=0
     for file in "${plugins_files[@]}"
     do
         if [[ $file == *$enabled_plugin* ]] 
@@ -159,7 +159,7 @@ do
     done
     if [[ $found -eq 0 ]]
     then
-        echo "Plugins yaml file is not found on server please check the property"
+        echo "Error: Plugins yaml file is not found on server please check the property for plugin: $enabled_plugin"
     fi
 done
 
