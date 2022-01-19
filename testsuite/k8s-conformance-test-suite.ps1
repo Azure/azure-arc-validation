@@ -56,13 +56,19 @@ foreach($version in $arc_platform_version)
     --plugin-env azure-arc-agent-cleanup.CLUSTER_NAME=$CLUSTERNAME `
     --plugin-env azure-arc-agent-cleanup.CLEANUP_TIMEOUT=$CLEANUP_TIMEOUT `
     --plugin-env azure-arc-agent-cleanup.CLIENT_ID=$AZ_CLIENT_ID `
-    --plugin-env azure-arc-agent-cleanup.CLIENT_SECRET=$AZ_CLIENT_SECRET 
+    --plugin-env azure-arc-agent-cleanup.CLIENT_SECRET=$AZ_CLIENT_SECRET `
+    --config config.json
 
     Write-Host "Test execution completed..Retrieving results"
    
     $sonobuoyResults=$(sonobuoy retrieve)
 
     sonobuoy results $sonobuoyResults
+
+    New-Item -Path . -Name "testResult" -ItemType "directory"
+    python arc-k8s-platform/remove-secrets.py $sonobuoyResults testResult
+
+    Remove-Item .\testResult -Recurse
 
     New-Item -Path . -Name "results" -ItemType "directory"
     Move-Item -Path $sonobuoyResults -Destination results\$sonobuoyResults

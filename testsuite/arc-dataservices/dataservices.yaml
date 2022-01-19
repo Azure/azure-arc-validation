@@ -10,6 +10,3 @@ spec:
   volumes:
   - name: results
     emptyDir: {}
-  volumeMounts:
-  - mountPath: /tmp/results
-    name: results
