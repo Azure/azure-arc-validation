@@ -1,5 +1,5 @@
 {
-    "Description": "Azure Arc Kubernetes Conformance",
-    "UUID": "",
-    "ResultsDir": "/tmp/results"
-} 
+  "Description": "Azure Arc Kubernetes Conformance",
+  "UUID": "",
+  "ResultsDir": "/tmp/results"
+}
