@@ -16,6 +16,8 @@ This test plugin will determine if the Kubernetes cluster is Azure Arc conforman
 
 - `test_kubernetes_configuration_flux_operator`: This test will ensure that a source control configuration is created on ARM and that the `complianceState` field reflects 'Installed'. Then it will check if the flux operator successfully deployed the resources.
 
+- `CSPScenarioTestAsync,HPScenarioTestAsync`: These tests will ensure that 'clusterconnect' scenarios work by making K8s calls to the connected cluster.
+
 
 ## Arc Agent Cleanup
 
