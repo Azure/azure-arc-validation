@@ -5,15 +5,15 @@ This document will enumerate everything you need to do run the sonobuoy based co
 ## Prerequisites
 
 1. Install [kubectl](https://kubernetes.io/docs/tasks/tools/#kubectl).
-1. Set the `KUBECONFIG` environment variable to the path to your kubeconfig file of your cluster.
-2. Install [sonobuoy](https://github.com/vmware-tanzu/sonobuoy#installation) version 0.55.1 or higher. Run `sonobuoy version` to verify it's installed correctly.
+2. Set the `KUBECONFIG` environment variable to the path to your kubeconfig file of your cluster.
 3. Address the [network requirements](https://docs.microsoft.com/en-us/azure/azure-arc/kubernetes/quickstart-connect-cluster#meet-network-requirements) on your cluster for the Arc agents to communicate with Azure.
-4. Download and install [git](https://git-scm.com/downloads).
-5. Download and install [az cli](https://docs.microsoft.com/en-us/cli/azure/install-azure-cli).
 
 ### Additional Prerequisites for Arc enabled Data Services
 
 1. Install [arcdata extension](https://docs.microsoft.com/en-us/azure/azure-arc/data/release-notes).
+2. Install [sonobuoy](https://github.com/vmware-tanzu/sonobuoy#installation) version 0.55.1 or higher. Run `sonobuoy version` to verify it's installed correctly.
+3. Download and install [git](https://git-scm.com/downloads).
+4. Download and install [az cli](https://docs.microsoft.com/en-us/cli/azure/install-azure-cli).
 
 ## Running the script and publishing the results
 
@@ -22,9 +22,9 @@ This document will enumerate everything you need to do run the sonobuoy based co
 
 ### Arc enabled Kubernetes
 
-1. After cloning the repo, navigate to the testsuite directory from the repo root: cd testsuite.
-2. Edit the azure-arc-conformance.properties file and fill in the required environment variables. You will be provided the credentials to do so.
-3. Run the commands as follows: `kubectl apply -k .`.
+1. After cloning the repo, navigate to the testsuite directory from the repo root: `cd testsuite`.
+2. Edit the [`azure-arc-conformance.properties`] azure-arc-conformance.properties file and fill in the required environment variables. You will be provided the credentials to do so.
+3. Run the command as follows: `kubectl apply -k .`.
 4. The test suite will take care of publishing the results to the storage account.
 
 #### Watching kubernetes pod for current running status
@@ -35,7 +35,10 @@ This document will enumerate everything you need to do run the sonobuoy based co
 #### Retrieving the results
 
 1. Once the above kubernetes job executes successfully, you will find the sonobuoy results tar file uploaded to the storage account configured in the property file.
-2. Get result from kubernetes pod if result upload to storage account fails `kubectl cp azure-arc-kubernetes-conformance/<pod-name>:/<result-tar-file> /tmp/bar`
+2. Get result from kubernetes pod if result upload to storage account fails `kubectl cp azure-arc-kubernetes-conformance/<pod-name>:/<result-tar-file> <destination_local_path>`
+    1. To get the pod name use `kubectl get pods -n azure-arc-kubernetes-conformance`
+    2. To get the result-tar-file name exec into the pod `kubectl exec -it <pod-name> -n azure-arc-kubernetes-conformance bash`
+    3. The result-tar-file will be present at root directory
 3. To take a deeper look at the test logs:
     1. Extract the tar file by running `tar -xvzf <path_to_tar>`
     2. You will find the pod logs in the `podlogs` folder and the test logs for each test per plugin in the `plugins` folder.
