@@ -2,6 +2,7 @@ configMapGenerator:
 - name: azure-arc-conformance
   files:
   - azure-arc-conformance.properties
+  - partner-metadata.md
   namespace: azure-arc-kubernetes-conformance
 generatorOptions:
   disableNameSuffixHash: true
