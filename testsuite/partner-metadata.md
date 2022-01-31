@@ -1,5 +1,5 @@
-- Upstream Kubernetes Version:
-- K8s Distribution Version:
+- Upstream Kubernetes Version: v1.22.3+e790d7f
+- K8s Distribution Version: 4.9.17
 - Additional Storage/Network Driver details (if applicable):
 - Private Cloud details (if applicable):
 - Bare-metal Node details (if applicable):
