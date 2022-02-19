@@ -5,16 +5,15 @@ This document will enumerate everything you need to do run the sonobuoy based co
 ## Prerequisites
 
 1. Install [kubectl](https://kubernetes.io/docs/tasks/tools/#kubectl).
-1. Set the `KUBECONFIG` environment variable to the path to your kubeconfig file of your cluster.
-2. Install [sonobuoy](https://github.com/vmware-tanzu/sonobuoy#installation) version 0.55.1 or higher. Run `sonobuoy version` to verify it's installed correctly.
+2. Set the `KUBECONFIG` environment variable to the path to your kubeconfig file of your cluster.
 3. Address the [network requirements](https://docs.microsoft.com/en-us/azure/azure-arc/kubernetes/quickstart-connect-cluster#meet-network-requirements) on your cluster for the Arc agents to communicate with Azure.
 4. Download and install [git](https://git-scm.com/downloads).
-5. Download and install [az cli](https://docs.microsoft.com/en-us/cli/azure/install-azure-cli).
-6. Download and install [python 3](https://www.python.org/downloads)
 
 ### Additional Prerequisites for Arc enabled Data Services
 
 1. Install [arcdata extension](https://docs.microsoft.com/en-us/azure/azure-arc/data/release-notes).
+2. Install [sonobuoy](https://github.com/vmware-tanzu/sonobuoy#installation) version 0.55.1 or higher. Run `sonobuoy version` to verify it's installed correctly.
+3. Download and install [az cli](https://docs.microsoft.com/en-us/cli/azure/install-azure-cli).
 
 ## Running the script and publishing the results
 
@@ -22,13 +21,31 @@ This document will enumerate everything you need to do run the sonobuoy based co
 2. Edit the [`partner-metadata.md`](partner-metadata.md) file and fill in the required details. For reference, please see the [`partner-metadata-sample.md`](partner-metadata-sample.md) file.
 
 ### Arc enabled Kubernetes
-1. Edit the [`k8s-conformance-test-suite.sh`](k8s-conformance-test-suite.sh) file and set the values for the required environment variables.
-2. If your cluster is behind an outbound proxy, please edit the above file according to the instruction provided as comments for proxy configuration.
-3. Make the test suite file executable by running `chmod +x k8s-conformance-test-suite.sh`.
-4. Execute the script by running `./k8s-conformance-test-suite.sh`.
-5. The test suite will take the storage account details as environment variables and will handle publishing the results in the right format.
 
-*The above script is **bash only**. Please use the [`k8s-conformance-test-suite.ps1`](k8s-conformance-test-suite.ps1) script for windows hosts.
+1. After cloning the repo, navigate to the testsuite directory from the repo root: `cd testsuite`.
+2. Edit the [`azure-arc-conformance.properties`](azure-arc-conformance.properties) file and fill in the required environment variables. You will be provided the credentials to do so.
+3. Run the command as follows: `kubectl apply -k .`.
+4. The test suite will take care of publishing the results to the storage account.
+
+#### Accessing Logs
+
+1. To get the test suite pod, run `kubectl get pods -n azure-arc-kubernetes-conformance -w`. The pod should reach running state in 5 to 10 minutes.
+2. Get the pods logs by running `kubectl logs <pod_name> -n azure-arc-kubernetes-conformance --follow`. This will show you the current progress of the test, warnings and errors if any.
+
+#### Retrieving the results
+
+1. Retrieve the results from the kubernetes pod by running: `kubectl cp azure-arc-kubernetes-conformance/<pod-name>:/<result-tar-file> <destination_local_path>`
+    1. To get the pod name use `kubectl get pods -n azure-arc-kubernetes-conformance`
+    2. To get the result-tar-file name exec into the pod `kubectl exec -it <pod-name> -n azure-arc-kubernetes-conformance bash`
+    3. The result-tar-file will be present at root directory
+2. To take a deeper look at the test logs:
+    1. Extract the tar file by running `tar -xvzf <path_to_tar>`
+    2. You will find the pod logs in the `podlogs` folder and the test logs for each test per plugin in the `plugins` folder.
+
+#### Cleaning up the test cluster
+
+1. Kubernetes job creates a few resources (a namespace and some cluster scoped resources) which remain in the cluster unless explicitly cleaned.
+2. Run  `kubectl delete -k .` to cleanup all resources. This step is important as failing to do so will prevent you from running the conformance tests again on the cluster.
 
 ### Arc enabled Data Services
 1. Edit the [`ds-conformance-test-suite.sh`](ds-conformance-test-suite.sh) file and set the values for the required environment variables.
@@ -44,7 +61,7 @@ Please update the `CONFIG_PROFILE` variable in the above script accordingly.
 5. Execute the script by running `./ds-conformance-test-suite.sh`.
 6. The test suite will take the storage account details as environment variables and will handle publishing the results in the right format.
 
-## Retrieving the results
+#### Retrieving the results
 
 1. Once the above script executes successfully, you will find the sonobuoy results tar file in the present working directory.
 2. Run `sonobuoy results <path_to_tar>` to display the results. The results are displayed per sonobuoy plugin.
@@ -52,7 +69,7 @@ Please update the `CONFIG_PROFILE` variable in the above script accordingly.
     1. Extract the tar file by running `tar -xvzf <path_to_tar>`
     2. You will find the pod logs in the `podlogs` folder and the test logs for each test per plugin in the `plugins` folder.
 
-## Cleaning up the test cluster
+#### Cleaning up the test cluster
 
 Sonobuoy creates a few resources (a namespace and some cluster scoped resources) which remain in the cluster unless explicitly cleaned.
 

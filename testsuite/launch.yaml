@@ -1,0 +1,49 @@
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: azure-arc-kubernetes-conformance
+---
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: azure-arc-kubernetes-conformance
+  namespace: azure-arc-kubernetes-conformance
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRoleBinding
+metadata:
+  name: azure-arc-kubernetes-conformance
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: ClusterRole
+  name: cluster-admin
+subjects:
+  - kind: ServiceAccount
+    name: azure-arc-kubernetes-conformance
+    namespace: azure-arc-kubernetes-conformance
+---
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: azure-arc-kubernetes-conformance
+  namespace: azure-arc-kubernetes-conformance
+spec:
+  template:
+    spec:
+      serviceAccountName: azure-arc-kubernetes-conformance
+      nodeSelector:
+        kubernetes.io/arch: amd64
+        kubernetes.io/os: linux
+      containers:
+      - name: azure-arc-kubernetes-conformance
+        # test image will change to actual once we push to MCR
+        image: testsantoshacr.azurecr.io/arck8sconformance/launcher:0.0.37
+        imagePullPolicy: IfNotPresent
+        volumeMounts:
+        - name: config-volume
+          mountPath: /etc/config
+      volumes:
+      - name: config-volume
+        configMap:
+          name: azure-arc-conformance
+      restartPolicy: Never
