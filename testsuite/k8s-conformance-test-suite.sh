@@ -233,7 +233,7 @@ while IFS= read -r arc_platform_version || [ -n "$arc_platform_version" ]; do
     #clean_up_resources
 
     echo "Buffer wait 5 minutes..."
-    sleep 5m
+    #sleep 5m
 
 done < aak8sSupportPolicy.txt
 
