@@ -1,34 +1,30 @@
-# Set the following environment variables to run the test suite
+#!/usr/bin/env bash
 
-# Common Variables
-# Some of the variables need to be populated from the service principal and storage account details provided to you by Microsoft
-connectedClustedId=$(tr -dc A-Za-z0-9 </dev/urandom | head -c 7 ; echo '')
-AZ_TENANT_ID= # tenant field of the service principal
-AZ_SUBSCRIPTION_ID= # subscription id of the azure subscription (will be provided)
-AZ_CLIENT_ID= # appid field of the service principal
-AZ_OBJECT_ID= # objectid of the service principal, please add it within the quotes
-AZ_CLIENT_SECRET= # password field of the service principal
-AZ_STORAGE_ACCOUNT= # name of your storage account (will be provided)
-AZ_STORAGE_ACCOUNT_SAS="<your-sas-token-here>" # sas token for your storage account, please add it within the quotes (will be provided)
-RESOURCE_GROUP= # resource group name (will be provided)
-OFFERING_NAME= # name of the partner offering; use this variable to distinguish between the results tar for different offerings
-CLUSTERNAME=arc-partner-test-$connectedClustedId # name of the arc connected cluster
-LOCATION=eastus # location of the arc connected cluster
-
-# Platform Cleanup Plugin
-CLEANUP_TIMEOUT=1500 # time in seconds after which the platform cleanup plugin times out
-
+#
+#   Azure Arc K8s conformance test script
+#
+# Before running the test, create the vars file and fill it:
+# $ cp ./.env-platform-sample ./.env-platform
+#
 # In case your cluster is behind an outbound proxy, please add the following environment variables in the below command
 # --plugin-env azure-arc-platform.HTTPS_PROXY="http://<proxy ip>:<proxy port>"
 # --plugin-env azure-arc-platform.HTTP_PROXY="http://<proxy ip>:<proxy port>"
 # --plugin-env azure-arc-platform.NO_PROXY="kubernetes.default.svc,<ip CIDR etc>"
-
+#
 # In case your outbound proxy is setup with certificate authentication, follow the below steps:
 # Create a Kubernetes generic secret with the name sonobuoy-proxy-cert with key proxycert in any namespace:
 # kubectl create secret generic sonobuoy-proxy-cert --from-file=proxycert=<path-to-cert-file>
 # By default we check for the secret in the default namespace. In case you have created the secret in some other namespace, please add the following variables in the sonobuoy run command: 
 # --plugin-env azure-arc-platform.PROXY_CERT_NAMESPACE="<namespace of sonobuoy secret>"
 # --plugin-env azure-arc-agent-cleanup.PROXY_CERT_NAMESPACE="namespace of sonobuoy secret"
+
+# Loading variables file
+VAR_FILE=./.env-platform
+if [[ ! -f ${VAR_FILE} ]]; then
+    echo "Unable to find variables file. Have you created it from sample ${VAR_FILE}-sample"
+    exit 1
+fi
+source ${VAR_FILE}
 
 az login --service-principal --username $AZ_CLIENT_ID --password $AZ_CLIENT_SECRET --tenant $AZ_TENANT_ID
 az account set -s $AZ_SUBSCRIPTION_ID
