@@ -74,12 +74,44 @@ collect_sonobuoy_results() {
 # OpenShift debug only: Patch kube-aad-proxy to allow SCC
 patch_kube_aad_proxy() {
   local cnt=0
-  while $(test -z $(oc -n azure-arc get deployment -l app.kubernetes.io/component=kube-aad-proxy -o jsonpath="{.items[*].metadata.name}")); do test ${cnt} -eq 20 && return; let "cnt++"; echo $cnt; sleep 20; done
-  echo "#> Running patch to kube-aad-proxy"
+  local maxRetries=20
+  local sleepInter=20
+  local deployment_name=kube-aad-proxy
+  local ns=azure-arc
+  while $(test -z $(oc -n ${ns} get deployment -l app.kubernetes.io/component=${deployment_name} -o jsonpath="{.items[*].metadata.name}"));
+  do
+    test ${cnt} -eq $maxRetries && return;
+    let "cnt++";
+    echo "#> running patch ${deployment_name}: $cnt / $maxRetries";
+    sleep $sleepInter;
+  done
+  sleep $sleepInter
+  echo "#> Running patch to ${deployment_name}"
   oc \
-    patch deployment.apps/kube-aad-proxy -n azure-arc \
+    patch deployment.apps/${deployment_name} -n ${ns} \
     --type='json' \
     -p='[{"op": "replace", "path": "/spec/template/spec/containers/1/securityContext", "value":{"privileged": true, "runAsGroup": 0,"runAsUser": 0}}]'
+}
+
+patch_controller_manager() {
+  local cnt=0
+  local maxRetries=20
+  local sleepInter=20
+  local deployment_name=controller-manager
+  local ns=azure-arc
+  while $(test -z $(oc -n ${ns} get deployment -l app.kubernetes.io/component=${deployment_name} -o jsonpath="{.items[*].metadata.name}"));
+  do
+    test ${cnt} -eq $maxRetries && return;
+    let "cnt++";
+    echo "#> running patch ${deployment_name}: $cnt / $maxRetries";
+    sleep $sleepInter;
+  done
+  sleep $sleepInter
+  echo "#> Running patch to ${deployment_name}"
+  oc \
+    patch deployment.apps/${deployment_name} -n ${ns} \
+    --type='json' \
+    -p='[{"op": "replace", "path": "/spec/template/spec/containers/0/securityContext", "value":{"privileged": true}}]'
 }
 
 # OpenShift debug only: dump NSs
@@ -121,12 +153,17 @@ clean_up_resources() {
     oc delete secret sh.helm.release.v1.azure-arc.v2 -n default
 
     #ToDo: delete Azure Arc object from Azure (need it?)
-    # delete arc service from RG (Azure Console)
-    #> List
-    #az connectedk8s list --resource-group $RESOURCE_GROUP -o table
-    #az_provider_show
+    # Show current AzureArc objects (expected to have 0)
+    az_provider_show
+
     #> Delete
-    #for ARC_NAME in $(az connectedk8s list  --resource-group $RESOURCE_GROUP  -o json |jq -r .[].name); do az connectedk8s delete --name $ARC_NAME  --resource-group $RESOURCE_GROUP ; done
+    for arc_name in $(az connectedk8s list  --resource-group $RESOURCE_GROUP  -o json |jq -r .[].name); do
+        echo "#> Sending delete command for 'az connectedk8s' for resource ${arc_name}"
+        az connectedk8s delete --yes --name $arc_name --resource-group $RESOURCE_GROUP ;
+    done
+
+    echo "Sleeping a while to start the process..."
+    sleep 30;
 }
 clean_up_resources
 
@@ -138,7 +175,8 @@ while IFS= read -r arc_platform_version || [ -n "$arc_platform_version" ]; do
     #> Patch to make sure SCC has the less restrictive permissions to run Arc Validation
     #>> removing it for a while to test it in newer versions:
     #>> arck8sconformance.azurecr.io/arck8sconformance/clusterconnect:0.1.7
-    #patch_kube_aad_proxy &
+    patch_kube_aad_proxy &
+    patch_controller_manager &
 
     sonobuoy run --wait \
     --plugin arc-k8s-platform/platform.yaml \
