@@ -12,6 +12,7 @@ RESOURCE_GROUP= # resource group name; set this to the resource group
 OFFERING_NAME= # name of the partner offering; use this variable to distinguish between the results tar for different offerings
 LOCATION=eastus # location of the arc connected cluster
 NAMESPACE=arc-ds-controller # namespace of the data controller
+CONNECTIVITY_MODE=indirect # choose connectivty mode for data services
 CONFIG_PROFILE=azure-arc-aks-default-storage # choose the config profile
 DATA_CONTROLLER_STORAGE_CLASS=default # choose the storage class for data controller
 SQL_MI_STORAGE_CLASS=default # choose the storage class for sql mi
@@ -35,11 +36,12 @@ INFRASTRUCTURE=azure # Allowed values are alibaba, aws, azure, gpc, onpremises, 
 
 echo "Running the test suite.."
 
-sonobuoy run --wait \
+sonobuoy run --wait --config config.json \
 --plugin arc-dataservices/dataservices.yaml \
 --plugin-env azure-arc-ds-platform.NAMESPACE=$NAMESPACE \
 --plugin-env azure-arc-ds-platform.CONFIG_PROFILE=$CONFIG_PROFILE \
 --plugin-env azure-arc-ds-platform.DATA_CONTROLLER_STORAGE_CLASS=$DATA_CONTROLLER_STORAGE_CLASS \
+--plugin-env azure-arc-ds-platform.CONNECTIVITY_MODE=$CONNECTIVITY_MODE \
 --plugin-env azure-arc-ds-platform.SQL_MI_STORAGE_CLASS=$SQL_MI_STORAGE_CLASS \
 --plugin-env azure-arc-ds-platform.PSQL_STORAGE_CLASS=$PSQL_STORAGE_CLASS \
 --plugin-env azure-arc-ds-platform.AZDATA_USERNAME=$AZDATA_USERNAME \
@@ -52,8 +54,7 @@ sonobuoy run --wait \
 --plugin-env azure-arc-ds-platform.LOCATION=$LOCATION \
 --plugin-env azure-arc-ds-platform.CLIENT_ID=$AZ_CLIENT_ID \
 --plugin-env azure-arc-ds-platform.CLIENT_SECRET=$AZ_CLIENT_SECRET \
---plugin-env azure-arc-ds-platform.INFRASTRUCTURE=$INFRASTRUCTURE \
---config config.json
+--plugin-env azure-arc-ds-platform.INFRASTRUCTURE=$INFRASTRUCTURE
 
 echo "Test execution completed..Retrieving results"
 

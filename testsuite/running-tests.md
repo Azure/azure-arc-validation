@@ -20,7 +20,7 @@ This document will enumerate everything you need to do run the sonobuoy based co
 1. Clone this repository.
 2. Edit the [`partner-metadata.md`](partner-metadata.md) file and fill in the required details. For reference, please see the [`partner-metadata-sample.md`](partner-metadata-sample.md) file.
 
-### Arc enabled Kubernetes
+### Arc enabled Kubernetes along with Arc enabled Data services (Directly Connected Mode)
 
 1. After cloning the repo, navigate to the testsuite directory from the repo root: `cd testsuite`.
 2. Edit the [`azure-arc-conformance.properties`](azure-arc-conformance.properties) file and fill in the required environment variables. You will be provided the credentials to do so.
@@ -47,7 +47,7 @@ This document will enumerate everything you need to do run the sonobuoy based co
 1. Kubernetes job creates a few resources (a namespace and some cluster scoped resources) which remain in the cluster unless explicitly cleaned.
 2. Run  `kubectl delete -k .` to cleanup all resources. This step is important as failing to do so will prevent you from running the conformance tests again on the cluster.
 
-### Arc enabled Data Services
+### Arc enabled Data services (Indirectly Connected Mode)
 1. Edit the [`ds-conformance-test-suite.sh`](ds-conformance-test-suite.sh) file and set the values for the required environment variables.
 2. If your cluster is behind an outbound proxy, please edit the above file according to the instruction provided as comments for proxy configuration.
 3. If you wish to bring your own custom control deployment profile with your own configuration, please follow the below process to provide the `control.json` to sonobuoy plugin.
