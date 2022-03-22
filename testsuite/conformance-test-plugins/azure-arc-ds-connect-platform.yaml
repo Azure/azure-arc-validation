@@ -3,7 +3,7 @@ sonobuoy-config:
   plugin-name: azure-arc-ds-connect-platform
   result-format: junit
 spec:
-  image: arcdscontainerregistry.azurecr.io/ds-pipeline-fail:0.2
+  image: arcdscontainerregistry.azurecr.io/ds-pipeline-fail:0.3
   imagePullPolicy: IfNotPresent
   name: plugin
   resources: {}
