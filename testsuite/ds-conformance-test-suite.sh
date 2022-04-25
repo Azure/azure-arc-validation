@@ -13,6 +13,7 @@ OFFERING_NAME= # name of the partner offering; use this variable to distinguish 
 LOCATION=eastus # location of the arc connected cluster
 NAMESPACE=arc-ds-controller # namespace of the data controller
 CONNECTIVITY_MODE=indirect # choose connectivty mode for data services
+SERVICE_TYPE=NodePort # Using a NodePort gives you the freedom to set up your own load-balancing solution or you can set LoadBalancer service type if your environment supports to generate external IPs.
 CONFIG_PROFILE=azure-arc-aks-default-storage # choose the config profile
 DATA_CONTROLLER_STORAGE_CLASS=default # choose the storage class for data controller
 SQL_MI_STORAGE_CLASS=default # choose the storage class for sql mi
@@ -42,6 +43,7 @@ sonobuoy run --wait --config config.json \
 --plugin-env azure-arc-ds-platform.CONFIG_PROFILE=$CONFIG_PROFILE \
 --plugin-env azure-arc-ds-platform.DATA_CONTROLLER_STORAGE_CLASS=$DATA_CONTROLLER_STORAGE_CLASS \
 --plugin-env azure-arc-ds-platform.CONNECTIVITY_MODE=$CONNECTIVITY_MODE \
+--plugin-env azure-arc-ds-platform.SERVICE_TYPE=$SERVICE_TYPE \
 --plugin-env azure-arc-ds-platform.SQL_MI_STORAGE_CLASS=$SQL_MI_STORAGE_CLASS \
 --plugin-env azure-arc-ds-platform.PSQL_STORAGE_CLASS=$PSQL_STORAGE_CLASS \
 --plugin-env azure-arc-ds-platform.AZDATA_USERNAME=$AZDATA_USERNAME \
