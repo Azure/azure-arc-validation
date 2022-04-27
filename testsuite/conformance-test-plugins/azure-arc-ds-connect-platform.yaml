@@ -3,7 +3,8 @@ sonobuoy-config:
   plugin-name: azure-arc-ds-connect-platform
   result-format: junit
 spec:
-  image: arck8sconformance.azurecr.io/arck8sconformance/ds-connect-platform:0.1.8
+  #image: arck8sconformance.azurecr.io/arck8sconformance/ds-connect-platform:0.1.8
+  image: arcdscontainerregistry.azurecr.io/ds-c-nodeport:0.46
   imagePullPolicy: IfNotPresent
   name: plugin
   resources: {}
