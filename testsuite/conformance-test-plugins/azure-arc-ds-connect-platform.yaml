@@ -5,7 +5,7 @@ sonobuoy-config:
 spec:
   #image: arck8sconformance.azurecr.io/arck8sconformance/ds-connect-platform:0.1.9
   #image: arcdscontainerregistry.azurecr.io/ds-connect-msi:0.1
-  image: arcdscontainerregistry.azurecr.io/ds-c-sql:0.1
+  image: arcdscontainerregistry.azurecr.io/ds-c-sql:0.2
   imagePullPolicy: IfNotPresent
   name: plugin
   resources: {}
