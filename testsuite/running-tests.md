@@ -38,7 +38,7 @@ This document will enumerate everything you need to do run the sonobuoy based co
 1. The results for each run - N, N-1 and N-2 can be retrieved.
 2. Retrieve the results from the kubernetes pod by running: `kubectl cp azure-arc-kubernetes-conformance/<pod-name>:<result-tar-file> results.tar.gz`
     1. To get the pod name use `kubectl get pods -n azure-arc-kubernetes-conformance`
-    2. To get the result-tar-file name, exec into the pod `kubectl exec -it <pod-name> -n azure-arc-kubernetes-conformance bash`. The format will be "conformance-results-*.tar.gz".
+    2. To get the result-tar-file name, exec into the pod `kubectl exec -it <pod-name> -n azure-arc-kubernetes-conformance -- bash`. The format will be "conformance-results-*.tar.gz".
     3. The result-tar-file will be present at root directory
 3. To take a deeper look at the test logs:
     1. Extract the tar file by running `tar -xvzf <path_to_tar>`
