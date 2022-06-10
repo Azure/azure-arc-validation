@@ -26,9 +26,10 @@ This test plugin runs a single test which is responsible for cleaning up the arc
 - `test_arc_agent_cleanup`: This test will wait until all other arc plugins are in a terminal state and then proceed with the cleanup of azure-arc agents.
 
 
-## Arc Data Services
+## Arc for Data services Conformance Tests (Indirectly Connected Mode)
 
-This test plugin automates the provisioning and testing of Azure Arc enabled data services "Data controller , SQL MI" on a Kubernetes cluster.
+This test plugin will determine if the Kubernetes cluster is conformant with Arc Data Services (Indirectly Connected Mode). 
+
 Following tests are a part of this test suite:
 
 - `test_check_namespace_existence`: This test will be responsible for monitoring the given namespace created or not. It will fail if the given namespace already found.
@@ -42,3 +43,41 @@ Following tests are a part of this test suite:
 - `test_check_pv_existence`: This test will watch the persistent volumes status and volume is bound to a claim.
 
 - `test_ds_cleanup`: This test will cleanup all the data service resources under the given namespace.
+
+- `test_create_postgressql`: This test will look for the presence of PostgreSQL server and its status.
+
+- `test_scale_out_postgressql`: This test will look for PostgreSQL Hyperscale server was scaled out.
+
+## Arc for Data services Conformance Tests (Directly Connected Mode)
+
+This test plugin will determine if the Kubernetes cluster is conformant with Arc Data Services (Directly Connected Mode). 
+
+Following tests are a part of this test suite:
+
+- `test_check_namespace_existence`: This test will be responsible for monitoring the given namespace created or not. It will fail if the given namespace already found.
+
+- `test_data_controller_ready`: This test will look for the presence of data controller and its status.
+
+- `test_check_connected_cluster_arm`: This test will look for the connectivity status of created connected cluster from azure portal.
+
+- `test_check_azure_arc_namespace_existence`: This test will look for the presence of azure-arc namespace.
+
+- `test_check_datacontroller_arm`: This test will look for the provisioning state of created datacontroller from azure portal.
+
+- `test_check_kubernetes_extension_arm`: This test will look for the install state of created connected cluster extension from azure portal.
+
+- `test_check_customlocation_arm`: This test will look for the provisioning state of created custom location from azure portal.
+
+- `test_check_pod_existence`: This test will watch the pods created under the given namespace and its status(RUNNING).
+
+- `test_check_pv_existence`: This test will watch the persistent volumes status and volume is bound to a claim.
+
+- `test_create_sql_mi`: This test will look for the presence of SQL managed instance and its status.
+
+- `test_ds_direct_cleanup`: This test will cleanup all the data service resources from azure portal and also under the given namespace.
+
+## Data services Cleanup
+
+By deleting the repective namespace we can clean up the Data services.
+
+kubectl delete namespace

@@ -12,12 +12,15 @@ RESOURCE_GROUP= # resource group name; set this to the resource group
 OFFERING_NAME= # name of the partner offering; use this variable to distinguish between the results tar for different offerings
 LOCATION=eastus # location of the arc connected cluster
 NAMESPACE=arc-ds-controller # namespace of the data controller
+CONNECTIVITY_MODE=indirect # choose connectivty mode for data services
+SERVICE_TYPE=NodePort # Using a NodePort gives you the freedom to set up your own load-balancing solution or you can set LoadBalancer service type if your environment supports to generate external IPs.
 CONFIG_PROFILE=azure-arc-aks-default-storage # choose the config profile
 DATA_CONTROLLER_STORAGE_CLASS=default # choose the storage class for data controller
 SQL_MI_STORAGE_CLASS=default # choose the storage class for sql mi
 PSQL_STORAGE_CLASS=default # choose the storage class for postgreSQL
 AZDATA_USERNAME=azureuser # database username
 AZDATA_PASSWORD=Welcome1234% # database password
+MEMORY=4Gi # The request for the capacity of the managed instance as an integer number followed by Gi (gigabytes). Example: 4Gi or 8Gi
 SQL_INSTANCE_NAME=arc-sql # sql instance name
 PSQL_SERVERGROUP_NAME=arc-psql # postgreSQL server name
 INFRASTRUCTURE=azure # Allowed values are alibaba, aws, azure, gpc, onpremises, other.
@@ -35,15 +38,18 @@ INFRASTRUCTURE=azure # Allowed values are alibaba, aws, azure, gpc, onpremises, 
 
 echo "Running the test suite.."
 
-sonobuoy run --wait \
+sonobuoy run --wait --config config.json \
 --plugin arc-dataservices/dataservices.yaml \
 --plugin-env azure-arc-ds-platform.NAMESPACE=$NAMESPACE \
 --plugin-env azure-arc-ds-platform.CONFIG_PROFILE=$CONFIG_PROFILE \
 --plugin-env azure-arc-ds-platform.DATA_CONTROLLER_STORAGE_CLASS=$DATA_CONTROLLER_STORAGE_CLASS \
+--plugin-env azure-arc-ds-platform.CONNECTIVITY_MODE=$CONNECTIVITY_MODE \
+--plugin-env azure-arc-ds-platform.SERVICE_TYPE=$SERVICE_TYPE \
 --plugin-env azure-arc-ds-platform.SQL_MI_STORAGE_CLASS=$SQL_MI_STORAGE_CLASS \
 --plugin-env azure-arc-ds-platform.PSQL_STORAGE_CLASS=$PSQL_STORAGE_CLASS \
 --plugin-env azure-arc-ds-platform.AZDATA_USERNAME=$AZDATA_USERNAME \
 --plugin-env azure-arc-ds-platform.AZDATA_PASSWORD=$AZDATA_PASSWORD \
+--plugin-env azure-arc-ds-platform.MEMORY=$MEMORY \
 --plugin-env azure-arc-ds-platform.SQL_INSTANCE_NAME=$SQL_INSTANCE_NAME \
 --plugin-env azure-arc-ds-platform.PSQL_SERVERGROUP_NAME=$PSQL_SERVERGROUP_NAME \
 --plugin-env azure-arc-ds-platform.TENANT_ID=$AZ_TENANT_ID \
@@ -52,8 +58,7 @@ sonobuoy run --wait \
 --plugin-env azure-arc-ds-platform.LOCATION=$LOCATION \
 --plugin-env azure-arc-ds-platform.CLIENT_ID=$AZ_CLIENT_ID \
 --plugin-env azure-arc-ds-platform.CLIENT_SECRET=$AZ_CLIENT_SECRET \
---plugin-env azure-arc-ds-platform.INFRASTRUCTURE=$INFRASTRUCTURE \
---config config.json
+--plugin-env azure-arc-ds-platform.INFRASTRUCTURE=$INFRASTRUCTURE
 
 echo "Test execution completed..Retrieving results"
 
