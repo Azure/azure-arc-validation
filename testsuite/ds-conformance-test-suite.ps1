@@ -24,6 +24,12 @@ $MEMORY="4Gi" # The request for the capacity of the managed instance as an integ
 $SQL_INSTANCE_NAME="arc-sql" # sql instance name
 $PSQL_SERVERGROUP_NAME="arc-psql" # postgreSQL server name
 $INFRASTRUCTURE="azure" # Allowed values are alibaba, aws, azure, gpc, onpremises, other.
+## For PRE-RELEASE test please uncomment and pass the required values for below parameters.
+#$RELEASE_TYPE="PRE-RELEASE"
+## Allowed repository names are arcdata/preview or arcdata/test
+#$REPOSITORY="arcdata/test"
+## Image Tag will be changed based on PRE-RELEASE versions
+#$IMAGE_TAG="v1.9.0_2022-07-12"
 
 # In case your cluster is behind an outbound proxy, please add the following environment variables in the below command
 # --plugin-env azure-arc-ds-platform.HTTPS_PROXY="http://<proxy ip>:<proxy port>"
@@ -61,7 +67,11 @@ sonobuoy run --wait --config config.json `
 --plugin-env azure-arc-ds-platform.LOCATION=$LOCATION `
 --plugin-env azure-arc-ds-platform.CLIENT_ID=$AZ_CLIENT_ID `
 --plugin-env azure-arc-ds-platform.CLIENT_SECRET=$AZ_CLIENT_SECRET `
---plugin-env azure-arc-ds-platform.INFRASTRUCTURE=$INFRASTRUCTURE
+--plugin-env azure-arc-ds-platform.INFRASTRUCTURE=$INFRASTRUCTURE `
+--plugin-env azure-arc-ds-platform.RELEASE_TYPE=$RELEASE_TYPE `
+--plugin-env azure-arc-ds-platform.REPOSITORY=$REPOSITORY `
+--plugin-env azure-arc-ds-platform.IMAGE_TAG=$IMAGE_TAG
+
 
 Write-Host "Test execution completed..Retrieving results"
 

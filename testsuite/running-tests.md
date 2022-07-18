@@ -91,6 +91,3 @@ Please update the `CONFIG_PROFILE` variable in the above script accordingly.
 
 Sonobuoy creates a few resources (a namespace and some cluster scoped resources) which remain in the cluster unless explicitly cleaned.
 Run `sonobuoy delete --wait` to cleanup all sonobuoy resources. This step is important as failing to do so will prevent you from running sonobuoy tests again on the cluster. If you are running the tests for both K8s and Data Services on the same cluster, please run this command in between the two test runs.
-
-## Pre-release conformance test for Arc enabled Data Services
-We have introduced PRE-RELEASE test feauture to provide an opportunity for customers and partners to provide pre-release feedback, pre-release versions of Azure Arc-enabled data services are made available on a predictable schedule. This article describes how to install pre-release versions of Azure Arc-enabled data services and provide feedback to Microsoft. For more information please refer this [link](https://docs.microsoft.com/en-us/azure/azure-arc/data/preview-testing#current-preview-release-information).
