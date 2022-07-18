@@ -72,7 +72,6 @@ sonobuoy run --wait --config config.json `
 --plugin-env azure-arc-ds-platform.REPOSITORY=$REPOSITORY `
 --plugin-env azure-arc-ds-platform.IMAGE_TAG=$IMAGE_TAG
 
-
 Write-Host "Test execution completed..Retrieving results"
 
 $sonobuoyResults=$(sonobuoy retrieve)

@@ -79,6 +79,8 @@ Please update the `CONFIG_PROFILE` variable in the above script accordingly.
 8. Execute the script by running `./ds-conformance-test-suite.sh`.
 9. The test suite will take the storage account details as environment variables and will handle publishing the results in the right format.
 
+*The above script is **bash only**. Please use the [`ds-conformance-test-suite.ps1`](ds-conformance-test-suite.ps1) script for windows hosts.
+
 ### Retrieving the results
 
 1. Once the above script executes successfully, you will find the sonobuoy results tar file in the present working directory.
