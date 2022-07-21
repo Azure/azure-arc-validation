@@ -26,7 +26,7 @@ This document will enumerate everything you need to do run the sonobuoy based co
 
 1. By default, the test suite will run only the Arc enabled Kubernetes tests.
 2. To run the data services tests in [direct mode](), set the `azure-arc-ds-connect-platform.enable` parameter to true in the `azure-arc-conformance.properties` file.
-3. We have introduced `PRE-RELEASE` test feauture to provide an opportunity for customers and partners to provide pre-release feedback, pre-release versions of Azure Arc-enabled data services are made available on a predictable schedule. This article describes how to install pre-release versions of Azure Arc-enabled data services and provide feedback to Microsoft. For more information please refer this [link](https://docs.microsoft.com/en-us/azure/azure-arc/data/preview-testing#current-preview-release-information).
+3. We have introduced `PRE-RELEASE` test feauture to provide an opportunity for customers and partners to provide pre-release feedback, pre-release versions of Azure Arc-enabled data services are made available on a predictable schedule.
 
 4. Fill out the additional parameters in the properties file.
 
@@ -66,7 +66,7 @@ This document will enumerate everything you need to do run the sonobuoy based co
 1. Clone this repository.
 2. Edit the [`partner-metadata.md`](partner-metadata.md) file and fill in the required details. For reference, please see the [`partner-metadata-sample.md`](partner-metadata-sample.md) file.
 3. Edit the [`ds-conformance-test-suite.sh`](ds-conformance-test-suite.sh) file and set the values for the required environment variables.
-4. We have introduced `PRE-RELEASE` test feauture to provide an opportunity for customers and partners to provide pre-release feedback, pre-release versions of Azure Arc-enabled data services are made available on a predictable schedule. This article describes how to install pre-release versions of Azure Arc-enabled data services and provide feedback to Microsoft. For more information please refer this [link](https://docs.microsoft.com/en-us/azure/azure-arc/data/preview-testing#current-preview-release-information).
+4. We have introduced `PRE-RELEASE` test feauture to provide an opportunity for customers and partners to provide pre-release feedback, pre-release versions of Azure Arc-enabled data services are made available on a predictable schedule.
 5. If your cluster is behind an outbound proxy, please edit the above file according to the instruction provided as comments for proxy configuration.
 6. If you wish to bring your own custom control deployment profile with your own configuration, please follow the below process to provide the `control.json` to sonobuoy plugin.
 ```
