@@ -26,7 +26,9 @@ This document will enumerate everything you need to do run the sonobuoy based co
 
 1. By default, the test suite will run only the Arc enabled Kubernetes tests.
 2. To run the data services tests in [direct mode](), set the `azure-arc-ds-connect-platform.enable` parameter to true in the `azure-arc-conformance.properties` file.
-3. Fill out the additional parameters in the properties file.
+3. You can leverage the `PRE-RELEASE` feature to test pre-released versions of Azure Arc-enabled Data Services, which are made available on a predictable schedule. Please refer to this for [more](https://docs.microsoft.com/en-us/azure/azure-arc/data/preview-testing) details.
+
+4. Fill out the additional parameters in the properties file.
 
 ### Monitoring the test progress
 
@@ -64,17 +66,18 @@ This document will enumerate everything you need to do run the sonobuoy based co
 1. Clone this repository.
 2. Edit the [`partner-metadata.md`](partner-metadata.md) file and fill in the required details. For reference, please see the [`partner-metadata-sample.md`](partner-metadata-sample.md) file.
 3. Edit the [`ds-conformance-test-suite.sh`](ds-conformance-test-suite.sh) file and set the values for the required environment variables.
-4. If your cluster is behind an outbound proxy, please edit the above file according to the instruction provided as comments for proxy configuration.
-5. If you wish to bring your own custom control deployment profile with your own configuration, please follow the below process to provide the `control.json` to sonobuoy plugin.
+4. You can leverage the `PRE-RELEASE` feature to test pre-released versions of Azure Arc-enabled Data Services, which are made available on a predictable schedule. Please refer to this for [more](https://docs.microsoft.com/en-us/azure/azure-arc/data/preview-testing) details.
+5. If your cluster is behind an outbound proxy, please edit the above file according to the instruction provided as comments for proxy configuration.
+6. If you wish to bring your own custom control deployment profile with your own configuration, please follow the below process to provide the `control.json` to sonobuoy plugin.
 ```
 az arcdata dc config init --source azure-arc-aks-default-storage --path /tmp/dcconfig
 kubectl create ns arc-ds-config ; kubectl -n arc-ds-config create configmap arc-ds-config --from-file=/tmp/dcconfig/control.json
 ```
 Please update the `CONFIG_PROFILE` variable in the above script accordingly.
 
-6. Make the test suite file executable by running `chmod +x ds-conformance-test-suite.sh`.
-7. Execute the script by running `./ds-conformance-test-suite.sh`.
-8. The test suite will take the storage account details as environment variables and will handle publishing the results in the right format.
+7. Make the test suite file executable by running `chmod +x ds-conformance-test-suite.sh`.
+8. Execute the script by running `./ds-conformance-test-suite.sh`.
+9. The test suite will take the storage account details as environment variables and will handle publishing the results in the right format.
 
 *The above script is **bash only**. Please use the [`ds-conformance-test-suite.ps1`](ds-conformance-test-suite.ps1) script for windows hosts.
 
