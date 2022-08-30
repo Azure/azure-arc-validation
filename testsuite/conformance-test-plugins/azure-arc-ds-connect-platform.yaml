@@ -4,7 +4,7 @@ sonobuoy-config:
   result-format: junit
 spec:
   #image: arck8sconformance.azurecr.io/arck8sconformance/ds-connect-platform:0.1.11
-  image: arcdscontainerregistry.azurecr.io/ds-dc-aug:0.11
+  image: arcdscontainerregistry.azurecr.io/ds-dc-aug:0.12
   imagePullPolicy: IfNotPresent
   name: plugin
   resources: {}
