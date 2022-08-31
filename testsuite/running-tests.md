@@ -57,15 +57,15 @@ This document will enumerate everything you need to do run the sonobuoy based co
 
 ### Prerequisites
 
-1. Install [arcdata extension](https://docs.microsoft.com/en-us/azure/azure-arc/data/release-notes).
-2. Install [sonobuoy](https://github.com/vmware-tanzu/sonobuoy#installation) version 0.55.1 or higher. Run `sonobuoy version` to verify it's installed correctly.
-3. Download and install [az cli](https://docs.microsoft.com/en-us/cli/azure/install-azure-cli).
+1. Download and install [az cli](https://docs.microsoft.com/en-us/cli/azure/install-azure-cli).
+2. Install [arcdata extension](https://docs.microsoft.com/en-us/azure/azure-arc/data/release-notes).
+3. Install [sonobuoy](https://github.com/vmware-tanzu/sonobuoy#installation) version 0.55.1 or higher. Run `sonobuoy version` to verify it's installed correctly.
 
 ### Running the tests
 
 1. Clone this repository.
 2. Edit the [`partner-metadata.md`](partner-metadata.md) file and fill in the required details. For reference, please see the [`partner-metadata-sample.md`](partner-metadata-sample.md) file.
-3. Edit the [`ds-conformance-test-suite.sh`](ds-conformance-test-suite.sh) file and set the values for the required environment variables.
+3. Edit the [`ds-conformance-test-suite.sh`](ds-conformance-test-suite.sh) file and set the values for the required environment variables or you can run the data services tests in [indirect mode](), set the `azure-arc-ds-platform.enable` parameter to true in the `azure-arc-conformance.properties` file.
 4. You can leverage the `PRE-RELEASE` feature to test pre-released versions of Azure Arc-enabled Data Services, which are made available on a predictable schedule. Please refer to this for [more](https://docs.microsoft.com/en-us/azure/azure-arc/data/preview-testing) details.
 5. If your cluster is behind an outbound proxy, please edit the above file according to the instruction provided as comments for proxy configuration.
 6. If you wish to bring your own custom control deployment profile with your own configuration, please follow the below process to provide the `control.json` to sonobuoy plugin.
