@@ -57,9 +57,9 @@ This document will enumerate everything you need to do run the sonobuoy based co
 
 ### Prerequisites
 
-1. Install [arcdata extension](https://docs.microsoft.com/en-us/azure/azure-arc/data/release-notes).
-2. Install [sonobuoy](https://github.com/vmware-tanzu/sonobuoy#installation) version 0.55.1 or higher. Run `sonobuoy version` to verify it's installed correctly.
-3. Download and install [az cli](https://docs.microsoft.com/en-us/cli/azure/install-azure-cli).
+1. Download and install [az cli](https://docs.microsoft.com/en-us/cli/azure/install-azure-cli).
+2. Install [arcdata extension](https://docs.microsoft.com/en-us/azure/azure-arc/data/release-notes).
+3. Install [sonobuoy](https://github.com/vmware-tanzu/sonobuoy#installation) version 0.55.1 or higher. Run `sonobuoy version` to verify it's installed correctly.
 
 ### Running the tests
 
