@@ -93,3 +93,9 @@ Please update the `CONFIG_PROFILE` variable in the above script accordingly.
 
 Sonobuoy creates a few resources (a namespace and some cluster scoped resources) which remain in the cluster unless explicitly cleaned.
 Run `sonobuoy delete --wait` to cleanup all sonobuoy resources. This step is important as failing to do so will prevent you from running sonobuoy tests again on the cluster. If you are running the tests for both K8s and Data Services on the same cluster, please run this command in between the two test runs.
+
+# Running the comprehensive end to end data services test suite
+
+This document will enumerate everything you need to do run the automated CI/CD pipelines that perform end-to-end tests on your environment. The Automated validation testing catalog can be found [here](https://learn.microsoft.com/en-us/azure/azure-arc/data/automated-integration-testing).
+
+<br/>
