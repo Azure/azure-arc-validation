@@ -99,6 +99,7 @@ Run `sonobuoy delete --wait` to cleanup all sonobuoy resources. This step is imp
 This document will enumerate everything you need to do run the automated CI/CD pipelines that perform end-to-end tests on your environment. The Automated validation testing catalog can be found [here](https://learn.microsoft.com/en-us/azure/azure-arc/data/automated-integration-testing).
 
 <br/>
+
 ### Prerequisites
 
 Please follow the [link](https://learn.microsoft.com/en-us/azure/azure-arc/data/automated-integration-testing#prerequisites) to fulfill the prereuisites. As part of Conformance test we share basic credentials.
