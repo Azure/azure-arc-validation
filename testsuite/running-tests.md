@@ -105,6 +105,6 @@ Please follow the [link](https://learn.microsoft.com/en-us/azure/azure-arc/data/
 To consist of Log Analytics workspace, please create WORKSPACE_ID and WORKSPACE_SHARED_KEY by using below commands.
 az login --service-principal -u ${CLIENT_ID} -p ${CLIENT_SECRET} --tenant ${TENANT_ID}
 Linux
-WORKSPACE_ID=$(az monitor log-analytics workspace create -g external-lenovo -n lenov-analytics -l eastus | jq .customerId | xargs)
+WORKSPACE_ID=$(az monitor log-analytics workspace create -g $RESOURCE_GROUP -n $partnername_anlytics -l $location | jq .customerId | xargs)
 
-WORKSPACE_SHARED_KEY=$(az monitor log-analytics workspace get-shared-keys --resource-group external-lenovo --workspace-name lenov-analytics | jq .primarySharedKey | xargs)
+WORKSPACE_SHARED_KEY=$(az monitor log-analytics workspace get-shared-keys --resource-group $RESOURCE_GROUP --workspace-name $partnername_anlytics | jq .primarySharedKey | xargs)
