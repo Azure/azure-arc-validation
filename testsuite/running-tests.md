@@ -101,7 +101,7 @@ This document will enumerate everything you need to do run the automated CI/CD p
 
 ### Prerequisites
 
-Please follow the [link](https://learn.microsoft.com/en-us/azure/azure-arc/data/automated-integration-testing#prerequisites) to fulfill the prereuisites. As part of Conformance test we share basic credentials.
+Please follow the [link](https://learn.microsoft.com/en-us/azure/azure-arc/data/automated-integration-testing#prerequisites) to fulfill the prerequisites. As part of Conformance test we share basic credentials.
 To consist of Log Analytics workspace, please create WORKSPACE_ID and WORKSPACE_SHARED_KEY by using below commands.
 ```
 az login --service-principal -u ${CLIENT_ID} -p ${CLIENT_SECRET} --tenant ${TENANT_ID}
