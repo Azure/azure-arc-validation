@@ -128,3 +128,30 @@ $WORKSPACE_SHARED_KEY=$WORKSPACE_SHARED_KEY.Replace("`"","")
 echo $WORKSPACE_SHARED_KEY
 ```
 
+
+### Kubernetes manifest preparation
+
+Follow the [link](https://learn.microsoft.com/en-us/azure/azure-arc/data/automated-integration-testing#kubernetes-manifest-preparation) and update the variables based on your environment at .test.env and patch.json files.
+
+### Running the tests
+
+Follow the [link](https://learn.microsoft.com/en-us/azure/azure-arc/data/automated-integration-testing#kubectl-apply) to deploy the launcher and tail the logs.
+By default lancher will create data services with LoadBalancer serviceType. If we want to have serviceType as NodePort please add this below content at patch.json file.
+
+```
+,
+{
+    "op": "replace",
+    "path": "spec.services/0/serviceType",
+    "value": "NodePort"
+}
+```
+### Examining Test Results
+Follow the [link](https://learn.microsoft.com/en-us/azure/azure-arc/data/automated-integration-testing#examining-test-results) to view the logs from storage container.
+
+### Cleaning up the test environment
+Follow the [link](https://learn.microsoft.com/en-us/azure/azure-arc/data/automated-integration-testing#clean-up-resources) to delete the launcher run.
+
+
+
+
