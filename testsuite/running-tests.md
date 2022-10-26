@@ -108,9 +108,9 @@ az login --service-principal -u ${CLIENT_ID} -p ${CLIENT_SECRET} --tenant ${TENA
 ```
 Linux(Bash)
 ```
-WORKSPACE_ID=$(az monitor log-analytics workspace create -g $RESOURCE_GROUP -n $partnername-anlytics -l $location | jq .customerId | xargs)
+WORKSPACE_ID=$(az monitor log-analytics workspace create -g $RESOURCE_GROUP -n $partnername-analytics -l $location | jq .customerId | xargs)
 echo $WORKSPACE_ID
-WORKSPACE_SHARED_KEY=$(az monitor log-analytics workspace get-shared-keys --resource-group $RESOURCE_GROUP --workspace-name $partnername-anlytics | jq .primarySharedKey | xargs)
+WORKSPACE_SHARED_KEY=$(az monitor log-analytics workspace get-shared-keys --resource-group $RESOURCE_GROUP --workspace-name $partnername-analytics | jq .primarySharedKey | xargs)
 echo $WORKSPACE_SHARED_KEY
 ```
 Windows(PowerShell)
