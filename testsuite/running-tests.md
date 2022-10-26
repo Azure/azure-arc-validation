@@ -131,8 +131,9 @@ echo $WORKSPACE_SHARED_KEY
 
 ### Kubernetes manifest preparation
 
-Follow the [link](https://learn.microsoft.com/en-us/azure/azure-arc/data/automated-integration-testing#kubernetes-manifest-preparation) and update the variables based on your environment at .test.env and patch.json files. Please consider overlay AKS as default overlay or you can copy and create new overlay based on your environment.
+Follow the [link](https://learn.microsoft.com/en-us/azure/azure-arc/data/automated-integration-testing#kubernetes-manifest-preparation) and update the variables based on your environment at .test.env and patch.json files. Please consider overlay AKS as default overlay or you can copy and create new overlay based on your environment. This test suite supports both Direct mode and Indirect mode.
 
+Example
 ```
 cp -r aks aks-hci
 ```
