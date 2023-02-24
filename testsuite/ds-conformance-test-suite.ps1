@@ -42,6 +42,9 @@ $INFRASTRUCTURE="azure" # Allowed values are alibaba, aws, azure, gpc, onpremise
 # By default we check for the secret in the default namespace. In case you have created the secret in some other namespace, please add the following variables in the sonobuoy run command: 
 # --plugin-env azure-arc-ds-platform.PROXY_CERT_NAMESPACE="<namespace of sonobuoy secret>"
 
+# Add below variables at sonobuoy run command when running the test suite on an openshift cluster  
+# --dns-namespace openshift-dns --dns-pod-labels dns.operator.openshift.io/daemonset-dns=default
+
 #az login --service-principal --username $AZ_CLIENT_ID --password $AZ_CLIENT_SECRET --tenant $AZ_TENANT_ID
 #az account set -s $AZ_SUBSCRIPTION_ID
 
