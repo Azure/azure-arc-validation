@@ -55,7 +55,7 @@ This document will enumerate everything you need to do run the sonobuoy based co
 
 ## Running the Arc enabled Data Services Tests (Indirect Mode)
 1. By default, the test suite will run only the Arc enabled Kubernetes tests.
-2. To run the data services tests in [direct mode](), set the `azure-arc-ds-connect-platform.enable` parameter to true and `azure-arc-ds-connect-platform.CONNECTIVITY_MODE` to direct in the `azure-arc-conformance.properties` file.
+2. To run the data services tests in [indirect mode](), set the `azure-arc-ds-connect-platform.enable` parameter to true and `azure-arc-ds-connect-platform.CONNECTIVITY_MODE` to indirect in the `azure-arc-conformance.properties` file.
 3. You can leverage the `PRE-RELEASE` feature to test pre-released versions of Azure Arc-enabled Data Services, which are made available on a predictable schedule. Please refer to this for [more](https://docs.microsoft.com/en-us/azure/azure-arc/data/preview-testing) details.
 
 4. Fill out the additional parameters in the properties file.
