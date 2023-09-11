@@ -22,7 +22,8 @@ This document will enumerate everything you need to do run the sonobuoy based co
 5. Run the command as follows: `kubectl apply -k .`
 6. The test suite will take care of publishing the results to the storage account.
 
-### Running the Arc enabled Data Services (Direct Mode) tests
+### Running the Arc enabled Data Services (Direct Mode) tests <span style="color: red;">(Deprecated)</span>
+
 
 1. By default, the test suite will run only the Arc enabled Kubernetes tests.
 2. To run the data services tests in [direct mode](), set the `azure-arc-ds-connect-platform.enable` parameter to true and `azure-arc-ds-connect-platform.CONNECTIVITY_MODE` to direct in the `azure-arc-conformance.properties` file.
@@ -81,7 +82,7 @@ This document will enumerate everything you need to do run the sonobuoy based co
 1. Kubernetes job creates a few resources (a namespace and some cluster scoped resources) which remain in the cluster unless explicitly cleaned.
 2. Run  `kubectl delete -k .` to cleanup all resources. This step is important as failing to do so will prevent you from running the conformance tests again on the cluster.
 
-# Running the Comprehensive End to End Data services test suite.
+# Running the Comprehensive End-to-End Data services test suite with CI-Launcher.
 
 This document will enumerate everything you need to do run the automated CI/CD pipelines that perform end-to-end tests on your environment. The Automated validation testing catalog can be found [here](https://learn.microsoft.com/en-us/azure/azure-arc/data/automated-integration-testing).
 <br/>
