@@ -22,7 +22,7 @@ This document will enumerate everything you need to do run the sonobuoy based co
 5. Run the command as follows: `kubectl apply -k .`
 6. The test suite will take care of publishing the results to the storage account.
 
-### Running the Arc enabled Data Services (Direct Mode) tests &#42;&#42;(Deprecated)&#42;&#42;
+### Running the Arc enabled Data Services tests (Direct Mode) &#42;&#42;(Deprecated)&#42;&#42;
 
 
 
