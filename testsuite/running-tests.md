@@ -81,4 +81,67 @@ This document will enumerate everything you need to do run the sonobuoy based co
 1. Kubernetes job creates a few resources (a namespace and some cluster scoped resources) which remain in the cluster unless explicitly cleaned.
 2. Run  `kubectl delete -k .` to cleanup all resources. This step is important as failing to do so will prevent you from running the conformance tests again on the cluster.
 
+# Running the Comprehensive End to End Data services test suite.
+
+This document will enumerate everything you need to do run the automated CI/CD pipelines that perform end-to-end tests on your environment. The Automated validation testing catalog can be found [here](https://learn.microsoft.com/en-us/azure/azure-arc/data/automated-integration-testing).
+<br/>
+
+### Prerequisites
+
+Please follow the [link](https://learn.microsoft.com/en-us/azure/azure-arc/data/automated-integration-testing#prerequisites) to fulfill the prerequisites. As part of Conformance test we share basic credentials.
+To consist of Log Analytics workspace, please create WORKSPACE_ID and WORKSPACE_SHARED_KEY by using below commands.
+```
+az login --service-principal -u ${CLIENT_ID} -p ${CLIENT_SECRET} --tenant ${TENANT_ID}
+```
+Linux(Bash)
+```
+WORKSPACE_ID=$(az monitor log-analytics workspace create -g $RESOURCE_GROUP -n $partnername-analytics -l $location | jq .customerId | xargs)
+echo $WORKSPACE_ID
+WORKSPACE_SHARED_KEY=$(az monitor log-analytics workspace get-shared-keys --resource-group $RESOURCE_GROUP --workspace-name $partnername-analytics | jq .primarySharedKey | xargs)
+echo $WORKSPACE_SHARED_KEY
+```
+Windows(PowerShell)
+```
+$WORKSPACE_ID=$(az monitor log-analytics workspace create -g $RESOURCE_GROUP_NAME -n $partnername_loganalytics -l $LOCATION)
+$WORKSPACE_ID=$WORKSPACE_ID | Select-String "customerId"
+$WORKSPACE_ID=$WORKSPACE_ID -split(":") | Select-String "customerId" -notMatch
+$WORKSPACE_ID=$WORKSPACE_ID -split(",")
+$WORKSPACE_ID=$WORKSPACE_ID.Replace("`"","")
+echo $WORKSPACE_ID
+
+$WORKSPACE_SHARED_KEY=$(az monitor log-analytics workspace get-shared-keys --resource-group $RESOURCE_GROUP_NAME --workspace-name $partnername_loganalytics | Select-String "primarySharedKey") -split(":") | Select-String "primarySharedKey" -notMatch
+$WORKSPACE_SHARED_KEY=$WORKSPACE_SHARED_KEY -split(",")
+$WORKSPACE_SHARED_KEY=$WORKSPACE_SHARED_KEY.Replace("`"","")
+echo $WORKSPACE_SHARED_KEY
+```
+
+
+### Kubernetes manifest preparation
+
+Follow the [link](https://learn.microsoft.com/en-us/azure/azure-arc/data/automated-integration-testing#kubernetes-manifest-preparation) and update the variables based on your environment at .test.env and patch.json files. Please consider overlay AKS as default overlay or you can copy and create new overlay based on your environment. This test suite supports both Direct mode and Indirect mode.
+
+Example
+```
+cp -r aks aks-hci
+```
+
+### Running the tests
+
+Follow the [link](https://learn.microsoft.com/en-us/azure/azure-arc/data/automated-integration-testing#kubectl-apply) to deploy the launcher and tail the logs.
+By default lancher will create data services with LoadBalancer serviceType. If we want to have serviceType as NodePort please add this below content at patch.json file.
+
+```
+,
+{
+    "op": "replace",
+    "path": "spec.services/0/serviceType",
+    "value": "NodePort"
+}
+```
+### Examining Test Results
+Follow the [link](https://learn.microsoft.com/en-us/azure/azure-arc/data/automated-integration-testing#examining-test-results) to view the logs from storage container.
+
+### Cleaning up the test environment
+Follow the [link](https://learn.microsoft.com/en-us/azure/azure-arc/data/automated-integration-testing#clean-up-resources) to delete the launcher run.
+
 
