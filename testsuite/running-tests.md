@@ -53,7 +53,7 @@ This document will enumerate everything you need to do run the sonobuoy based co
 1. Kubernetes job creates a few resources (a namespace and some cluster scoped resources) which remain in the cluster unless explicitly cleaned.
 2. Run  `kubectl delete -k .` to cleanup all resources. This step is important as failing to do so will prevent you from running the conformance tests again on the cluster.
 
-## Running the Arc enabled Data Services Tests (Indirect Mode) &#42;&#42;(Deprecated)&#42;&#42;
+### Running the Arc enabled Data Services Tests (Indirect Mode) &#42;&#42;(Deprecated)&#42;&#42;
 
 
 1. By default, the test suite will run only the Arc enabled Kubernetes tests.
