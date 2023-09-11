@@ -22,7 +22,8 @@ This document will enumerate everything you need to do run the sonobuoy based co
 5. Run the command as follows: `kubectl apply -k .`
 6. The test suite will take care of publishing the results to the storage account.
 
-### Running the Arc enabled Data Services (Direct Mode) tests <span style="color: red;">(Deprecated)</span>
+### Running the Arc enabled Data Services (Direct Mode) tests **(Deprecated)**
+
 
 
 1. By default, the test suite will run only the Arc enabled Kubernetes tests.
