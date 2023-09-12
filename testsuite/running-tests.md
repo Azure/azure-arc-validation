@@ -185,7 +185,6 @@ If you wish to allocate additional CPU and memory for Controldb during Data Cont
             }
         },
 ```
-If you wish to allocate additional CPU and memory for Controldb during Data Controller creation, please include the following snippet in `patch.json`.
 
 ### Recommended Tests for Partner Scope
 The following tests are recommended for the partner scope
