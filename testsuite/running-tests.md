@@ -118,11 +118,10 @@ echo $WORKSPACE_SHARED_KEY
 ```
 ### Partner metadata preparation
 
-Please add and update below variables with partner environment details at `.test.env` file.
+Please add and update the following variables with the required partner environment details in the `.test.env` file.
 ```
-# Name of the partner Solution name and Version; use this variable to distinguish between the results for different Solution name and Versions.
+# The partner's solution name and version should be provided in this variable to distinguish between results for different solution names and versions.
 export SOLUTIONNAME_VERSION="TKG-2.1.0"
-# Provide Partner metat data by filling required details.
 export UPSTREAM_KUBERNETES_VERSION="TKG 2.1.0"
 export KUBERNETES_DISTRIBUTION_VERSION="v1.7.2_vmware.1"
 # Additional Storage/Network Driver details (if applicable)
