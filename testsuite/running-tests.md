@@ -133,6 +133,16 @@ export BARE_METAL_NODE=""
 # OEM/IHV solution details (if applicable)
 export OEM_IHV=""
 ```
+To fine-tune SQL MI resources, please add and update the following variables with the required SQL MI constraints in the .test.env file.
+
+```
+export SQLMI_GP_CORES_REQUEST=1
+export SQLMI_GP_CORES_LIMIT=1
+export SQLMI_BC_CORES_REQUEST=3
+export SQLMI_BC_CORES_LIMIT=4
+export SQLMI_MEMORY_REQUEST=3Gi
+export SQLMI_MEMORY_LIMIT=3Gi
+```
 ### Kubernetes manifest preparation
 
 Follow the [link](https://learn.microsoft.com/en-us/azure/azure-arc/data/automated-integration-testing#kubernetes-manifest-preparation) and update the variables based on your environment at .test.env and patch.json files. Please consider overlay AKS as default overlay or you can copy and create new overlay based on your environment. This test suite supports both Direct mode and Indirect mode.
@@ -155,6 +165,29 @@ By default lancher will create data services with LoadBalancer serviceType. If w
     "value": "NodePort"
 }
 ```
+If you wish to allocate additional CPU and memory for Controldb during Data Controller creation, please include the following snippet in `patch.json`.
+
+```
+{
+            "op": "add",
+            "path": "spec.resources",
+            "value": {
+                    "controllerDb": {
+                    "requests": {
+                        "cpu": "200m",
+                        "memory": "6Gi"
+                    },
+                    "limits": {
+                        "cpu": "800m",
+                        "memory": "6Gi"
+                    }
+                }
+            }
+        },
+```
+If you wish to allocate additional CPU and memory for Controldb during Data Controller creation, please include the following snippet in `patch.json`.
+
+
 ### Examining Test Results
 Follow the [link](https://learn.microsoft.com/en-us/azure/azure-arc/data/automated-integration-testing#examining-test-results) to view the logs from storage container.
 
