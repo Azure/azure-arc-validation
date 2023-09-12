@@ -116,8 +116,24 @@ $WORKSPACE_SHARED_KEY=$WORKSPACE_SHARED_KEY -split(",")
 $WORKSPACE_SHARED_KEY=$WORKSPACE_SHARED_KEY.Replace("`"","")
 echo $WORKSPACE_SHARED_KEY
 ```
+### Partner metadata preparation
 
-
+Please add and update below variables with partner environment details at `.test.env` file.
+```
+# Name of the partner Solution name and Version; use this variable to distinguish between the results for different Solution name and Versions.
+export SOLUTIONNAME_VERSION="TKG-2.1.0"
+# Provide Partner metat data by filling required details.
+export UPSTREAM_KUBERNETES_VERSION="TKG 2.1.0"
+export KUBERNETES_DISTRIBUTION_VERSION="v1.7.2_vmware.1"
+# Additional Storage/Network Driver details (if applicable)
+export STORAGE_NETWORK="Antrea v1.7.2_vmware.1"
+# Private Cloud details (if applicable)
+export PRIVATE_CLOUD="vSphere 7.0"
+# Bare-metal Node details (if applicable)
+export BARE_METAL_NODE=""
+# OEM/IHV solution details (if applicable)
+export OEM_IHV=""
+```
 ### Kubernetes manifest preparation
 
 Follow the [link](https://learn.microsoft.com/en-us/azure/azure-arc/data/automated-integration-testing#kubernetes-manifest-preparation) and update the variables based on your environment at .test.env and patch.json files. Please consider overlay AKS as default overlay or you can copy and create new overlay based on your environment. This test suite supports both Direct mode and Indirect mode.
