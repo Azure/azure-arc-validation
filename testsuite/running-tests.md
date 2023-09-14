@@ -188,6 +188,22 @@ If you wish to allocate additional CPU and memory for Controldb during Data Cont
 
 ### Recommended Tests for Partner Scope
 The following tests are recommended for the partner scope
+<style>
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+th, td {
+    padding: 8px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+}
+
+tr:nth-child(even) {
+    background-color: #f2f2f2;
+}
+</style>
 
 | Modes  | Required  | Optional  |
 |-----------|-----------|-----------|
