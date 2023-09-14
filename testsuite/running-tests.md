@@ -189,6 +189,13 @@ If you wish to allocate additional CPU and memory for Controldb during Data Cont
 ### Recommended Tests for Partner Scope
 The following tests are recommended for the partner scope
 
+| Header 1  | Header 2  | Header 3  |
+|-----------|-----------|-----------|
+| Row 1, Col 1 | Row 1, Col 2 | Row 1, Col 3 |
+| Row 2, Col 1 | Row 2, Col 2 | Row 2, Col 3 |
+| Row 3, Col 1 | Row 3, Col 2 | Row 3, Col 3 |
+
+
 
 ### Examining Test Results
 Follow the [link](https://learn.microsoft.com/en-us/azure/azure-arc/data/automated-integration-testing#examining-test-results) to view the logs from storage container.
