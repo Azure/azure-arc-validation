@@ -189,7 +189,7 @@ If you wish to allocate additional CPU and memory for Controldb during Data Cont
 ### Recommended Tests for Partner Scope
 The following tests are recommended for the partner scope, and detailed information for each test suite will be available [here](https://learn.microsoft.com/en-us/azure/azure-arc/data/automated-integration-testing#tests-performed-per-test-suite).
 
-&#42;&#42;(NOTE: Make sure test suite names are seperated by space only.)&#42;&#42;
+&#42;&#42; NOTE: Make sure test suite names are seperated by space only. &#42;&#42;
 
 | Modes  | Required test suite names | Optional test suite names  |
 |-----------|-----------|-----------|
