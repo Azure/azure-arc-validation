@@ -189,7 +189,9 @@ If you wish to allocate additional CPU and memory for Controldb during Data Cont
 ### Recommended Tests for Partner Scope
 The following tests are recommended for the partner scope, and detailed information for each test suite will be available [here](https://learn.microsoft.com/en-us/azure/azure-arc/data/automated-integration-testing#tests-performed-per-test-suite).
 
-| Modes  | Required  | Optional  |
+&#42;&#42;(NOTE: Make sure test suite names are seperated by space only.)&#42;&#42;
+
+| Modes  | Required test suite names | Optional test suite names  |
 |-----------|-----------|-----------|
 | Indirect | billing controldb ci-billing nonroot postgres sqlinstance telemetry-grafana telemetry-kafka telemetry-monitorstack | kube-rbac ci-sqlinstance sqlinstance-credentialrotation sqlinstance-ha sqlinstance-tde |
 | Direct | direct-crud direct-hydration controldb ci-billing nonroot postgres sqlinstance telemetry-grafana telemetry-kafka telemetry-monitorstack | ci-sqlinstance sqlinstance-credentialrotation sqlinstance-ha sqlinstance-tde |
