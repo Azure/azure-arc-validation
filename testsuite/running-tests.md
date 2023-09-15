@@ -85,7 +85,7 @@ This document will enumerate everything you need to do run the sonobuoy based co
 
 # Running the Comprehensive End-to-End Data services test suite with CI-Launcher.
 
-This document will enumerate everything you need to do run the automated CI/CD pipelines that perform end-to-end tests on your environment. The Automated validation testing catalog can be found [here](https://learn.microsoft.com/en-us/azure/azure-arc/data/automated-integration-testing).
+This document will enumerate everything you need to do to run the automated CI-Launcher that perform end-to-end tests on your environment. The Automated validation testing catalog can be found [here](https://learn.microsoft.com/en-us/azure/azure-arc/data/automated-integration-testing).
 <br/>
 
 ### Prerequisites
