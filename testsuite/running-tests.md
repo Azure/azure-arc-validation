@@ -31,9 +31,6 @@ This document will enumerate everything you need to do run the sonobuoy based co
 
 # Running the Comprehensive End-to-End Data services test suite with CI-Launcher. &#42;&#42; NEW &#42;&#42;
 
-<p style="font-family: Arial; font-size: 16px;">This text is in Arial font with a font size of 16 pixels.</p>
-
-
 This document will enumerate everything you need to do to run the automated CI-Launcher that perform end-to-end tests on your environment. The Automated validation testing catalog can be found [here](https://learn.microsoft.com/en-us/azure/azure-arc/data/automated-integration-testing).
 <br/>
 
