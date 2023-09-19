@@ -2,7 +2,6 @@
 
 This document will enumerate everything you need to do run the sonobuoy based conformance test suite on your environment. The test catalog can be found [here](catalog.md).
 
-<br/>
 
 ## Running the Arc enabled Kubernetes Tests
 
