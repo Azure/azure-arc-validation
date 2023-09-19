@@ -147,8 +147,6 @@ Follow the [link](https://learn.microsoft.com/en-us/azure/azure-arc/data/automat
 ### Cleaning up the test environment
 Follow the [link](https://learn.microsoft.com/en-us/azure/azure-arc/data/automated-integration-testing#clean-up-resources) to delete the launcher run.
 
-<br/>
-
 ### Running the Arc enabled Data Services tests (Direct Mode) &#42;&#42;(Deprecated)&#42;&#42;
 
 
