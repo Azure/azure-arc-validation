@@ -27,7 +27,12 @@ This document will enumerate everything you need to do run the sonobuoy based co
 1. Kubernetes job creates a few resources (a namespace and some cluster scoped resources) which remain in the cluster unless explicitly cleaned.
 2. Run  `kubectl delete -k .` to cleanup all resources. This step is important as failing to do so will prevent you from running the conformance tests again on the cluster.
 
-# Running the Comprehensive End-to-End Data services test suite with CI-Launcher.
+<br/>
+
+# Running the Comprehensive End-to-End Data services test suite with CI-Launcher. &#42;&#42; NEW &#42;&#42;
+
+<p style="font-family: Arial; font-size: 16px;">This text is in Arial font with a font size of 16 pixels.</p>
+
 
 This document will enumerate everything you need to do to run the automated CI-Launcher that perform end-to-end tests on your environment. The Automated validation testing catalog can be found [here](https://learn.microsoft.com/en-us/azure/azure-arc/data/automated-integration-testing).
 <br/>
@@ -146,7 +151,7 @@ Follow the [link](https://learn.microsoft.com/en-us/azure/azure-arc/data/automat
 ### Cleaning up the test environment
 Follow the [link](https://learn.microsoft.com/en-us/azure/azure-arc/data/automated-integration-testing#clean-up-resources) to delete the launcher run.
 
-
+<br/>
 
 ### Running the Arc enabled Data Services tests (Direct Mode) &#42;&#42;(Deprecated)&#42;&#42;
 
@@ -209,3 +214,4 @@ Follow the [link](https://learn.microsoft.com/en-us/azure/azure-arc/data/automat
 1. Kubernetes job creates a few resources (a namespace and some cluster scoped resources) which remain in the cluster unless explicitly cleaned.
 2. Run  `kubectl delete -k .` to cleanup all resources. This step is important as failing to do so will prevent you from running the conformance tests again on the cluster.
 
+<br/>
