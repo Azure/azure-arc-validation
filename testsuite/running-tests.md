@@ -145,9 +145,8 @@ The following tests are recommended for the partner scope, and detailed informat
 Follow the [link](https://learn.microsoft.com/en-us/azure/azure-arc/data/automated-integration-testing#examining-test-results) to view the logs from storage container.
 
 ### Cleaning up the test environment
-Follow the [link](https://learn.microsoft.com/en-us/azure/azure-arc/data/automated-integration-testing#clean-up-resources) to delete the launcher run.
+Follow the [link](https://learn.microsoft.com/en-us/azure/azure-arc/data/automated-integration-testing#clean-up-resources) to delete the launcher run.<br/>
 
-<br/>
 
 ### Running the Arc enabled Data Services tests (Direct Mode) &#42;&#42;(Deprecated)&#42;&#42;
 
