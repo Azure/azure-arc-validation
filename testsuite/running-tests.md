@@ -28,7 +28,7 @@ This document will enumerate everything you need to do run the sonobuoy based co
 
 <br/>
 
-## Running End-to-End Data services with CI-Launcher &#42;&#42; &#42;&#42;
+## Running End-to-End Data services with CI-Launcher.
 
 
 This document will enumerate everything you need to do to run the automated CI-Launcher that perform end-to-end tests on your environment. The Automated validation testing catalog can be found [here](https://learn.microsoft.com/en-us/azure/azure-arc/data/automated-integration-testing).
@@ -149,4 +149,4 @@ Follow the [link](https://learn.microsoft.com/en-us/azure/azure-arc/data/automat
 Follow the [link](https://learn.microsoft.com/en-us/azure/azure-arc/data/automated-integration-testing#clean-up-resources) to delete the launcher run.<br/>
 
 
-### Running the Arc enabled Data Services tests &#42;&#42;([Deprecated](dataservice-conformance-tests))&#42;&#42;
+### Running the Arc enabled Data Services tests &#42;&#42;([Deprecated](dataservice-conformance-tests.md))&#42;&#42;
