@@ -140,7 +140,7 @@ The following tests are recommended for the partner scope, and detailed informat
 | Modes  | Required test suite names | Optional test suite names  |
 |-----------|-----------|-----------|
 | Indirect | billing controldb nonroot sqlinstance | kube-rbac (Recommend to test against different K8s distros) <br> ci-billing telemetry-grafana telemetry-kafka telemetry-monitorstack ci-sqlinstance sqlinstance-credentialrotation sqlinstance-ha sqlinstance-tde postgres |
-| Direct | direct-crud direct-hydration controldb nonroot sqlinstance | ci-billing telemetry-grafana telemetry-kafka telemetry-monitorstack ci-sqlinstance sqlinstance-credentialrotation sqlinstance-ha sqlinstance-tde postgres |
+| Direct | direct-crud direct-hydration controldb nonroot sqlinstance | kube-rbac (Recommend to test against different K8s distros) <br> ci-billing telemetry-grafana telemetry-kafka telemetry-monitorstack ci-sqlinstance sqlinstance-credentialrotation sqlinstance-ha sqlinstance-tde postgres |
 
 ### Examining Test Results
 Follow the [link](https://learn.microsoft.com/en-us/azure/azure-arc/data/automated-integration-testing#examining-test-results) to view the logs from storage container.
