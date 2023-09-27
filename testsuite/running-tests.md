@@ -139,7 +139,7 @@ The following tests are recommended for the partner scope, and detailed informat
 
 | Modes  | Required test suite names | Optional test suite names  |
 |-----------|-----------|-----------|
-| Indirect | billing controldb nonroot sqlinstance | ci-billing telemetry-grafana telemetry-kafka telemetry-monitorstack ci-sqlinstance sqlinstance-credentialrotation sqlinstance-ha sqlinstance-tde postgres kube-rbac |
+| Indirect | billing controldb nonroot sqlinstance | ci-billing telemetry-grafana telemetry-kafka telemetry-monitorstack ci-sqlinstance sqlinstance-credentialrotation sqlinstance-ha sqlinstance-tde postgres kube-rbac (Recommend to test against different K8s distros)|
 | Direct | direct-crud direct-hydration controldb nonroot sqlinstance | ci-billing telemetry-grafana telemetry-kafka telemetry-monitorstack ci-sqlinstance sqlinstance-credentialrotation sqlinstance-ha sqlinstance-tde postgres |
 
 ### Examining Test Results
