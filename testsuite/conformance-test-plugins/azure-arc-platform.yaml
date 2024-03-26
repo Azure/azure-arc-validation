@@ -1,8 +1,17 @@
 podSpec:
   containers:
     - name: clusterconnecttest
+      #image: arck8sconformance.azurecr.io/arck8sconformance/clusterconnect:0.1.12
       image: arck8sconformance.azurecr.io/arck8sconformance/clusterconnect:0.1.12
       imagePullPolicy: IfNotPresent
+      securityContext:
+        allowPrivilegeEscalation: false
+        runAsNonRoot: true
+        runAsUser: 1010
+        capabilities:
+          drop: ["ALL"]
+        seccompProfile:
+          type: "RuntimeDefault"
   restartPolicy: Always
   serviceAccountName: sonobuoy-serviceaccount
 sonobuoy-config:
@@ -10,8 +19,17 @@ sonobuoy-config:
   plugin-name: azure-arc-platform
   result-format: junit
 spec:
-  image: arck8sconformance.azurecr.io/arck8sconformance/platform:0.1.13
+  #image: arck8sconformance.azurecr.io/arck8sconformance/platform:0.1.13
+  image: arcdscontainerregistry.azurecr.io/platform:1.0
   imagePullPolicy: IfNotPresent
+  securityContext:
+    allowPrivilegeEscalation: false
+    runAsNonRoot: true
+    runAsUser: 1010
+    capabilities:
+      drop: ["ALL"]
+    seccompProfile:
+      type: "RuntimeDefault"
   name: plugin
   resources: {}
   volumes:

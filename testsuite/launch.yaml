@@ -36,8 +36,16 @@ spec:
         kubernetes.io/os: linux
       containers:
       - name: azure-arc-kubernetes-conformance
-        image: arck8sconformance.azurecr.io/arck8sconformance/launcher:0.1.2
+        image: arcdscontainerregistry.azurecr.io/launcher:1.10
         imagePullPolicy: IfNotPresent
+        securityContext:
+          allowPrivilegeEscalation: false
+          runAsNonRoot: true
+          runAsUser: 1010
+          capabilities:
+            drop: ["ALL"]
+          seccompProfile:
+            type: "RuntimeDefault"
         volumeMounts:
         - name: config-volume
           mountPath: /etc/config
