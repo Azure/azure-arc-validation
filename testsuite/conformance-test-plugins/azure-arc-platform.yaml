@@ -4,6 +4,14 @@ podSpec:
       #image: arck8sconformance.azurecr.io/arck8sconformance/clusterconnect:0.1.12
       image: arck8sconformance.azurecr.io/arck8sconformance/clusterconnect:0.1.12
       imagePullPolicy: IfNotPresent
+      securityContext:
+        allowPrivilegeEscalation: false
+        runAsNonRoot: true
+        runAsUser: 1010
+        capabilities:
+          drop: ["ALL"]
+        seccompProfile:
+          type: "RuntimeDefault"
   restartPolicy: Always
   serviceAccountName: sonobuoy-serviceaccount
 sonobuoy-config:
