@@ -3,7 +3,16 @@ sonobuoy-config:
   plugin-name: azure-arc-agent-cleanup
   result-format: junit
 spec:
-  image: arck8sconformance.azurecr.io/arck8sconformance/agentcleanup:0.1.5
+  #image: arck8sconformance.azurecr.io/arck8sconformance/agentcleanup:0.1.5
+  image: arcctfregistry.azurecr.io/cleanup:1.0
+  securityContext:
+    allowPrivilegeEscalation: false
+    runAsNonRoot: true
+    runAsUser: 1010
+    capabilities:
+      drop: ["ALL"]
+    seccompProfile:
+      type: "RuntimeDefault"
   imagePullPolicy: IfNotPresent
   name: plugin
   resources: {}
