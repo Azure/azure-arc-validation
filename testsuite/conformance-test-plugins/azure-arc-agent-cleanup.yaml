@@ -4,7 +4,7 @@ sonobuoy-config:
   result-format: junit
 spec:
   #image: arck8sconformance.azurecr.io/arck8sconformance/agentcleanup:0.1.5
-  image: ctfregistryarc.azurecr.io/cleanup:7.0
+  image: ctfregistryarc.azurecr.io/cleanup:8.0
   securityContext:
     allowPrivilegeEscalation: false
     runAsNonRoot: true
