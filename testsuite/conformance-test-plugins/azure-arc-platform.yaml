@@ -14,14 +14,6 @@ spec:
   #image: arck8sconformance.azurecr.io/arck8sconformance/platform:0.1.13
   image: ctfregistryarc.azurecr.io/platform:3.0
   imagePullPolicy: IfNotPresent
-  securityContext:
-    allowPrivilegeEscalation: false
-    runAsNonRoot: true
-    runAsUser: 1010
-    capabilities:
-      drop: ["ALL"]
-    seccompProfile:
-      type: "RuntimeDefault"
   name: plugin
   resources: {}
   volumes:
