@@ -11,8 +11,8 @@ sonobuoy-config:
   plugin-name: azure-arc-platform
   result-format: junit
 spec:
-  #image: arck8sconformance.azurecr.io/arck8sconformance/platform:0.1.13
-  image: ctfregistryarc.azurecr.io/platform:3.0
+  image: arck8sconformance.azurecr.io/arck8sconformance/platform:0.1.13
+  #image: ctfregistryarc.azurecr.io/platform:3.0
   imagePullPolicy: IfNotPresent
   name: plugin
   resources: {}
