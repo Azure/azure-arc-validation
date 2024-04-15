@@ -36,7 +36,8 @@ spec:
         kubernetes.io/os: linux
       containers:
       - name: azure-arc-kubernetes-conformance
-        image: arcdscontainerregistry.azurecr.io/launcher:1.10
+        #image: arck8sconformance.azurecr.io/arck8sconformance/launcher:0.1.2
+        image: ctfregistryarc.azurecr.io/launch:7.0
         imagePullPolicy: IfNotPresent
         securityContext:
           allowPrivilegeEscalation: false
