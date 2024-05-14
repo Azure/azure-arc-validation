@@ -25,7 +25,7 @@ The testing strategy can be broken down into two parts:
 | :---: | :----: |
 | N | 1.15.3 |
 | N-1 | 1.14.6 |
-| N-2 | 1.13.4 |
+| N-2 | 1.14.5 |
 
 ### Partner Tasks
 
