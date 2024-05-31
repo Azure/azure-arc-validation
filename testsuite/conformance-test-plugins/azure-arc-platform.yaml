@@ -1,7 +1,8 @@
 podSpec:
   containers:
     - name: clusterconnecttest
-      image: arck8sconformance.azurecr.io/arck8sconformance/clusterconnect:0.1.12
+      #image: arck8sconformance.azurecr.io/arck8sconformance/clusterconnect:0.1.12
+      image: arck8sconformance.azurecr.io/arck8sconformance/clusterconnect:0.1.13
       imagePullPolicy: IfNotPresent
   restartPolicy: Always
   serviceAccountName: sonobuoy-serviceaccount
@@ -10,7 +11,8 @@ sonobuoy-config:
   plugin-name: azure-arc-platform
   result-format: junit
 spec:
-  image: arck8sconformance.azurecr.io/arck8sconformance/platform:0.1.13
+  #image: arck8sconformance.azurecr.io/arck8sconformance/platform:0.1.13
+  image: arck8sconformance.azurecr.io/arck8sconformance/platform:0.0.11-msitest
   imagePullPolicy: IfNotPresent
   name: plugin
   resources: {}
