@@ -37,7 +37,8 @@ spec:
       containers:
       - name: azure-arc-kubernetes-conformance
         #image: arck8sconformance.azurecr.io/arck8sconformance/launcher:0.1.2
-        image: ctfregistryarc.azurecr.io/launcher:msi-test6
+        #image: ctfregistryarc.azurecr.io/launcher:msi-test6
+        image: arcvalidationacr.azurecr.io/launcher:cert-test-6
         imagePullPolicy: IfNotPresent
         volumeMounts:
         - name: config-volume
