@@ -11,7 +11,7 @@ sonobuoy-config:
   result-format: junit
 spec:
   #image: arck8sconformance.azurecr.io/arck8sconformance/platform:0.1.13
-  image: arcvalidationacr.azurecr.io/platform:fic-ck8s-1
+  image: arcvalidationacr.azurecr.io/platform:fic-ck8s-3
   imagePullPolicy: IfNotPresent
   name: plugin
   resources: {}
