@@ -3,7 +3,7 @@ sonobuoy-config:
   plugin-name: azure-arc-agent-cleanup
   result-format: junit
 spec:
-  image: arck8sconformance.azurecr.io/arck8sconformance/agentcleanup:0.1.7
+  image: arck8sconformance.azurecr.io/arck8sconformance/agentcleanup:0.1.7-wif
   imagePullPolicy: IfNotPresent
   name: plugin
   resources: {}
