@@ -17,6 +17,7 @@ This test plugin will determine if the Kubernetes cluster is Azure Arc conforman
 - `test_kubernetes_configuration_flux_operator`: This test will ensure that a source control configuration is created on ARM and that the `complianceState` field reflects 'Installed'. Then it will check if the flux operator successfully deployed the resources.
 
 - `CSPScenarioTestAsync,HPScenarioTestAsync`: These tests will ensure that 'clusterconnect' scenarios work by making K8s calls to the connected cluster.
+- `test_wif`: This test will ensure that the cluster can be onboarded as an Arc cluster with the Workload Identity Federation enabled, and the mutating webhook required for this feature is successfully installed. The test only runs if environment variable `TEST_WIF` is set to `true`.
 
 
 ## Arc Agent Cleanup
