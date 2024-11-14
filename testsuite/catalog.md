@@ -14,7 +14,7 @@ This test plugin will determine if the Kubernetes cluster is Azure Arc conforman
 
 - `CSPScenarioTestAsync,HPScenarioTestAsync`: These tests will ensure that 'clusterconnect' scenarios work by making K8s calls to the connected cluster.
   
-- `test_wif`: This test will ensure that the cluster can be onboarded as an Arc cluster with the Workload Identity Federation enabled, and the mutating webhook required for this feature is successfully installed. The test only runs if environment variable `TEST_WIF` is set to `true`  (please note that this feature does not work in an AKS and Openshift cluster).
+- `test_wif`: This test will ensure that the cluster can be onboarded as an Arc cluster with the Workload Identity Federation enabled, and the mutating webhook required for this feature is successfully installed. The test only runs if environment variable `TEST_WIF` is set to `true`  (please note that this feature does not work in an AKS and Openshift clusters).
 
 
 ## Arc Agent Cleanup
