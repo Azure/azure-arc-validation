@@ -23,9 +23,9 @@ The testing strategy can be broken down into two parts:
 
 | Arc enabled Kubernetes Minor Release | Version |
 | :---: | :----: |
-| N | 1.20.1 |
-| N-1 | 1.19.2 |
-| N-2 | 1.18.3 |
+| N | 1.23.3 |
+| N-1 | 1.22.4 |
+| N-2 | 1.21.10 |
 
 ### Partner Tasks
 
