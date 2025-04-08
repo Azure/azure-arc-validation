@@ -1,10 +1,11 @@
-podSpec:
-  containers:
-    - name: clusterconnecttest
-      image: arck8sconformance.azurecr.io/arck8sconformance/clusterconnect:0.1.12
-      imagePullPolicy: IfNotPresent
-  restartPolicy: Always
-  serviceAccountName: sonobuoy-serviceaccount
+## Uncomment below code once clusterconnect is integrated with FIC
+#podSpec:
+  #containers:
+    #- name: clusterconnecttest
+      #image: arck8sconformance.azurecr.io/arck8sconformance/clusterconnect:0.1.12
+      #imagePullPolicy: IfNotPresent
+  #restartPolicy: Never
+  #serviceAccountName: sonobuoy-serviceaccount
 sonobuoy-config:
   driver: Job
   plugin-name: azure-arc-platform
