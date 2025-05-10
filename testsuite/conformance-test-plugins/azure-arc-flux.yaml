@@ -1,0 +1,14 @@
+sonobuoy-config:
+  driver: Job
+  plugin-name: azure-arc-flux
+  result-format: junit
+spec:
+  image: azurearcfork8sdev.azurecr.io/microsoft-flux-conformance:0.1.5
+  name: plugin
+  resources: {}
+  volumes:
+  - name: results
+    emptyDir: {}
+  volumeMounts:
+    - mountPath: /tmp/results
+      name: results
