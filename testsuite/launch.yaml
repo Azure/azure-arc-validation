@@ -36,7 +36,7 @@ spec:
         kubernetes.io/os: linux
       containers:
       - name: azure-arc-kubernetes-conformance
-        image: arck8sconformance.azurecr.io/arck8sconformance/launcher:cbl-mariner-fix1
+        image: arck8sconformance.azurecr.io/arck8sconformance/launcher:0.1.8
         imagePullPolicy: IfNotPresent
         volumeMounts:
         - name: config-volume
