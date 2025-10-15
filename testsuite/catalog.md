@@ -11,8 +11,6 @@ This test plugin will determine if the Kubernetes cluster is Azure Arc conforman
 - `test_connected_cluster_metadata`: This test will watch the custom resource 'clustermetadata' to check if the custom resource status has been updated with cluster metadata properties. Then it will check if check if the metadata properties are present in the ARM resource.
 
 - `test_metrics_and_logging`: This test will check the logs to ensure that metrics agent and fluent bit sidecar containers successfully pushed metrics and logs to data plane.
-
-- `CSPScenarioTestAsync,HPScenarioTestAsync`: These tests will ensure that 'clusterconnect' scenarios work by making K8s calls to the connected cluster.
   
 - `test_wif`: This test will ensure that the cluster can be onboarded as an Arc cluster with the Workload Identity Federation enabled, and the mutating webhook required for this feature is successfully installed. The test only runs if environment variable `TEST_WIF` is set to `true`  (please note that this feature does not work in an AKS and Openshift clusters).
 
@@ -79,3 +77,4 @@ Following tests are a part of this test suite:
 By deleting the repective namespace we can clean up the Data services.
 
 kubectl delete namespace
+
