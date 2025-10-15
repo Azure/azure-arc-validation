@@ -12,7 +12,7 @@ This test plugin will determine if the Kubernetes cluster is Azure Arc conforman
 
 - `test_metrics_and_logging`: This test will check the logs to ensure that metrics agent and fluent bit sidecar containers successfully pushed metrics and logs to data plane.
   
-- `test_wif`: This test will ensure that the cluster can be onboarded as an Arc cluster with the Workload Identity Federation enabled, and the mutating webhook required for this feature is successfully installed. The test only runs if environment variable `TEST_WIF` is set to `true`  (please note that this feature does not work in an AKS and Openshift clusters).
+- `test_wif`: This test will ensure that the cluster can be onboarded as an Arc cluster with the Workload Identity Federation enabled, and the mutating webhook required for this feature is successfully installed. The test only runs if environment variable `TEST_WIF` is set to `true`  (please note that this feature does not work in an AKS clusters).
 
 
 ## Arc Agent Cleanup
@@ -77,4 +77,5 @@ Following tests are a part of this test suite:
 By deleting the repective namespace we can clean up the Data services.
 
 kubectl delete namespace
+
 
