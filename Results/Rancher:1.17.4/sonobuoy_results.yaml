@@ -1,0 +1,26 @@
+name: azure-arc-conformance
+status: passed
+meta:
+  type: summary
+items:
+- name: results.xml
+  status: passed
+  meta:
+    file: results/global/results.xml
+    type: file
+  items:
+  - name: pytest
+    status: passed
+    items:
+    - name: test_connected_cluster_resource
+      status: passed
+    - name: test_kubernetes_configuration_flux_operator
+      status: passed
+    - name: test_metrics_and_logging
+      status: passed
+    - name: test_kubernetes_configuration_helm_operator
+      status: passed
+    - name: test_cluster_metadata
+      status: passed
+    - name: test_identity_operator
+      status: passed
